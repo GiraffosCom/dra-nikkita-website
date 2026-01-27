@@ -480,44 +480,69 @@
         .before-after {
             background: var(--color-soft-black);
             color: var(--color-white);
+            padding: 6rem 0;
         }
 
         .before-after h2 {
             text-align: center;
             color: var(--color-white);
             margin-bottom: 1rem;
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
         }
 
         .before-after-subtitle {
             text-align: center;
             color: var(--color-gold);
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+            letter-spacing: 0.05em;
         }
 
         .before-after-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
         .before-after-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(201, 169, 98, 0.2);
-            border-radius: 20px;
+            background: linear-gradient(145deg, #0d0d0d 0%, #000000 100%);
+            border: 2px solid rgba(201, 169, 98, 0.25);
+            border-radius: 28px;
             overflow: hidden;
-            transition: all 0.3s var(--transition-smooth);
+            transition: all 0.5s var(--transition-smooth);
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.6),
+                0 0 0 1px rgba(201, 169, 98, 0.1) inset;
         }
 
         .before-after-card:hover {
             border-color: var(--color-gold);
-            transform: translateY(-5px);
+            transform: translateY(-12px) scale(1.02);
+            box-shadow:
+                0 40px 100px rgba(0, 0, 0, 0.7),
+                0 0 60px rgba(201, 169, 98, 0.15),
+                0 0 0 1px rgba(201, 169, 98, 0.3) inset;
         }
 
         .before-after-images {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
             position: relative;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+        }
+
+        .before-after-images::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 100%);
+            z-index: 5;
+            pointer-events: none;
         }
 
         .before-after-images::after {
@@ -525,96 +550,120 @@
             position: absolute;
             top: 0;
             left: 50%;
-            width: 2px;
+            transform: translateX(-50%);
+            width: 4px;
             height: 100%;
-            background: var(--color-gold);
-        }
-
-        .ba-image {
-            aspect-ratio: 3/4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: #000000;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .ba-image svg {
-            width: 80px;
-            height: 80px;
-            stroke: var(--color-gold);
-            opacity: 0.3;
-        }
-
-        /* Cards con imagen real - una sola imagen dividida */
-        .before-after-card.has-image .before-after-images {
-            grid-template-columns: 1fr;
-        }
-
-        .before-after-card.has-image .before-after-images::after {
-            left: 50%;
+            background: linear-gradient(180deg,
+                var(--color-gold) 0%,
+                var(--color-gold-light) 30%,
+                var(--color-gold) 50%,
+                var(--color-gold-light) 70%,
+                var(--color-gold) 100%
+            );
+            box-shadow:
+                0 0 30px rgba(201, 169, 98, 0.6),
+                0 0 60px rgba(201, 169, 98, 0.3);
+            z-index: 10;
         }
 
         .ba-real-image {
             width: 100%;
-            aspect-ratio: 1/1;
+            height: 100%;
             object-fit: cover;
+            display: block;
+            transition: transform 0.6s var(--transition-smooth), filter 0.4s ease;
+            filter: contrast(1.02) saturate(1.05);
+        }
+
+        .before-after-card:hover .ba-real-image {
+            transform: scale(1.05);
+            filter: contrast(1.05) saturate(1.1);
+        }
+
+        .ba-labels {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+            z-index: 5;
         }
 
         .ba-label {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 0.7rem;
-            letter-spacing: 0.15em;
+            font-size: 0.8rem;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: var(--color-gold);
-            background: rgba(0,0,0,0.5);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
+            color: var(--color-white);
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(201, 169, 98, 0.5);
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 500;
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+
+        .ba-label.after-label {
+            background: var(--color-gold);
+            border-color: var(--color-gold);
+            color: var(--color-soft-black);
+            font-weight: 600;
+        }
+
+        .before-after-card:hover .ba-label {
+            transform: translateY(-3px);
         }
 
         .before-after-info {
-            padding: 1.5rem;
+            padding: 1.8rem 2rem;
             text-align: center;
+            background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+            border-top: 1px solid rgba(201, 169, 98, 0.15);
         }
 
         .before-after-treatment {
             font-family: var(--font-display);
-            font-size: 1.2rem;
+            font-size: 1.6rem;
             color: var(--color-gold);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.02em;
         }
 
         .before-after-detail {
-            font-size: 0.85rem;
-            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.45);
             margin-bottom: 0;
+            letter-spacing: 0.05em;
         }
 
         .before-after-disclaimer {
             text-align: center;
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.4);
-            margin-top: 2.5rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.35);
+            margin-top: 3.5rem;
             font-style: italic;
+            letter-spacing: 0.02em;
         }
 
         @media (max-width: 900px) {
             .before-after-grid {
-                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+                max-width: 800px;
             }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .before-after-grid {
                 grid-template-columns: 1fr;
-                max-width: 350px;
-                margin: 0 auto;
+                max-width: 500px;
+                gap: 2.5rem;
+            }
+
+            .before-after-images {
+                aspect-ratio: 3/2;
             }
         }
 
@@ -1285,131 +1334,69 @@
             <p class="before-after-subtitle">Transformaciones que hablan por sí solas</p>
 
             <div class="before-after-grid">
-                <!-- Card 1 - Imagen real -->
-                <div class="before-after-card has-image">
+                <!-- Card 1 -->
+                <div class="before-after-card">
                     <div class="before-after-images">
-                        <img src="antes-despues-1.JPG" alt="Antes y después lipopapada" class="ba-real-image">
+                        <img src="antes-despues-1.JPG" alt="Antes y después - Caso 1" class="ba-real-image">
+                        <div class="ba-labels">
+                            <span class="ba-label">Antes</span>
+                            <span class="ba-label after-label">Después</span>
+                        </div>
                     </div>
                     <div class="before-after-info">
                         <div class="before-after-treatment">Lipopapada</div>
-                        <p class="before-after-detail">Paciente 32 años • 3 meses post</p>
+                        <p class="before-after-detail">Resultados reales</p>
                     </div>
                 </div>
 
-                <!-- Card 2 - Imagen real -->
-                <div class="before-after-card has-image">
+                <!-- Card 2 -->
+                <div class="before-after-card">
                     <div class="before-after-images">
-                        <img src="antes-despues-2.JPG" alt="Antes y después mini lifting" class="ba-real-image">
+                        <img src="antes-despues-2.JPG" alt="Antes y después - Caso 2" class="ba-real-image">
+                        <div class="ba-labels">
+                            <span class="ba-label">Antes</span>
+                            <span class="ba-label after-label">Después</span>
+                        </div>
                     </div>
                     <div class="before-after-info">
                         <div class="before-after-treatment">Mini Lifting</div>
-                        <p class="before-after-detail">Paciente 45 años • 6 meses post</p>
+                        <p class="before-after-detail">Resultados reales</p>
                     </div>
                 </div>
 
                 <!-- Card 3 -->
                 <div class="before-after-card">
                     <div class="before-after-images">
-                        <div class="ba-image before">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <circle cx="12" cy="8" r="5"/>
-                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
-                            </svg>
+                        <img src="antes-despues-3.JPG" alt="Antes y después - Caso 3" class="ba-real-image">
+                        <div class="ba-labels">
                             <span class="ba-label">Antes</span>
-                        </div>
-                        <div class="ba-image after">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <circle cx="12" cy="8" r="5"/>
-                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
-                                <path d="M16 3l2 2 4-4" stroke-width="2"/>
-                            </svg>
-                            <span class="ba-label">Después</span>
+                            <span class="ba-label after-label">Después</span>
                         </div>
                     </div>
                     <div class="before-after-info">
                         <div class="before-after-treatment">Lipo + Lifting</div>
-                        <p class="before-after-detail">Paciente 48 años • 4 meses post</p>
+                        <p class="before-after-detail">Resultados reales</p>
                     </div>
                 </div>
 
                 <!-- Card 4 -->
                 <div class="before-after-card">
                     <div class="before-after-images">
-                        <div class="ba-image before">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <circle cx="12" cy="8" r="5"/>
-                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
-                            </svg>
+                        <img src="antes-despues-4.JPG" alt="Antes y después - Caso 4" class="ba-real-image">
+                        <div class="ba-labels">
                             <span class="ba-label">Antes</span>
-                        </div>
-                        <div class="ba-image after">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <circle cx="12" cy="8" r="5"/>
-                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
-                                <path d="M16 3l2 2 4-4" stroke-width="2"/>
-                            </svg>
-                            <span class="ba-label">Después</span>
+                            <span class="ba-label after-label">Después</span>
                         </div>
                     </div>
                     <div class="before-after-info">
                         <div class="before-after-treatment">Lipopapada</div>
-                        <p class="before-after-detail">Paciente 38 años • 2 meses post</p>
-                    </div>
-                </div>
-
-                <!-- Card 5 -->
-                <div class="before-after-card">
-                    <div class="before-after-images">
-                        <div class="ba-image before">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <circle cx="12" cy="8" r="5"/>
-                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
-                            </svg>
-                            <span class="ba-label">Antes</span>
-                        </div>
-                        <div class="ba-image after">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <circle cx="12" cy="8" r="5"/>
-                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
-                                <path d="M16 3l2 2 4-4" stroke-width="2"/>
-                            </svg>
-                            <span class="ba-label">Después</span>
-                        </div>
-                    </div>
-                    <div class="before-after-info">
-                        <div class="before-after-treatment">Mini Lifting</div>
-                        <p class="before-after-detail">Paciente 55 años • 5 meses post</p>
-                    </div>
-                </div>
-
-                <!-- Card 6 -->
-                <div class="before-after-card">
-                    <div class="before-after-images">
-                        <div class="ba-image before">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <circle cx="12" cy="8" r="5"/>
-                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
-                            </svg>
-                            <span class="ba-label">Antes</span>
-                        </div>
-                        <div class="ba-image after">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <circle cx="12" cy="8" r="5"/>
-                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
-                                <path d="M16 3l2 2 4-4" stroke-width="2"/>
-                            </svg>
-                            <span class="ba-label">Después</span>
-                        </div>
-                    </div>
-                    <div class="before-after-info">
-                        <div class="before-after-treatment">Lipo + Lifting</div>
-                        <p class="before-after-detail">Paciente 50 años • 4 meses post</p>
+                        <p class="before-after-detail">Resultados reales</p>
                     </div>
                 </div>
             </div>
 
             <p class="before-after-disclaimer">
-                *Los resultados pueden variar según cada paciente. Fotos ilustrativas - próximamente casos reales con autorización.
+                *Los resultados pueden variar según cada paciente. Fotos de casos reales con autorización.
             </p>
         </div>
     </section>

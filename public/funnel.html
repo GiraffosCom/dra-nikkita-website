@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dra Nikkita | Lipopapada & Lifting Facial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-white: #FFFFFF;
+            --color-cream: #FAF8F5;
+            --color-nude: #E8DDD4;
+            --color-nude-soft: #F5F0EB;
+            --color-gold: #C9A962;
+            --color-gold-light: #E8D5A3;
+            --color-gold-dark: #A8893F;
+            --color-charcoal: #2A2A2A;
+            --color-soft-black: #1A1A1A;
+            --color-warm-gray: #8B8680;
+            --color-rose: #D4A5A5;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Outfit', sans-serif;
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--color-white);
+            color: var(--color-charcoal);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Elegant Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--color-cream);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-gold);
+            border-radius: 3px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Section Base */
+        section {
+            padding: 5rem 0;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.05rem;
+            color: var(--color-warm-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        em {
+            font-style: italic;
+            color: var(--color-gold);
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+            color: var(--color-white);
+            padding: 1.2rem 2.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.4s var(--transition-smooth);
+            box-shadow: 0 10px 40px rgba(201, 169, 98, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(201, 169, 98, 0.4);
+        }
+
+        .cta-button svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* ==================== */
+        /* 1. HERO SECTION */
+        /* ==================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(180deg, var(--color-white) 0%, var(--color-cream) 100%);
+            position: relative;
+            padding: 6rem 0 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: radial-gradient(ellipse at 80% 50%, rgba(201, 169, 98, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 2rem;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--color-gold);
+            border-radius: 30px;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            color: var(--color-charcoal);
+        }
+
+        .hero h1 span {
+            display: block;
+            color: var(--color-gold-dark);
+            font-style: italic;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--color-warm-gray);
+            max-width: 550px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-video {
+            width: 100%;
+            max-width: 600px;
+            margin: 2.5rem auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+            background: var(--color-nude);
+            aspect-ratio: 16/9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .hero-video::before {
+            content: '▶';
+            font-size: 3rem;
+            color: var(--color-gold);
+            opacity: 0.8;
+        }
+
+        /* ==================== */
+        /* 2. EMPATHY SECTION */
+        /* ==================== */
+        .empathy {
+            background: var(--color-white);
+        }
+
+        .empathy-content {
+            text-align: center;
+        }
+
+        .empathy h2 {
+            color: var(--color-charcoal);
+        }
+
+        .empathy-bullets {
+            list-style: none;
+            max-width: 500px;
+            margin: 2.5rem auto;
+            text-align: left;
+        }
+
+        .empathy-bullets li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem 0;
+            font-size: 1.1rem;
+            color: var(--color-charcoal);
+            border-bottom: 1px solid var(--color-nude);
+        }
+
+        .empathy-bullets li:last-child {
+            border-bottom: none;
+        }
+
+        .empathy-bullets li::before {
+            content: '✓';
+            color: var(--color-gold);
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .empathy-quote {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            font-style: italic;
+            color: var(--color-charcoal);
+            margin: 3rem 0;
+            padding: 2rem;
+            border-left: 3px solid var(--color-gold);
+            background: var(--color-nude-soft);
+            text-align: left;
+        }
+
+        .empathy-quote span {
+            display: block;
+            color: var(--color-gold-dark);
+        }
+
+        /* ==================== */
+        /* 3. AUTHORITY SECTION */
+        /* ==================== */
+        .authority {
+            background: var(--color-cream);
+        }
+
+        .authority-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .authority-image {
+            position: relative;
+        }
+
+        .authority-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .authority-image::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 100%;
+            height: 100%;
+            border: 2px solid var(--color-gold);
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        .authority-content h2 {
+            color: var(--color-charcoal);
+        }
+
+        .authority-content p {
+            font-size: 1.1rem;
+            line-height: 1.9;
+        }
+
+        .authority-signature {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--color-gold);
+            margin-top: 2rem;
+        }
+
+        /* ==================== */
+        /* 4. EDUCATION SECTION */
+        /* ==================== */
+        .education {
+            background: var(--color-white);
+        }
+
+        .education h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .education-card {
+            background: var(--color-nude-soft);
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .education-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .education-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .education-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--color-white);
+        }
+
+        .education-card h3 {
+            color: var(--color-charcoal);
+            font-size: 1.3rem;
+        }
+
+        .education-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+        }
+
+        /* ==================== */
+        /* 5. SOLUTION SECTION */
+        /* ==================== */
+        .solution {
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-white) 100%);
+        }
+
+        .solution h2 {
+            text-align: center;
+        }
+
+        .solution-intro {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .solution-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .solution-tab {
+            padding: 1rem 2rem;
+            background: var(--color-white);
+            border: 2px solid var(--color-nude);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .solution-tab.active,
+        .solution-tab:hover {
+            background: var(--color-gold);
+            border-color: var(--color-gold);
+            color: var(--color-white);
+        }
+
+        .solution-content {
+            background: var(--color-white);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.05);
+        }
+
+        .solution-content h3 {
+            color: var(--color-gold-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .solution-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            color: var(--color-charcoal);
+        }
+
+        .solution-features li::before {
+            content: '◆';
+            color: var(--color-gold);
+            font-size: 0.6rem;
+        }
+
+        .solution-quote {
+            font-family: var(--font-display);
+            font-size: 1.6rem;
+            font-style: italic;
+            text-align: center;
+            color: var(--color-charcoal);
+            padding: 2rem;
+            margin: 2rem 0;
+            background: var(--color-nude-soft);
+            border-radius: 15px;
+        }
+
+        .solution-panel {
+            display: none;
+        }
+
+        .solution-panel.active {
+            display: block;
+        }
+
+        /* ==================== */
+        /* 5.5 BEFORE/AFTER SECTION */
+        /* ==================== */
+        .before-after {
+            background: var(--color-soft-black);
+            color: var(--color-white);
+        }
+
+        .before-after h2 {
+            text-align: center;
+            color: var(--color-white);
+            margin-bottom: 1rem;
+        }
+
+        .before-after-subtitle {
+            text-align: center;
+            color: var(--color-gold);
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        .before-after-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .before-after-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .before-after-card:hover {
+            border-color: var(--color-gold);
+            transform: translateY(-5px);
+        }
+
+        .before-after-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+
+        .before-after-images::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: var(--color-gold);
+        }
+
+        .ba-image {
+            aspect-ratio: 3/4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: #000000;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .ba-image svg {
+            width: 80px;
+            height: 80px;
+            stroke: var(--color-gold);
+            opacity: 0.3;
+        }
+
+        /* Cards con imagen real - una sola imagen dividida */
+        .before-after-card.has-image .before-after-images {
+            grid-template-columns: 1fr;
+        }
+
+        .before-after-card.has-image .before-after-images::after {
+            left: 50%;
+        }
+
+        .ba-real-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+
+        .ba-label {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            background: rgba(0,0,0,0.5);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .before-after-info {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .before-after-treatment {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--color-gold);
+            margin-bottom: 0.3rem;
+        }
+
+        .before-after-detail {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 0;
+        }
+
+        .before-after-disclaimer {
+            text-align: center;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.4);
+            margin-top: 2.5rem;
+            font-style: italic;
+        }
+
+        @media (max-width: 900px) {
+            .before-after-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .before-after-grid {
+                grid-template-columns: 1fr;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+        }
+
+        /* ==================== */
+        /* 6. SOCIAL PROOF */
+        /* ==================== */
+        .social-proof {
+            background: var(--color-soft-black);
+            color: var(--color-white);
+        }
+
+        .social-proof h2 {
+            text-align: center;
+            color: var(--color-white);
+        }
+
+        .social-proof-subtitle {
+            text-align: center;
+            color: var(--color-gold);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .testimonial-card:hover {
+            background: rgba(201, 169, 98, 0.1);
+            border-color: var(--color-gold);
+        }
+
+        .testimonial-stars {
+            color: var(--color-gold);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 45px;
+            height: 45px;
+            background: var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--color-soft-black);
+        }
+
+        .testimonial-name {
+            font-weight: 500;
+            color: var(--color-white);
+        }
+
+        .testimonial-location {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* ==================== */
+        /* 7. PROCESS SECTION */
+        /* ==================== */
+        .process {
+            background: var(--color-white);
+        }
+
+        .process h2 {
+            text-align: center;
+        }
+
+        .process-subtitle {
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto 3rem;
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-nude));
+            z-index: 0;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-number {
+            width: 80px;
+            height: 80px;
+            background: var(--color-white);
+            border: 3px solid var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-gold);
+        }
+
+        .process-step h4 {
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-charcoal);
+            margin-bottom: 0.5rem;
+        }
+
+        .process-step p {
+            font-size: 0.9rem;
+            margin-bottom: 0;
+        }
+
+        /* ==================== */
+        /* 8. PRICING SECTION */
+        /* ==================== */
+        .pricing {
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-nude-soft) 100%);
+        }
+
+        .pricing-card {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--color-white);
+            border-radius: 30px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light), var(--color-gold));
+        }
+
+        .pricing-label {
+            display: inline-block;
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-amount {
+            font-family: var(--font-display);
+            font-size: 4rem;
+            color: var(--color-gold);
+            margin: 1.5rem 0;
+        }
+
+        .pricing-amount span {
+            font-size: 1.5rem;
+            color: var(--color-warm-gray);
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: var(--color-nude-soft);
+            border-radius: 15px;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.8rem 0;
+            color: var(--color-charcoal);
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
+        .pricing-guarantee {
+            font-size: 0.9rem;
+            color: var(--color-warm-gray);
+            margin-top: 2rem;
+            font-style: italic;
+        }
+
+        /* ==================== */
+        /* 9. FAQ SECTION */
+        /* ==================== */
+        .faq {
+            background: var(--color-white);
+        }
+
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .faq-list {
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--color-nude);
+            padding: 1.5rem 0;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--color-charcoal);
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--color-gold);
+        }
+
+        .faq-icon {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-gold);
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            background: var(--color-gold);
+            color: var(--color-white);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s var(--transition-smooth);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+        }
+
+        .faq-answer p {
+            padding-top: 1rem;
+            font-size: 1rem;
+        }
+
+        /* ==================== */
+        /* 10. CLOSING SECTION */
+        /* ==================== */
+        .closing {
+            background: var(--color-soft-black);
+            color: var(--color-white);
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .closing h2 {
+            color: var(--color-white);
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .closing h2 span {
+            color: var(--color-gold);
+        }
+
+        .closing p {
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 400px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .closing-logo {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-gold);
+            margin-top: 3rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* ==================== */
+        /* STICKY CTA MOBILE */
+        /* ==================== */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            padding: 1rem;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            display: none;
+        }
+
+        .sticky-cta .cta-button {
+            width: 100%;
+            padding: 1rem;
+        }
+
+        /* ==================== */
+        /* RESPONSIVE */
+        /* ==================== */
+        @media (max-width: 900px) {
+            .authority-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .authority-image {
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 4rem 0;
+            }
+
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .solution-tabs {
+                flex-direction: column;
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sticky-cta {
+                display: block;
+            }
+
+            .closing {
+                padding-bottom: 8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .cta-button {
+                padding: 1rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .pricing-amount {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ==================== -->
+    <!-- 1. HERO SECTION -->
+    <!-- ==================== -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">Dra. Nikkita | Especialista en Estética Facial</span>
+                <h1>
+                    Tu rostro no debería verse derretido.
+                    <span>Y no, no es normal.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    La papada y la flacidez facial tienen solución cuando se tratan con diagnóstico y criterio médico.
+                </p>
+
+                <div class="hero-video">
+                    <!-- Video VSL placeholder -->
+                </div>
+
+                <a href="#pricing" class="cta-button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                        <line x1="16" y1="2" x2="16" y2="6"/>
+                        <line x1="8" y1="2" x2="8" y2="6"/>
+                        <line x1="3" y1="10" x2="21" y2="10"/>
+                    </svg>
+                    Agenda y paga tu evaluación online
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 2. EMPATHY SECTION -->
+    <!-- ==================== -->
+    <section class="empathy">
+        <div class="container">
+            <div class="empathy-content">
+                <h2>Si esto te pasa, <em>no estás sola</em></h2>
+
+                <ul class="empathy-bullets">
+                    <li>Evitas las fotos de perfil</li>
+                    <li>Sientes que tu rostro se cae antes de tiempo</li>
+                    <li>Tu cuello ya no se ve firme</li>
+                    <li>Te ves cansada aunque no lo estés</li>
+                    <li>Cada vez te reconoces menos en el espejo</li>
+                </ul>
+
+                <blockquote class="empathy-quote">
+                    "Esto no es vanidad.
+                    <span>Es identidad."</span>
+                </blockquote>
+
+                <a href="#pricing" class="cta-button">
+                    Quiero mi evaluación
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 3. AUTHORITY SECTION -->
+    <!-- ==================== -->
+    <section class="authority">
+        <div class="container">
+            <div class="authority-grid">
+                <div class="authority-image">
+                    <img src="dra-nikkita-hero.jpg" alt="Dra. Nicole Morales">
+                </div>
+                <div class="authority-content">
+                    <h2>Soy la <em>Dra. Nicole Morales</em></h2>
+                    <p>
+                        Doctora especialista en estética facial con más de 15 años de experiencia transformando rostros y devolviendo confianza.
+                    </p>
+                    <p>
+                        He acompañado a cientos de mujeres que un día decidieron dejar de postergarse. Mujeres que entendieron que cuidarse no es ego, es necesidad.
+                    </p>
+                    <p>
+                        Mi enfoque es simple: resultados naturales, seguros y honestos. Nunca prometo lo que no puedo cumplir, y siempre te diré si realmente eres candidata o no.
+                    </p>
+                    <span class="authority-signature">— Dra. Nikkita</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 4. EDUCATION SECTION -->
+    <!-- ==================== -->
+    <section class="education">
+        <div class="container">
+            <h2>¿Por qué <em>pasa esto</em>?</h2>
+
+            <div class="education-grid">
+                <div class="education-card">
+                    <div class="education-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 16v-4"/>
+                            <path d="M12 8h.01"/>
+                        </svg>
+                    </div>
+                    <h3>¿Qué es la papada?</h3>
+                    <p>
+                        Puede ser acumulación de grasa, flacidez de piel, o ambas. El tratamiento correcto depende del diagnóstico exacto.
+                    </p>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
+                    <h3>¿Qué es la flacidez facial?</h3>
+                    <p>
+                        La pérdida de colágeno y elastina hace que la piel pierda firmeza y el rostro "caiga" con los años.
+                    </p>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                            <line x1="9" y1="9" x2="9.01" y2="9"/>
+                            <line x1="15" y1="9" x2="15.01" y2="9"/>
+                        </svg>
+                    </div>
+                    <h3>El rostro "derretido"</h3>
+                    <p>
+                        Es la combinación de pérdida de volumen, grasa mal posicionada y piel flácida que cambia las proporciones faciales.
+                    </p>
+                </div>
+
+                <div class="education-card">
+                    <div class="education-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
+                        </svg>
+                    </div>
+                    <h3>No siempre necesitas cirugía</h3>
+                    <p>
+                        Muchos casos se resuelven con procedimientos mínimamente invasivos. El diagnóstico correcto es clave.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 5. SOLUTION SECTION -->
+    <!-- ==================== -->
+    <section class="solution">
+        <div class="container">
+            <h2>La <em>solución</em> existe</h2>
+            <p class="solution-intro">
+                Dependiendo de tu caso, el tratamiento puede ser lipopapada, lifting facial, o una combinación personalizada.
+            </p>
+
+            <div class="solution-tabs">
+                <button class="solution-tab active" data-tab="lipopapada">Lipopapada</button>
+                <button class="solution-tab" data-tab="lifting">Lifting Facial</button>
+            </div>
+
+            <div class="solution-content">
+                <!-- Panel Lipopapada -->
+                <div class="solution-panel active" id="panel-lipopapada">
+                    <h3>Lipopapada</h3>
+                    <p>
+                        Procedimiento mínimamente invasivo para eliminar la grasa localizada bajo el mentón. Ideal cuando el problema principal es acumulación de grasa, no flacidez severa.
+                    </p>
+
+                    <ul class="solution-features">
+                        <li>Procedimiento ambulatorio</li>
+                        <li>Anestesia local</li>
+                        <li>Recuperación rápida (3-5 días)</li>
+                        <li>Resultados naturales y duraderos</li>
+                        <li>Sin cicatrices visibles</li>
+                    </ul>
+
+                    <div class="solution-quote">
+                        "El objetivo no es verte distinta,<br>
+                        es volver a reconocerte."
+                    </div>
+
+                    <a href="#pricing" class="cta-button">
+                        Saber si soy candidata
+                    </a>
+                </div>
+
+                <!-- Panel Lifting -->
+                <div class="solution-panel" id="panel-lifting">
+                    <h3>Lifting Facial</h3>
+                    <p>
+                        Procedimiento que reposiciona los tejidos faciales para devolver firmeza y definición al rostro. Indicado cuando existe flacidez moderada a severa que no responde a tratamientos menos invasivos.
+                    </p>
+
+                    <ul class="solution-features">
+                        <li>Mini lifting o lifting completo según el caso</li>
+                        <li>Resultados que duran años</li>
+                        <li>Técnicas que respetan tu expresión natural</li>
+                        <li>Recuperación progresiva (7-14 días)</li>
+                        <li>Cicatrices ocultas en zonas naturales</li>
+                    </ul>
+
+                    <div class="solution-quote">
+                        "No se trata de borrar los años,<br>
+                        sino de verte tan bien como te sientes."
+                    </div>
+
+                    <a href="#pricing" class="cta-button">
+                        Saber si soy candidata
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 5.5 BEFORE/AFTER -->
+    <!-- ==================== -->
+    <section class="before-after">
+        <div class="container">
+            <h2>Resultados <em>reales</em></h2>
+            <p class="before-after-subtitle">Transformaciones que hablan por sí solas</p>
+
+            <div class="before-after-grid">
+                <!-- Card 1 - Imagen real -->
+                <div class="before-after-card has-image">
+                    <div class="before-after-images">
+                        <img src="antes-despues-1.JPG" alt="Antes y después lipopapada" class="ba-real-image">
+                    </div>
+                    <div class="before-after-info">
+                        <div class="before-after-treatment">Lipopapada</div>
+                        <p class="before-after-detail">Paciente 32 años • 3 meses post</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 - Imagen real -->
+                <div class="before-after-card has-image">
+                    <div class="before-after-images">
+                        <img src="antes-despues-2.JPG" alt="Antes y después mini lifting" class="ba-real-image">
+                    </div>
+                    <div class="before-after-info">
+                        <div class="before-after-treatment">Mini Lifting</div>
+                        <p class="before-after-detail">Paciente 45 años • 6 meses post</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <div class="ba-image before">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <circle cx="12" cy="8" r="5"/>
+                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
+                            </svg>
+                            <span class="ba-label">Antes</span>
+                        </div>
+                        <div class="ba-image after">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <circle cx="12" cy="8" r="5"/>
+                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
+                                <path d="M16 3l2 2 4-4" stroke-width="2"/>
+                            </svg>
+                            <span class="ba-label">Después</span>
+                        </div>
+                    </div>
+                    <div class="before-after-info">
+                        <div class="before-after-treatment">Lipo + Lifting</div>
+                        <p class="before-after-detail">Paciente 48 años • 4 meses post</p>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <div class="ba-image before">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <circle cx="12" cy="8" r="5"/>
+                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
+                            </svg>
+                            <span class="ba-label">Antes</span>
+                        </div>
+                        <div class="ba-image after">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <circle cx="12" cy="8" r="5"/>
+                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
+                                <path d="M16 3l2 2 4-4" stroke-width="2"/>
+                            </svg>
+                            <span class="ba-label">Después</span>
+                        </div>
+                    </div>
+                    <div class="before-after-info">
+                        <div class="before-after-treatment">Lipopapada</div>
+                        <p class="before-after-detail">Paciente 38 años • 2 meses post</p>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <div class="ba-image before">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <circle cx="12" cy="8" r="5"/>
+                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
+                            </svg>
+                            <span class="ba-label">Antes</span>
+                        </div>
+                        <div class="ba-image after">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <circle cx="12" cy="8" r="5"/>
+                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
+                                <path d="M16 3l2 2 4-4" stroke-width="2"/>
+                            </svg>
+                            <span class="ba-label">Después</span>
+                        </div>
+                    </div>
+                    <div class="before-after-info">
+                        <div class="before-after-treatment">Mini Lifting</div>
+                        <p class="before-after-detail">Paciente 55 años • 5 meses post</p>
+                    </div>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="before-after-card">
+                    <div class="before-after-images">
+                        <div class="ba-image before">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <circle cx="12" cy="8" r="5"/>
+                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
+                            </svg>
+                            <span class="ba-label">Antes</span>
+                        </div>
+                        <div class="ba-image after">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <circle cx="12" cy="8" r="5"/>
+                                <path d="M3 21v-2a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7v2"/>
+                                <path d="M16 3l2 2 4-4" stroke-width="2"/>
+                            </svg>
+                            <span class="ba-label">Después</span>
+                        </div>
+                    </div>
+                    <div class="before-after-info">
+                        <div class="before-after-treatment">Lipo + Lifting</div>
+                        <p class="before-after-detail">Paciente 50 años • 4 meses post</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="before-after-disclaimer">
+                *Los resultados pueden variar según cada paciente. Fotos ilustrativas - próximamente casos reales con autorización.
+            </p>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 6. SOCIAL PROOF -->
+    <!-- ==================== -->
+    <section class="social-proof">
+        <div class="container">
+            <h2>Más de <em>2,500 pacientes</em> ya tomaron la decisión</h2>
+            <p class="social-proof-subtitle">Sus palabras, no las nuestras</p>
+
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Volví a mirarme sin miedo. Después de años evitando fotos, hoy me saco selfies sin filtros."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">M</div>
+                        <div>
+                            <div class="testimonial-name">María José</div>
+                            <div class="testimonial-location">Santiago</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "Me siento yo otra vez. La doctora fue honesta desde el primer momento sobre qué esperar."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">C</div>
+                        <div>
+                            <div class="testimonial-name">Carolina</div>
+                            <div class="testimonial-location">Viña del Mar</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">
+                        "No me cambió la cara, me devolvió la seguridad. Eso no tiene precio."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="testimonial-avatar">P</div>
+                        <div>
+                            <div class="testimonial-name">Patricia</div>
+                            <div class="testimonial-location">Providencia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 7. PROCESS SECTION -->
+    <!-- ==================== -->
+    <section class="process">
+        <div class="container">
+            <h2>Cómo funciona la <em>evaluación online</em></h2>
+            <p class="process-subtitle">
+                Te diremos si realmente eres candidata y qué tratamiento es el adecuado para ti.
+            </p>
+
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="process-number">1</div>
+                    <h4>Pagas tu evaluación</h4>
+                    <p>Proceso seguro y simple</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-number">2</div>
+                    <h4>Completas formulario</h4>
+                    <p>Información clínica básica</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-number">3</div>
+                    <h4>Evaluación médica</h4>
+                    <p>Análisis personalizado</p>
+                </div>
+
+                <div class="process-step">
+                    <div class="process-number">4</div>
+                    <h4>Recomendación honesta</h4>
+                    <p>Sin presiones ni falsas promesas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 8. PRICING SECTION -->
+    <!-- ==================== -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="pricing-card">
+                <span class="pricing-label">Evaluación Online</span>
+                <h2>Tu primer paso hacia el cambio</h2>
+
+                <div class="pricing-amount">
+                    $25.000 <span>CLP</span>
+                </div>
+
+                <ul class="pricing-features">
+                    <li>Evaluación médica personalizada</li>
+                    <li>Análisis de tu caso específico</li>
+                    <li>Recomendación de tratamiento</li>
+                    <li>Respuesta en 24-48 horas</li>
+                    <li>Descontable del tratamiento</li>
+                </ul>
+
+                <a href="https://wa.me/56912345678?text=Hola,%20quiero%20pagar%20mi%20evaluación%20online" class="cta-button" target="_blank">
+                    Pagar evaluación online ahora
+                </a>
+
+                <p class="pricing-guarantee">
+                    Sin presiones. Sin promesas falsas. Con criterio médico.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 9. FAQ SECTION -->
+    <!-- ==================== -->
+    <section class="faq">
+        <div class="container">
+            <h2>Preguntas <em>frecuentes</em></h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Es doloroso el procedimiento?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Los procedimientos se realizan con anestesia local, por lo que no sentirás dolor durante el tratamiento. Después puede haber molestias leves que se controlan fácilmente con medicación.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Es una cirugía?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>La lipopapada es un procedimiento mínimamente invasivo, no una cirugía tradicional. El lifting puede variar según el tipo, pero siempre buscamos la opción menos invasiva que dé los mejores resultados.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Cuánto dura el resultado?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Los resultados de la lipopapada son permanentes en cuanto a las células de grasa eliminadas. El lifting puede durar varios años dependiendo del cuidado posterior y factores individuales.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Y si no soy candidata?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Te lo diremos con honestidad. Preferimos decirte la verdad a hacer un procedimiento que no te dará los resultados esperados. Si no eres candidata, te orientaremos sobre alternativas.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿La evaluación es reembolsable?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>El valor de la evaluación se descuenta íntegramente del tratamiento si decides realizarlo. Es nuestra forma de valorar tu tiempo y tu confianza.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 10. CLOSING SECTION -->
+    <!-- ==================== -->
+    <section class="closing">
+        <div class="container">
+            <h2>Elegirte no es ego.<br><span>Es autocuidado.</span></h2>
+            <p>
+                Da el primer paso hoy. Tu rostro merece una evaluación honesta y profesional.
+            </p>
+            <a href="#pricing" class="cta-button">
+                Pagar mi evaluación ahora
+            </a>
+            <div class="closing-logo">Dra Nikkita</div>
+        </div>
+    </section>
+
+    <!-- STICKY CTA MOBILE -->
+    <div class="sticky-cta">
+        <a href="#pricing" class="cta-button">
+            Pagar evaluación online
+        </a>
+    </div>
+
+    <!-- FAQ Toggle Script -->
+    <script>
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+
+                // Close all
+                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+
+                // Open clicked if wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Solution tabs
+        document.querySelectorAll('.solution-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetTab = tab.dataset.tab;
+
+                // Update tabs
+                document.querySelectorAll('.solution-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Update panels
+                document.querySelectorAll('.solution-panel').forEach(panel => panel.classList.remove('active'));
+                document.getElementById('panel-' + targetTab).classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>

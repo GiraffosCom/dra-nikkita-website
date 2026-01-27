@@ -972,88 +972,566 @@
         }
 
         /* ==================== */
-        /* 8. PRICING SECTION */
+        /* 8. EVALUATION SECTION */
         /* ==================== */
-        .pricing {
-            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-nude-soft) 100%);
+        .bot-section {
+            background: var(--color-soft-black);
+            color: var(--color-white);
+            padding: 6rem 0;
         }
 
-        .pricing-card {
-            max-width: 500px;
+        .evaluation-container {
+            max-width: 1000px;
             margin: 0 auto;
-            background: var(--color-white);
-            border-radius: 30px;
-            padding: 3rem;
-            text-align: center;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+            padding: 0 1.5rem;
+        }
+
+        .evaluation-grid {
+            margin-bottom: 3rem;
+        }
+
+        .evaluation-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .eval-card {
+            background: rgba(248, 245, 240, 0.03);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 20px;
+            padding: 2.5rem;
             position: relative;
-            overflow: hidden;
+            transition: all 0.4s var(--transition-smooth);
         }
 
-        .pricing-card::before {
-            content: '';
+        .eval-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-gold);
+            box-shadow: 0 20px 60px rgba(201, 169, 98, 0.15);
+        }
+
+        .eval-card.featured {
+            border-color: var(--color-gold);
+            background: rgba(201, 169, 98, 0.08);
+        }
+
+        .eval-badge {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light), var(--color-gold));
-        }
-
-        .pricing-label {
-            display: inline-block;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+            padding: 0.4rem 1.2rem;
             font-size: 0.75rem;
-            letter-spacing: 0.15em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: var(--color-gold);
-            margin-bottom: 1rem;
+            border-radius: 20px;
         }
 
-        .pricing-card h2 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .pricing-amount {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            color: var(--color-gold);
-            margin: 1.5rem 0;
-        }
-
-        .pricing-amount span {
-            font-size: 1.5rem;
-            color: var(--color-warm-gray);
-        }
-
-        .pricing-features {
-            list-style: none;
-            text-align: left;
-            margin: 2rem 0;
-            padding: 2rem;
-            background: var(--color-nude-soft);
-            border-radius: 15px;
-        }
-
-        .pricing-features li {
+        .eval-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(201, 169, 98, 0.15);
+            border-radius: 16px;
             display: flex;
             align-items: center;
-            gap: 1rem;
-            padding: 0.8rem 0;
-            color: var(--color-charcoal);
+            justify-content: center;
+            margin-bottom: 1.5rem;
         }
 
-        .pricing-features li::before {
+        .eval-icon svg {
+            width: 28px;
+            height: 28px;
+            stroke: var(--color-gold);
+        }
+
+        .eval-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--color-white);
+            margin-bottom: 0.8rem;
+        }
+
+        .eval-card > p {
+            font-size: 0.9rem;
+            color: rgba(248, 245, 240, 0.7);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .eval-price {
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .eval-price .price-amount {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 500;
+            color: var(--color-gold);
+        }
+
+        .eval-price .price-currency {
+            font-size: 1rem;
+            color: rgba(248, 245, 240, 0.6);
+        }
+
+        .eval-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .eval-features li {
+            font-size: 0.9rem;
+            color: rgba(248, 245, 240, 0.8);
+            padding: 0.6rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            border-bottom: 1px solid rgba(248, 245, 240, 0.1);
+        }
+
+        .eval-features li:last-child {
+            border-bottom: none;
+        }
+
+        .eval-features li::before {
             content: '✓';
             color: var(--color-gold);
             font-weight: 600;
         }
 
-        .pricing-guarantee {
+        .eval-btn {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.1rem 2rem;
+            background: transparent;
+            border: 1px solid var(--color-gold);
+            color: var(--color-white);
+            font-family: var(--font-body);
             font-size: 0.9rem;
-            color: var(--color-warm-gray);
-            margin-top: 2rem;
-            font-style: italic;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+            text-decoration: none;
+        }
+
+        .eval-btn:hover {
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+        }
+
+        .eval-btn.primary {
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+        }
+
+        .eval-btn.primary:hover {
+            background: var(--color-gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 169, 98, 0.3);
+        }
+
+        .eval-notice {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            background: rgba(201, 169, 98, 0.1);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .notice-icon {
+            flex-shrink: 0;
+        }
+
+        .notice-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-gold);
+        }
+
+        .notice-content h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-gold);
+        }
+
+        .notice-content p {
+            font-size: 0.85rem;
+            color: rgba(248, 245, 240, 0.8);
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        .notice-content strong {
+            color: var(--color-white);
+        }
+
+        /* Chat Section Trigger */
+        .chat-section {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(248, 245, 240, 0.03);
+            border-radius: 20px;
+            border: 1px dashed rgba(201, 169, 98, 0.3);
+        }
+
+        .chat-header-info h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--color-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .chat-header-info p {
+            font-size: 0.9rem;
+            color: rgba(248, 245, 240, 0.6);
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-chat-open {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--color-rose) 0%, var(--color-gold) 100%);
+            border: none;
+            color: var(--color-soft-black);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .btn-chat-open:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 169, 98, 0.3);
+        }
+
+        /* Chat Modal */
+        .chat-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .chat-modal.active {
+            display: flex;
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            background: var(--color-soft-black);
+            border-radius: 24px;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+        }
+
+        .chat-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 1.5rem;
+            background: rgba(201, 169, 98, 0.1);
+            border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .chat-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-rose) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-avatar span {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--color-white);
+        }
+
+        .chat-title h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--color-white);
+        }
+
+        .chat-status {
+            font-size: 0.75rem;
+            color: #4ade80;
+        }
+
+        .chat-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: var(--color-white);
+            cursor: pointer;
+            padding: 0.5rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .chat-close:hover {
+            opacity: 1;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            min-height: 350px;
+            max-height: 450px;
+        }
+
+        .chat-bubble {
+            max-width: 85%;
+            padding: 1rem 1.2rem;
+            border-radius: 18px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            animation: bubbleIn 0.3s var(--transition-smooth);
+        }
+
+        @keyframes bubbleIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .chat-bubble.bot {
+            background: rgba(201, 169, 98, 0.15);
+            color: var(--color-white);
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+        }
+
+        .chat-bubble.user {
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+            border-bottom-right-radius: 4px;
+            align-self: flex-end;
+        }
+
+        .chat-input-area {
+            padding: 1rem 1.5rem 1.5rem;
+            border-top: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 1rem 1.2rem;
+            background: rgba(248, 245, 240, 0.05);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 12px;
+            color: var(--color-white);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--color-gold);
+        }
+
+        .chat-input::placeholder {
+            color: rgba(248, 245, 240, 0.4);
+        }
+
+        .chat-send {
+            padding: 1rem 1.5rem;
+            background: var(--color-gold);
+            border: none;
+            border-radius: 12px;
+            color: var(--color-soft-black);
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .chat-send:hover {
+            background: var(--color-gold-light);
+        }
+
+        .chat-send:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .chat-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .chat-option {
+            padding: 0.8rem 1.2rem;
+            background: rgba(248, 245, 240, 0.05);
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 25px;
+            color: var(--color-white);
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .chat-option:hover {
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+            border-color: var(--color-gold);
+        }
+
+        .chat-file-upload {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .file-upload-area {
+            border: 2px dashed rgba(201, 169, 98, 0.4);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--color-gold);
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        .file-upload-area svg {
+            width: 40px;
+            height: 40px;
+            stroke: var(--color-gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .file-upload-area p {
+            font-size: 0.85rem;
+            color: rgba(248, 245, 240, 0.6);
+            margin-bottom: 0;
+        }
+
+        .file-preview {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .file-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--color-gold);
+            position: relative;
+        }
+
+        .file-thumb .remove-file {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-rose);
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-progress {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid rgba(201, 169, 98, 0.1);
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(248, 245, 240, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--color-gold);
+            width: 10%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            font-size: 0.75rem;
+            color: rgba(248, 245, 240, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .evaluation-options {
+                grid-template-columns: 1fr;
+            }
+
+            .eval-card {
+                padding: 2rem;
+            }
+
+            .chat-container {
+                max-height: 95vh;
+            }
         }
 
         /* ==================== */
@@ -1265,13 +1743,13 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <span class="hero-badge">Dra. Nikkita | Especialista en Mini Lifting</span>
+                <span class="hero-badge">Dra. Nikkita | Tu aliada en rejuvenecimiento facial</span>
                 <h1>
-                    Rejuvenece tu rostro sin cirugía invasiva.
-                    <span>Con anestesia local y recuperación rápida.</span>
+                    Mereces verte tan radiante como te sientes por dentro.
+                    <span>Sin importar tu edad.</span>
                 </h1>
                 <p class="hero-subtitle">
-                    El Mini Lifting es la técnica ideal para quienes quieren resultados reales sin los riesgos de una cirugía mayor. Sin anestesia general, sin hospitalización.
+                    Sé que has pensado en esto muchas veces. Sé que mereces sentirte hermosa y segura. El Mini Lifting es el camino seguro para recuperar esa confianza, con anestesia local y acompañamiento en cada paso del proceso.
                 </p>
 
                 <div class="hero-video">
@@ -1285,7 +1763,7 @@
                         <line x1="8" y1="2" x2="8" y2="6"/>
                         <line x1="3" y1="10" x2="21" y2="10"/>
                     </svg>
-                    Agenda tu evaluación para Mini Lifting
+                    Quiero saber si soy candidata
                 </a>
             </div>
         </div>
@@ -1297,23 +1775,23 @@
     <section class="empathy">
         <div class="container">
             <div class="empathy-content">
-                <h2>Si esto te pasa, <em>no estás sola</em></h2>
+                <h2>Entiendo lo que sientes. <em>No estás sola.</em></h2>
 
                 <ul class="empathy-bullets">
-                    <li>Sientes que tu rostro perdió definición y firmeza</li>
-                    <li>Te miras al espejo y ves flacidez en mejillas y cuello</li>
-                    <li>Quieres rejuvenecer pero te da miedo una cirugía mayor</li>
-                    <li>Buscas resultados naturales, no un rostro "operado"</li>
-                    <li>Necesitas recuperarte rápido para volver a tu vida</li>
+                    <li>Te miras al espejo y ya no te reconoces como antes</li>
+                    <li>Sientes que tu rostro no refleja la energía que llevas dentro</li>
+                    <li>Has pensado en hacer algo, pero el miedo te detiene</li>
+                    <li>Quieres verte bien, pero no quieres que se note que "te hiciste algo"</li>
+                    <li>Mereces sentirte hermosa sin tener que explicarle a nadie</li>
                 </ul>
 
                 <blockquote class="empathy-quote">
-                    "El Mini Lifting es para ti si quieres verte mejor,
-                    <span>sin poner tu vida en pausa."</span>
+                    "Cada mujer merece mirarse al espejo y sentir orgullo.
+                    <span>Estoy aquí para acompañarte en ese camino."</span>
                 </blockquote>
 
                 <a href="#pricing" class="cta-button">
-                    Quiero saber si soy candidata
+                    Quiero sentirme hermosa de nuevo
                 </a>
             </div>
         </div>
@@ -1329,17 +1807,17 @@
                     <img src="dra-nikkita-hero.jpg" alt="Dra. Nicole Morales">
                 </div>
                 <div class="authority-content">
-                    <h2>Soy la <em>Dra. Nicole Morales</em></h2>
+                    <h2>Hola, soy la <em>Dra. Nicole</em></h2>
                     <p>
-                        Doctora especialista en estética facial con más de 15 años de experiencia transformando rostros y devolviendo confianza.
+                        Y quiero que sepas algo: entiendo perfectamente lo que sientes. Antes de ser doctora, soy mujer. Y sé lo importante que es mirarse al espejo y sentirse bien con lo que ves.
                     </p>
                     <p>
-                        He acompañado a cientos de mujeres que un día decidieron dejar de postergarse. Mujeres que entendieron que cuidarse no es ego, es necesidad.
+                        En mis más de 15 años de experiencia, he tenido el privilegio de acompañar a cientos de mujeres en este camino. Mujeres como tú, que un día decidieron priorizarse y dar ese paso.
                     </p>
                     <p>
-                        Mi enfoque es simple: resultados naturales, seguros y honestos. Nunca prometo lo que no puedo cumplir, y siempre te diré si realmente eres candidata o no.
+                        Mi compromiso contigo es simple: honestidad total, manos expertas y acompañamiento de principio a fin. Estarás en buenas manos, te lo prometo.
                     </p>
-                    <span class="authority-signature">— Dra. Nikkita</span>
+                    <span class="authority-signature">— Con cariño, Dra. Nikkita</span>
                 </div>
             </div>
         </div>
@@ -1414,33 +1892,33 @@
     <!-- ==================== -->
     <section class="solution">
         <div class="container">
-            <h2>El <em>Mini Lifting</em>: tu solución</h2>
+            <h2>El <em>Mini Lifting</em>: tu nueva oportunidad</h2>
             <p class="solution-intro">
-                El procedimiento ideal para rejuvenecer tu rostro sin los riesgos y tiempos de recuperación de una cirugía tradicional.
+                Imagina volver a sentirte segura frente al espejo. Verte radiante sin que nadie sepa tu secreto. El Mini Lifting es ese puente entre cómo te sientes por dentro y cómo te ves por fuera.
             </p>
 
             <div class="solution-content">
-                <h3>¿Qué es el Mini Lifting?</h3>
+                <h3>¿Por qué el Mini Lifting es diferente?</h3>
                 <p>
-                    Es un procedimiento quirúrgico mínimamente invasivo que reposiciona los tejidos faciales para devolver firmeza y definición al rostro. A diferencia del lifting tradicional, se realiza con <strong>anestesia local</strong>, sin necesidad de hospitalización.
+                    Porque fue diseñado pensando en mujeres como tú: mujeres ocupadas, valientes, que quieren resultados reales pero sin los miedos de una cirugía mayor. Se realiza con <strong>anestesia local</strong>, en un ambiente de confianza, y vuelves a casa el mismo día.
                 </p>
 
                 <ul class="solution-features">
-                    <li>Procedimiento ambulatorio con anestesia local</li>
-                    <li>Sin riesgos de anestesia general</li>
-                    <li>Recuperación más rápida (5-7 días)</li>
-                    <li>Resultados naturales que duran años</li>
-                    <li>Cicatrices mínimas y ocultas</li>
-                    <li>Puedes volver a casa el mismo día</li>
+                    <li>Despierta durante todo el procedimiento (sin anestesia general)</li>
+                    <li>Te acompañamos antes, durante y después</li>
+                    <li>Recuperación suave en 5-7 días</li>
+                    <li>Resultados naturales: tú, pero rejuvenecida</li>
+                    <li>Cicatrices prácticamente invisibles</li>
+                    <li>Vuelves a tu vida sin que nadie note "qué te hiciste"</li>
                 </ul>
 
                 <div class="solution-quote">
-                    "El Mini Lifting te devuelve la firmeza<br>
-                    sin poner tu vida en pausa."
+                    "No se trata de cambiar quien eres.<br>
+                    Se trata de que tu reflejo muestre lo que sientes."
                 </div>
 
                 <a href="#pricing" class="cta-button">
-                    Saber si soy candidata
+                    Quiero saber si soy candidata
                 </a>
             </div>
         </div>
@@ -1662,19 +2140,19 @@
     <!-- ==================== -->
     <section class="social-proof">
         <div class="container">
-            <h2>Más de <em>2,500 pacientes</em> ya tomaron la decisión</h2>
-            <p class="social-proof-subtitle">Sus palabras, no las nuestras</p>
+            <h2>Ellas también <em>dudaron al principio</em></h2>
+            <p class="social-proof-subtitle">Hoy se miran al espejo con una sonrisa</p>
 
             <div class="testimonials-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-text">
-                        "El Mini Lifting fue la mejor decisión. Me recuperé en una semana y nadie notó que me hice algo, solo que me veo descansada."
+                        "Tenía miedo, mucho miedo. Pero la Dra. Nikkita me hizo sentir tan segura que supe que estaba en las mejores manos. Hoy me miro al espejo y por fin veo la mujer que siento que soy."
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">M</div>
                         <div>
-                            <div class="testimonial-name">María José</div>
+                            <div class="testimonial-name">María José, 52 años</div>
                             <div class="testimonial-location">Santiago</div>
                         </div>
                     </div>
@@ -1683,12 +2161,12 @@
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-text">
-                        "Tenía miedo de una cirugía mayor. El Mini Lifting con anestesia local fue perfecto para mí. Los masajes post-op ayudaron mucho."
+                        "Postergué esto por años pensando que era vanidad. Qué equivocada estaba. Sentirme bien conmigo misma cambió todo: mi energía, mi confianza, mi felicidad."
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">C</div>
                         <div>
-                            <div class="testimonial-name">Carolina</div>
+                            <div class="testimonial-name">Carolina, 48 años</div>
                             <div class="testimonial-location">Viña del Mar</div>
                         </div>
                     </div>
@@ -1697,12 +2175,12 @@
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-text">
-                        "La Dra. Nikkita me explicó todo con honestidad. El resultado es natural, me veo como yo pero 10 años más joven."
+                        "Mi hija me dijo: 'mamá, te ves tan descansada y feliz'. Nadie sabe mi secreto, y así me gusta. Gracias Dra. por devolverme mi confianza."
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">P</div>
                         <div>
-                            <div class="testimonial-name">Patricia</div>
+                            <div class="testimonial-name">Patricia, 55 años</div>
                             <div class="testimonial-location">Providencia</div>
                         </div>
                     </div>
@@ -1752,34 +2230,144 @@
     <!-- ==================== -->
     <!-- 8. PRICING SECTION -->
     <!-- ==================== -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <div class="pricing-card">
-                <span class="pricing-label">Evaluación para Mini Lifting</span>
-                <h2>Tu primer paso hacia el rejuvenecimiento</h2>
+    <section class="bot-section" id="pricing">
+        <div class="evaluation-container">
+            <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
+                <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300; color: var(--color-white);">
+                    Hoy puede ser el día que <em style="color: var(--color-gold); font-style: italic;">cambies tu historia</em>
+                </h2>
+                <p style="color: rgba(248, 245, 240, 0.7); margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Elige la opción que mejor se adapte a ti. Ambas son el primer paso hacia tu transformación.
+                </p>
+            </div>
 
-                <div class="pricing-amount">
-                    $25.000 <span>CLP</span>
+            <div class="evaluation-grid">
+                <!-- Evaluation Options -->
+                <div class="evaluation-options">
+                    <div class="eval-card">
+                        <div class="eval-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                        <h3>Evaluación Online</h3>
+                        <p>Videollamada personalizada con la Dra. Nikkita desde la comodidad de tu hogar</p>
+                        <div class="eval-price">
+                            <span class="price-amount">$25.000</span>
+                            <span class="price-currency">CLP</span>
+                        </div>
+                        <ul class="eval-features">
+                            <li>Duración: 20-30 minutos</li>
+                            <li>Análisis facial personalizado</li>
+                            <li>Recomendación de tratamiento</li>
+                            <li>Presupuesto detallado</li>
+                        </ul>
+                        <a href="https://wa.me/56945271894?text=Hola,%20quiero%20agendar%20mi%20evaluación%20online%20para%20Mini%20Lifting" class="eval-btn" target="_blank">
+                            Agendar Online
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <div class="eval-card featured">
+                        <div class="eval-badge">Recomendado</div>
+                        <div class="eval-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <h3>Evaluación Presencial</h3>
+                        <p>Visita nuestra clínica para una evaluación completa en persona con la Dra. Nikkita</p>
+                        <div class="eval-price">
+                            <span class="price-amount">$50.000</span>
+                            <span class="price-currency">CLP</span>
+                        </div>
+                        <ul class="eval-features">
+                            <li>Duración: 30-45 minutos</li>
+                            <li>Examen físico completo</li>
+                            <li>Análisis con tecnología avanzada</li>
+                            <li>Plan de tratamiento detallado</li>
+                        </ul>
+                        <a href="https://wa.me/56945271894?text=Hola,%20quiero%20agendar%20mi%20evaluación%20presencial%20para%20Mini%20Lifting" class="eval-btn primary" target="_blank">
+                            Agendar Presencial
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
                 </div>
 
-                <ul class="pricing-features">
-                    <li>Evaluación médica personalizada</li>
-                    <li>Análisis de tu caso para Mini Lifting</li>
-                    <li>Determinamos si eres candidata ideal</li>
-                    <li>Respuesta en 24-48 horas</li>
-                    <li>Descontable del Mini Lifting</li>
-                </ul>
+                <!-- Important Notice -->
+                <div class="eval-notice">
+                    <div class="notice-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="16" x2="12" y2="12"/>
+                            <line x1="12" y1="8" x2="12.01" y2="8"/>
+                        </svg>
+                    </div>
+                    <div class="notice-content">
+                        <h4>Información importante</h4>
+                        <p>El pago de la evaluación <strong>no tiene devolución</strong>. Sin embargo, si decides realizar el tratamiento, <strong>el monto pagado se descuenta del valor total</strong> del Mini Lifting.</p>
+                    </div>
+                </div>
+            </div>
 
-                <a href="https://wa.me/56912345678?text=Hola,%20quiero%20pagar%20mi%20evaluación%20para%20Mini%20Lifting" class="cta-button" target="_blank">
-                    Pagar evaluación ahora
-                </a>
-
-                <p class="pricing-guarantee">
-                    Sin presiones. Sin promesas falsas. Con criterio médico.
-                </p>
+            <!-- Pre-evaluation Chat Section -->
+            <div class="chat-section">
+                <div class="chat-header-info">
+                    <h3>¿No estás segura si calificas?</h3>
+                    <p>Completa nuestra pre-evaluación gratuita y descubre si eres candidata para el Mini Lifting</p>
+                </div>
+                <button class="btn-chat-open" onclick="openChatBot()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    Iniciar Pre-Evaluación Gratuita
+                </button>
             </div>
         </div>
     </section>
+
+    <!-- Chat Bot Modal -->
+    <div class="chat-modal" id="chatModal">
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="chat-avatar">
+                    <span>N</span>
+                </div>
+                <div class="chat-title">
+                    <h4>Asistente Dra Nikkita</h4>
+                    <span class="chat-status">● En línea</span>
+                </div>
+                <button class="chat-close" onclick="closeChatBot()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will be inserted here -->
+            </div>
+
+            <div class="chat-input-area" id="chatInputArea">
+                <!-- Dynamic input based on current question -->
+            </div>
+
+            <div class="chat-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">Paso 1 de 8</span>
+            </div>
+        </div>
+    </div>
 
     <!-- ==================== -->
     <!-- 9. FAQ SECTION -->
@@ -1857,14 +2445,14 @@
     <!-- ==================== -->
     <section class="closing">
         <div class="container">
-            <h2>Tu Mini Lifting te espera.<br><span>Sin anestesia general. Sin hospitalización.</span></h2>
+            <h2>Mereces sentirte hermosa.<br><span>Sin importar tu edad. Sin importar lo que piensen los demás.</span></h2>
             <p>
-                Da el primer paso hoy. Descubre si eres candidata ideal para el Mini Lifting.
+                Hoy puede ser el día en que dejes de postergarte. Estoy aquí para acompañarte.
             </p>
             <a href="#pricing" class="cta-button">
-                Pagar mi evaluación ahora
+                Quiero comenzar mi transformación
             </a>
-            <div class="closing-logo">Dra Nikkita</div>
+            <div class="closing-logo">Con cariño, Dra. Nikkita</div>
         </div>
     </section>
 
@@ -1892,6 +2480,221 @@
             });
         });
 
+        // CHAT BOT SYSTEM
+        const chatBot = {
+            currentStep: 0,
+            userData: {},
+
+            questions: [
+                {
+                    field: 'name',
+                    message: '¡Hola! Soy el asistente virtual de la Dra. Nikkita. Estoy aquí para ayudarte con tu pre-evaluación para Mini Lifting. ¿Cuál es tu nombre?',
+                    type: 'text',
+                    placeholder: 'Escribe tu nombre...'
+                },
+                {
+                    field: 'age',
+                    message: 'Mucho gusto, {name}. Para conocer mejor tu caso, ¿cuántos años tienes?',
+                    type: 'options',
+                    options: ['30-40 años', '41-50 años', '51-60 años', 'Más de 60 años']
+                },
+                {
+                    field: 'concern',
+                    message: '¿Cuál es tu principal preocupación facial?',
+                    type: 'options',
+                    options: ['Flacidez en mejillas', 'Flacidez en cuello/papada', 'Pérdida de definición del óvalo', 'Todas las anteriores']
+                },
+                {
+                    field: 'previous',
+                    message: '¿Has tenido algún tratamiento facial estético antes?',
+                    type: 'options',
+                    options: ['No, nunca', 'Sí, tratamientos no invasivos', 'Sí, cirugía facial', 'Sí, varios tratamientos']
+                },
+                {
+                    field: 'timeline',
+                    message: '¿Cuándo te gustaría realizarte el Mini Lifting?',
+                    type: 'options',
+                    options: ['Lo antes posible', 'En 1-3 meses', 'En 3-6 meses', 'Solo estoy explorando']
+                },
+                {
+                    field: 'anesthesia',
+                    message: 'El Mini Lifting se realiza con anestesia local (sin anestesia general). ¿Te sientes cómoda con esto?',
+                    type: 'options',
+                    options: ['Sí, me parece ideal', 'Tengo algunas dudas', 'Preferiría anestesia general']
+                },
+                {
+                    field: 'email',
+                    message: 'Para enviarte información personalizada, ¿cuál es tu correo electrónico?',
+                    type: 'text',
+                    placeholder: 'tu@email.com'
+                },
+                {
+                    field: 'phone',
+                    message: 'Finalmente, ¿cuál es tu número de WhatsApp para contactarte?',
+                    type: 'text',
+                    placeholder: '+56 9 1234 5678'
+                }
+            ],
+
+            start() {
+                this.currentStep = 0;
+                this.userData = {};
+                const messagesDiv = document.getElementById('chatMessages');
+                while (messagesDiv.firstChild) {
+                    messagesDiv.removeChild(messagesDiv.firstChild);
+                }
+                this.showQuestion();
+            },
+
+            showQuestion() {
+                const question = this.questions[this.currentStep];
+                if (!question) {
+                    this.showCompletion();
+                    return;
+                }
+
+                const progress = ((this.currentStep + 1) / this.questions.length) * 100;
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('progressText').textContent = 'Paso ' + (this.currentStep + 1) + ' de ' + this.questions.length;
+
+                let message = question.message;
+                for (const [key, value] of Object.entries(this.userData)) {
+                    message = message.replace('{' + key + '}', value);
+                }
+
+                setTimeout(() => {
+                    this.addBotMessage(message);
+                    setTimeout(() => {
+                        this.showInput(question);
+                    }, 500);
+                }, 300);
+            },
+
+            addBotMessage(text) {
+                const messagesDiv = document.getElementById('chatMessages');
+                const bubble = document.createElement('div');
+                bubble.className = 'chat-bubble bot';
+                bubble.textContent = text;
+                messagesDiv.appendChild(bubble);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            },
+
+            addUserMessage(text) {
+                const messagesDiv = document.getElementById('chatMessages');
+                const bubble = document.createElement('div');
+                bubble.className = 'chat-bubble user';
+                bubble.textContent = text;
+                messagesDiv.appendChild(bubble);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            },
+
+            showInput(question) {
+                const inputArea = document.getElementById('chatInputArea');
+                while (inputArea.firstChild) {
+                    inputArea.removeChild(inputArea.firstChild);
+                }
+
+                if (question.type === 'options') {
+                    const optionsDiv = document.createElement('div');
+                    optionsDiv.className = 'chat-options';
+                    question.options.forEach(opt => {
+                        const btn = document.createElement('button');
+                        btn.className = 'chat-option';
+                        btn.textContent = opt;
+                        btn.addEventListener('click', () => this.selectOption(opt, question.field));
+                        optionsDiv.appendChild(btn);
+                    });
+                    inputArea.appendChild(optionsDiv);
+                } else if (question.type === 'text') {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'chat-input-wrapper';
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'chat-input';
+                    input.id = 'chatInput';
+                    input.placeholder = question.placeholder;
+                    input.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter') this.submitInput(question.field);
+                    });
+
+                    const sendBtn = document.createElement('button');
+                    sendBtn.className = 'chat-send';
+                    sendBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+                    sendBtn.addEventListener('click', () => this.submitInput(question.field));
+
+                    wrapper.appendChild(input);
+                    wrapper.appendChild(sendBtn);
+                    inputArea.appendChild(wrapper);
+
+                    setTimeout(() => input.focus(), 100);
+                }
+            },
+
+            selectOption(value, field) {
+                this.userData[field] = value;
+                this.addUserMessage(value);
+                this.currentStep++;
+                setTimeout(() => this.showQuestion(), 500);
+            },
+
+            submitInput(field) {
+                const input = document.getElementById('chatInput');
+                const value = input.value.trim();
+                if (!value) return;
+
+                this.userData[field] = value;
+                this.addUserMessage(value);
+                this.currentStep++;
+                setTimeout(() => this.showQuestion(), 500);
+            },
+
+            showCompletion() {
+                document.getElementById('progressFill').style.width = '100%';
+                document.getElementById('progressText').textContent = '¡Completado!';
+
+                setTimeout(() => {
+                    this.addBotMessage('¡Gracias ' + this.userData.name + '! Hemos recibido tu pre-evaluación para Mini Lifting. La Dra. Nikkita revisará tu información y te contactará pronto para darte una respuesta personalizada.');
+
+                    const inputArea = document.getElementById('chatInputArea');
+                    while (inputArea.firstChild) {
+                        inputArea.removeChild(inputArea.firstChild);
+                    }
+
+                    const completionDiv = document.createElement('div');
+                    completionDiv.style.textAlign = 'center';
+
+                    const infoText = document.createElement('p');
+                    infoText.style.cssText = 'color: rgba(248,245,240,0.7); margin-bottom: 1rem; font-size: 0.9rem;';
+                    infoText.textContent = 'Te contactaremos en las próximas 24-48 horas';
+
+                    const closeBtn = document.createElement('button');
+                    closeBtn.className = 'chat-send';
+                    closeBtn.style.width = '100%';
+                    closeBtn.textContent = 'Cerrar';
+                    closeBtn.addEventListener('click', closeChatBot);
+
+                    completionDiv.appendChild(infoText);
+                    completionDiv.appendChild(closeBtn);
+                    inputArea.appendChild(completionDiv);
+
+                    console.log('Pre-evaluation data:', this.userData);
+                }, 500);
+            }
+        };
+
+        function openChatBot() {
+            document.getElementById('chatModal').classList.add('active');
+            chatBot.start();
+        }
+
+        function closeChatBot() {
+            document.getElementById('chatModal').classList.remove('active');
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeChatBot();
+        });
     </script>
 </body>
 </html>

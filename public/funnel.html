@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dra Nikkita | Lipopapada & Lifting Facial</title>
+    <title>Dra Nikkita | Mini Lifting Facial</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -398,31 +398,6 @@
             margin: 0 auto 3rem;
         }
 
-        .solution-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .solution-tab {
-            padding: 1rem 2rem;
-            background: var(--color-white);
-            border: 2px solid var(--color-nude);
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s var(--transition-smooth);
-        }
-
-        .solution-tab.active,
-        .solution-tab:hover {
-            background: var(--color-gold);
-            border-color: var(--color-gold);
-            color: var(--color-white);
-        }
-
         .solution-content {
             background: var(--color-white);
             padding: 3rem;
@@ -466,12 +441,190 @@
             border-radius: 15px;
         }
 
-        .solution-panel {
-            display: none;
+        /* ==================== */
+        /* 5.2 COMPARISON SECTION */
+        /* ==================== */
+        .comparison {
+            background: var(--color-white);
+            padding: 5rem 0;
         }
 
-        .solution-panel.active {
-            display: block;
+        .comparison h2 {
+            text-align: center;
+        }
+
+        .comparison-subtitle {
+            text-align: center;
+            color: var(--color-warm-gray);
+            margin-bottom: 3rem;
+        }
+
+        .comparison-table {
+            max-width: 700px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            background: var(--color-charcoal);
+        }
+
+        .comparison-header .comparison-cell {
+            padding: 1.5rem 1rem;
+            font-weight: 600;
+            color: var(--color-white);
+            text-align: center;
+        }
+
+        .comparison-header .comparison-cell.highlight {
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+        }
+
+        .comparison-header .comparison-cell.empty {
+            background: var(--color-charcoal);
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr;
+            border-bottom: 1px solid var(--color-nude);
+        }
+
+        .comparison-row:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-cell {
+            padding: 1.2rem 1rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .comparison-cell.label {
+            background: var(--color-nude-soft);
+            font-weight: 500;
+            color: var(--color-charcoal);
+            justify-content: flex-start;
+            padding-left: 1.5rem;
+        }
+
+        .comparison-cell.highlight {
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        .comparison-cell .check {
+            color: var(--color-gold);
+            font-weight: 700;
+        }
+
+        .comparison-cell .cross {
+            color: var(--color-rose);
+            font-weight: 700;
+        }
+
+        /* ==================== */
+        /* 5.3 INCLUDES SECTION */
+        /* ==================== */
+        .includes {
+            background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-white) 100%);
+            padding: 5rem 0;
+        }
+
+        .includes h2 {
+            text-align: center;
+        }
+
+        .includes-subtitle {
+            text-align: center;
+            color: var(--color-warm-gray);
+            margin-bottom: 3rem;
+        }
+
+        .includes-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .includes-card {
+            background: var(--color-white);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s var(--transition-smooth);
+            border: 2px solid transparent;
+        }
+
+        .includes-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--color-gold);
+            box-shadow: 0 20px 50px rgba(201, 169, 98, 0.15);
+        }
+
+        .includes-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .includes-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--color-white);
+        }
+
+        .includes-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            color: var(--color-charcoal);
+            margin-bottom: 0.75rem;
+        }
+
+        .includes-card p {
+            font-size: 0.9rem;
+            color: var(--color-warm-gray);
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 900px) {
+            .includes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .comparison-header,
+            .comparison-row {
+                grid-template-columns: 1fr 1fr 1fr;
+                font-size: 0.85rem;
+            }
+
+            .comparison-cell {
+                padding: 1rem 0.5rem;
+            }
+
+            .comparison-cell.label {
+                padding-left: 0.75rem;
+            }
+
+            .includes-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ==================== */
@@ -1112,13 +1265,13 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <span class="hero-badge">Dra. Nikkita | Especialista en Estética Facial</span>
+                <span class="hero-badge">Dra. Nikkita | Especialista en Mini Lifting</span>
                 <h1>
-                    Tu rostro no debería verse derretido.
-                    <span>Y no, no es normal.</span>
+                    Rejuvenece tu rostro sin cirugía invasiva.
+                    <span>Con anestesia local y recuperación rápida.</span>
                 </h1>
                 <p class="hero-subtitle">
-                    La papada y la flacidez facial tienen solución cuando se tratan con diagnóstico y criterio médico.
+                    El Mini Lifting es la técnica ideal para quienes quieren resultados reales sin los riesgos de una cirugía mayor. Sin anestesia general, sin hospitalización.
                 </p>
 
                 <div class="hero-video">
@@ -1132,7 +1285,7 @@
                         <line x1="8" y1="2" x2="8" y2="6"/>
                         <line x1="3" y1="10" x2="21" y2="10"/>
                     </svg>
-                    Agenda y paga tu evaluación online
+                    Agenda tu evaluación para Mini Lifting
                 </a>
             </div>
         </div>
@@ -1147,20 +1300,20 @@
                 <h2>Si esto te pasa, <em>no estás sola</em></h2>
 
                 <ul class="empathy-bullets">
-                    <li>Evitas las fotos de perfil</li>
-                    <li>Sientes que tu rostro se cae antes de tiempo</li>
-                    <li>Tu cuello ya no se ve firme</li>
-                    <li>Te ves cansada aunque no lo estés</li>
-                    <li>Cada vez te reconoces menos en el espejo</li>
+                    <li>Sientes que tu rostro perdió definición y firmeza</li>
+                    <li>Te miras al espejo y ves flacidez en mejillas y cuello</li>
+                    <li>Quieres rejuvenecer pero te da miedo una cirugía mayor</li>
+                    <li>Buscas resultados naturales, no un rostro "operado"</li>
+                    <li>Necesitas recuperarte rápido para volver a tu vida</li>
                 </ul>
 
                 <blockquote class="empathy-quote">
-                    "Esto no es vanidad.
-                    <span>Es identidad."</span>
+                    "El Mini Lifting es para ti si quieres verte mejor,
+                    <span>sin poner tu vida en pausa."</span>
                 </blockquote>
 
                 <a href="#pricing" class="cta-button">
-                    Quiero mi evaluación
+                    Quiero saber si soy candidata
                 </a>
             </div>
         </div>
@@ -1261,65 +1414,168 @@
     <!-- ==================== -->
     <section class="solution">
         <div class="container">
-            <h2>La <em>solución</em> existe</h2>
+            <h2>El <em>Mini Lifting</em>: tu solución</h2>
             <p class="solution-intro">
-                Dependiendo de tu caso, el tratamiento puede ser lipopapada, lifting facial, o una combinación personalizada.
+                El procedimiento ideal para rejuvenecer tu rostro sin los riesgos y tiempos de recuperación de una cirugía tradicional.
             </p>
 
-            <div class="solution-tabs">
-                <button class="solution-tab active" data-tab="lipopapada">Lipopapada</button>
-                <button class="solution-tab" data-tab="lifting">Lifting Facial</button>
-            </div>
-
             <div class="solution-content">
-                <!-- Panel Lipopapada -->
-                <div class="solution-panel active" id="panel-lipopapada">
-                    <h3>Lipopapada</h3>
-                    <p>
-                        Procedimiento mínimamente invasivo para eliminar la grasa localizada bajo el mentón. Ideal cuando el problema principal es acumulación de grasa, no flacidez severa.
-                    </p>
+                <h3>¿Qué es el Mini Lifting?</h3>
+                <p>
+                    Es un procedimiento quirúrgico mínimamente invasivo que reposiciona los tejidos faciales para devolver firmeza y definición al rostro. A diferencia del lifting tradicional, se realiza con <strong>anestesia local</strong>, sin necesidad de hospitalización.
+                </p>
 
-                    <ul class="solution-features">
-                        <li>Procedimiento ambulatorio</li>
-                        <li>Anestesia local</li>
-                        <li>Recuperación rápida (3-5 días)</li>
-                        <li>Resultados naturales y duraderos</li>
-                        <li>Sin cicatrices visibles</li>
-                    </ul>
+                <ul class="solution-features">
+                    <li>Procedimiento ambulatorio con anestesia local</li>
+                    <li>Sin riesgos de anestesia general</li>
+                    <li>Recuperación más rápida (5-7 días)</li>
+                    <li>Resultados naturales que duran años</li>
+                    <li>Cicatrices mínimas y ocultas</li>
+                    <li>Puedes volver a casa el mismo día</li>
+                </ul>
 
-                    <div class="solution-quote">
-                        "El objetivo no es verte distinta,<br>
-                        es volver a reconocerte."
-                    </div>
-
-                    <a href="#pricing" class="cta-button">
-                        Saber si soy candidata
-                    </a>
+                <div class="solution-quote">
+                    "El Mini Lifting te devuelve la firmeza<br>
+                    sin poner tu vida en pausa."
                 </div>
 
-                <!-- Panel Lifting -->
-                <div class="solution-panel" id="panel-lifting">
-                    <h3>Lifting Facial</h3>
-                    <p>
-                        Procedimiento que reposiciona los tejidos faciales para devolver firmeza y definición al rostro. Indicado cuando existe flacidez moderada a severa que no responde a tratamientos menos invasivos.
-                    </p>
+                <a href="#pricing" class="cta-button">
+                    Saber si soy candidata
+                </a>
+            </div>
+        </div>
+    </section>
 
-                    <ul class="solution-features">
-                        <li>Mini lifting o lifting completo según el caso</li>
-                        <li>Resultados que duran años</li>
-                        <li>Técnicas que respetan tu expresión natural</li>
-                        <li>Recuperación progresiva (7-14 días)</li>
-                        <li>Cicatrices ocultas en zonas naturales</li>
-                    </ul>
+    <!-- ==================== -->
+    <!-- 5.2 COMPARISON TABLE -->
+    <!-- ==================== -->
+    <section class="comparison">
+        <div class="container">
+            <h2><em>Mini Lifting</em> vs Lifting Tradicional</h2>
+            <p class="comparison-subtitle">¿Por qué elegir el Mini Lifting?</p>
 
-                    <div class="solution-quote">
-                        "No se trata de borrar los años,<br>
-                        sino de verte tan bien como te sientes."
+            <div class="comparison-table">
+                <div class="comparison-header">
+                    <div class="comparison-cell empty"></div>
+                    <div class="comparison-cell highlight">Mini Lifting</div>
+                    <div class="comparison-cell">Lifting Tradicional</div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-cell label">Anestesia</div>
+                    <div class="comparison-cell highlight">
+                        <span class="check">✓</span> Local
                     </div>
+                    <div class="comparison-cell">
+                        <span class="cross">✗</span> General
+                    </div>
+                </div>
 
-                    <a href="#pricing" class="cta-button">
-                        Saber si soy candidata
-                    </a>
+                <div class="comparison-row">
+                    <div class="comparison-cell label">Hospitalización</div>
+                    <div class="comparison-cell highlight">
+                        <span class="check">✓</span> No requerida
+                    </div>
+                    <div class="comparison-cell">
+                        <span class="cross">✗</span> 1-2 días
+                    </div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-cell label">Recuperación</div>
+                    <div class="comparison-cell highlight">
+                        <span class="check">✓</span> 5-7 días
+                    </div>
+                    <div class="comparison-cell">
+                        <span class="cross">✗</span> 2-3 semanas
+                    </div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-cell label">Riesgos</div>
+                    <div class="comparison-cell highlight">
+                        <span class="check">✓</span> Mínimos
+                    </div>
+                    <div class="comparison-cell">
+                        <span class="cross">✗</span> Mayores
+                    </div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-cell label">Cicatrices</div>
+                    <div class="comparison-cell highlight">
+                        <span class="check">✓</span> Mínimas
+                    </div>
+                    <div class="comparison-cell">
+                        <span class="cross">✗</span> Más visibles
+                    </div>
+                </div>
+
+                <div class="comparison-row">
+                    <div class="comparison-cell label">Resultados</div>
+                    <div class="comparison-cell highlight">
+                        <span class="check">✓</span> Naturales
+                    </div>
+                    <div class="comparison-cell">
+                        <span class="check">✓</span> Naturales
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== -->
+    <!-- 5.3 INCLUDES SECTION -->
+    <!-- ==================== -->
+    <section class="includes">
+        <div class="container">
+            <h2>Tu Mini Lifting <em>incluye todo</em></h2>
+            <p class="includes-subtitle">Sin costos ocultos. Todo lo que necesitas para tu recuperación.</p>
+
+            <div class="includes-grid">
+                <div class="includes-card">
+                    <div class="includes-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </div>
+                    <h3>Procedimiento completo</h3>
+                    <p>Mini Lifting con anestesia local en clínica certificada</p>
+                </div>
+
+                <div class="includes-card">
+                    <div class="includes-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="3" width="18" height="18" rx="2"/>
+                            <path d="M3 9h18"/>
+                            <path d="M9 21V9"/>
+                        </svg>
+                    </div>
+                    <h3>Faja post-operatoria</h3>
+                    <p>Faja de compresión especializada para tu recuperación</p>
+                </div>
+
+                <div class="includes-card">
+                    <div class="includes-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <h3>Masajes post-operatorios</h3>
+                    <p>Sesiones de drenaje linfático para acelerar tu recuperación</p>
+                </div>
+
+                <div class="includes-card">
+                    <div class="includes-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="8.5" cy="7" r="4"/>
+                            <line x1="20" y1="8" x2="20" y2="14"/>
+                            <line x1="23" y1="11" x2="17" y2="11"/>
+                        </svg>
+                    </div>
+                    <h3>Controles médicos</h3>
+                    <p>Seguimiento personalizado hasta tu recuperación completa</p>
                 </div>
             </div>
         </div>
@@ -1337,14 +1593,14 @@
                 <!-- Card 1 -->
                 <div class="before-after-card">
                     <div class="before-after-images">
-                        <img src="antes-despues-1.JPG" alt="Antes y después - Caso 1" class="ba-real-image">
+                        <img src="antes-despues-1.JPG" alt="Antes y después Mini Lifting - Caso 1" class="ba-real-image">
                         <div class="ba-labels">
                             <span class="ba-label">Antes</span>
                             <span class="ba-label after-label">Después</span>
                         </div>
                     </div>
                     <div class="before-after-info">
-                        <div class="before-after-treatment">Lipopapada</div>
+                        <div class="before-after-treatment">Mini Lifting</div>
                         <p class="before-after-detail">Resultados reales</p>
                     </div>
                 </div>
@@ -1352,7 +1608,7 @@
                 <!-- Card 2 -->
                 <div class="before-after-card">
                     <div class="before-after-images">
-                        <img src="antes-despues-2.JPG" alt="Antes y después - Caso 2" class="ba-real-image">
+                        <img src="antes-despues-2.JPG" alt="Antes y después Mini Lifting - Caso 2" class="ba-real-image">
                         <div class="ba-labels">
                             <span class="ba-label">Antes</span>
                             <span class="ba-label after-label">Después</span>
@@ -1367,14 +1623,14 @@
                 <!-- Card 3 -->
                 <div class="before-after-card">
                     <div class="before-after-images">
-                        <img src="antes-despues-3.JPG" alt="Antes y después - Caso 3" class="ba-real-image">
+                        <img src="antes-despues-3.JPG" alt="Antes y después Mini Lifting - Caso 3" class="ba-real-image">
                         <div class="ba-labels">
                             <span class="ba-label">Antes</span>
                             <span class="ba-label after-label">Después</span>
                         </div>
                     </div>
                     <div class="before-after-info">
-                        <div class="before-after-treatment">Lipo + Lifting</div>
+                        <div class="before-after-treatment">Mini Lifting</div>
                         <p class="before-after-detail">Resultados reales</p>
                     </div>
                 </div>
@@ -1382,14 +1638,14 @@
                 <!-- Card 4 -->
                 <div class="before-after-card">
                     <div class="before-after-images">
-                        <img src="antes-despues-4.JPG" alt="Antes y después - Caso 4" class="ba-real-image">
+                        <img src="antes-despues-4.JPG" alt="Antes y después Mini Lifting - Caso 4" class="ba-real-image">
                         <div class="ba-labels">
                             <span class="ba-label">Antes</span>
                             <span class="ba-label after-label">Después</span>
                         </div>
                     </div>
                     <div class="before-after-info">
-                        <div class="before-after-treatment">Lipopapada</div>
+                        <div class="before-after-treatment">Mini Lifting</div>
                         <p class="before-after-detail">Resultados reales</p>
                     </div>
                 </div>
@@ -1413,7 +1669,7 @@
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-text">
-                        "Volví a mirarme sin miedo. Después de años evitando fotos, hoy me saco selfies sin filtros."
+                        "El Mini Lifting fue la mejor decisión. Me recuperé en una semana y nadie notó que me hice algo, solo que me veo descansada."
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">M</div>
@@ -1427,7 +1683,7 @@
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-text">
-                        "Me siento yo otra vez. La doctora fue honesta desde el primer momento sobre qué esperar."
+                        "Tenía miedo de una cirugía mayor. El Mini Lifting con anestesia local fue perfecto para mí. Los masajes post-op ayudaron mucho."
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">C</div>
@@ -1441,7 +1697,7 @@
                 <div class="testimonial-card">
                     <div class="testimonial-stars">★★★★★</div>
                     <p class="testimonial-text">
-                        "No me cambió la cara, me devolvió la seguridad. Eso no tiene precio."
+                        "La Dra. Nikkita me explicó todo con honestidad. El resultado es natural, me veo como yo pero 10 años más joven."
                     </p>
                     <div class="testimonial-author">
                         <div class="testimonial-avatar">P</div>
@@ -1460,9 +1716,9 @@
     <!-- ==================== -->
     <section class="process">
         <div class="container">
-            <h2>Cómo funciona la <em>evaluación online</em></h2>
+            <h2>Tu camino hacia el <em>Mini Lifting</em></h2>
             <p class="process-subtitle">
-                Te diremos si realmente eres candidata y qué tratamiento es el adecuado para ti.
+                Un proceso simple y transparente para determinar si eres candidata ideal.
             </p>
 
             <div class="process-steps">
@@ -1499,8 +1755,8 @@
     <section class="pricing" id="pricing">
         <div class="container">
             <div class="pricing-card">
-                <span class="pricing-label">Evaluación Online</span>
-                <h2>Tu primer paso hacia el cambio</h2>
+                <span class="pricing-label">Evaluación para Mini Lifting</span>
+                <h2>Tu primer paso hacia el rejuvenecimiento</h2>
 
                 <div class="pricing-amount">
                     $25.000 <span>CLP</span>
@@ -1508,14 +1764,14 @@
 
                 <ul class="pricing-features">
                     <li>Evaluación médica personalizada</li>
-                    <li>Análisis de tu caso específico</li>
-                    <li>Recomendación de tratamiento</li>
+                    <li>Análisis de tu caso para Mini Lifting</li>
+                    <li>Determinamos si eres candidata ideal</li>
                     <li>Respuesta en 24-48 horas</li>
-                    <li>Descontable del tratamiento</li>
+                    <li>Descontable del Mini Lifting</li>
                 </ul>
 
-                <a href="https://wa.me/56912345678?text=Hola,%20quiero%20pagar%20mi%20evaluación%20online" class="cta-button" target="_blank">
-                    Pagar evaluación online ahora
+                <a href="https://wa.me/56912345678?text=Hola,%20quiero%20pagar%20mi%20evaluación%20para%20Mini%20Lifting" class="cta-button" target="_blank">
+                    Pagar evaluación ahora
                 </a>
 
                 <p class="pricing-guarantee">
@@ -1535,41 +1791,51 @@
             <div class="faq-list">
                 <div class="faq-item">
                     <div class="faq-question">
-                        ¿Es doloroso el procedimiento?
+                        ¿El Mini Lifting es doloroso?
                         <span class="faq-icon">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Los procedimientos se realizan con anestesia local, por lo que no sentirás dolor durante el tratamiento. Después puede haber molestias leves que se controlan fácilmente con medicación.</p>
+                        <p>El Mini Lifting se realiza con anestesia local, por lo que no sentirás dolor durante el procedimiento. Después puede haber molestias leves que se controlan fácilmente con medicación. Es mucho más cómodo que un lifting tradicional con anestesia general.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">
-                        ¿Es una cirugía?
+                        ¿Cuál es la diferencia con el lifting tradicional?
                         <span class="faq-icon">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>La lipopapada es un procedimiento mínimamente invasivo, no una cirugía tradicional. El lifting puede variar según el tipo, pero siempre buscamos la opción menos invasiva que dé los mejores resultados.</p>
+                        <p>El Mini Lifting se realiza con anestesia local (no general), sin necesidad de hospitalización. La recuperación es más rápida (5-7 días vs 2-3 semanas), las cicatrices son mínimas y los riesgos son mucho menores. Los resultados son igualmente naturales y duraderos.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">
-                        ¿Cuánto dura el resultado?
+                        ¿Qué incluye el Mini Lifting?
                         <span class="faq-icon">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Los resultados de la lipopapada son permanentes en cuanto a las células de grasa eliminadas. El lifting puede durar varios años dependiendo del cuidado posterior y factores individuales.</p>
+                        <p>Tu Mini Lifting incluye el procedimiento completo, faja post-operatoria, sesiones de masajes de drenaje linfático y todos los controles médicos necesarios hasta tu recuperación completa. Sin costos ocultos.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question">
-                        ¿Y si no soy candidata?
+                        ¿Cuánto duran los resultados?
                         <span class="faq-icon">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Te lo diremos con honestidad. Preferimos decirte la verdad a hacer un procedimiento que no te dará los resultados esperados. Si no eres candidata, te orientaremos sobre alternativas.</p>
+                        <p>Los resultados del Mini Lifting duran varios años (5-10 años típicamente), dependiendo de tu cuidado posterior, estilo de vida y factores genéticos. El envejecimiento natural continúa, pero desde un punto de partida rejuvenecido.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        ¿Y si no soy candidata para Mini Lifting?
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Te lo diremos con honestidad en la evaluación. No todas las pacientes son candidatas ideales para Mini Lifting. Si tu caso requiere otro enfoque, te orientaremos sobre las mejores alternativas para ti.</p>
                     </div>
                 </div>
 
@@ -1579,7 +1845,7 @@
                         <span class="faq-icon">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>El valor de la evaluación se descuenta íntegramente del tratamiento si decides realizarlo. Es nuestra forma de valorar tu tiempo y tu confianza.</p>
+                        <p>El valor de la evaluación se descuenta íntegramente del Mini Lifting si decides realizarlo. Es nuestra forma de valorar tu tiempo y tu confianza.</p>
                     </div>
                 </div>
             </div>
@@ -1591,9 +1857,9 @@
     <!-- ==================== -->
     <section class="closing">
         <div class="container">
-            <h2>Elegirte no es ego.<br><span>Es autocuidado.</span></h2>
+            <h2>Tu Mini Lifting te espera.<br><span>Sin anestesia general. Sin hospitalización.</span></h2>
             <p>
-                Da el primer paso hoy. Tu rostro merece una evaluación honesta y profesional.
+                Da el primer paso hoy. Descubre si eres candidata ideal para el Mini Lifting.
             </p>
             <a href="#pricing" class="cta-button">
                 Pagar mi evaluación ahora
@@ -1626,20 +1892,6 @@
             });
         });
 
-        // Solution tabs
-        document.querySelectorAll('.solution-tab').forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetTab = tab.dataset.tab;
-
-                // Update tabs
-                document.querySelectorAll('.solution-tab').forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-
-                // Update panels
-                document.querySelectorAll('.solution-panel').forEach(panel => panel.classList.remove('active'));
-                document.getElementById('panel-' + targetTab).classList.add('active');
-            });
-        });
     </script>
 </body>
 </html>

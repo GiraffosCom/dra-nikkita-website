@@ -63,20 +63,22 @@ export default async function handler(req, res) {
 
         // Prepare lead data for Frappe CRM using standard fields
         const frappeLeadData = {
-            doctype: 'CRM Lead',
-            first_name: leadData.personal?.nombre?.split(' ')[0] || '',
+            first_name: leadData.personal?.nombre?.split(' ')[0] || 'Sin nombre',
             last_name: leadData.personal?.nombre?.split(' ').slice(1).join(' ') || '',
             email: leadData.personal?.email || '',
             mobile_no: leadData.personal?.telefono || '',
-            lead_owner: 'Administrator'
+            status: 'New'
         };
+
+        console.log('Sending to Frappe:', JSON.stringify(frappeLeadData));
 
         // Send to Frappe CRM
         const response = await fetch(`${CRM_URL}/api/resource/CRM Lead`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `token ${API_KEY}:${API_SECRET}`
+                'Authorization': `token ${API_KEY}:${API_SECRET}`,
+                'Accept': 'application/json'
             },
             body: JSON.stringify(frappeLeadData)
         });

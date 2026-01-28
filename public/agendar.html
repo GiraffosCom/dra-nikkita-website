@@ -50,7 +50,10 @@
             padding: 0.5rem 0.8rem; border-radius: 20px; font-size: 0.8rem;
             background: rgba(255, 255, 255, 0.05); color: var(--color-warm-gray);
             transition: all 0.3s ease;
+            cursor: pointer;
         }
+        .step:hover:not(.active) { background: rgba(255, 255, 255, 0.1); }
+        .step.completed:hover { background: rgba(201, 169, 98, 0.5); }
         .step.active { background: var(--color-gold); color: var(--color-soft-black); }
         .step.completed { background: rgba(201, 169, 98, 0.3); color: var(--color-gold); }
         .step-number {
@@ -603,11 +606,20 @@
         // ============================================
         // STEP NAVIGATION
         // ============================================
+        let highestStepReached = 1;
+
         function goToStep(stepNum) {
+            // Track highest step reached
+            if (stepNum > highestStepReached) {
+                highestStepReached = stepNum;
+            }
+
             steps.forEach((step, i) => {
                 step.classList.remove('active', 'completed');
-                if (i + 1 < stepNum) step.classList.add('completed');
+                if (i + 1 < highestStepReached || (i + 1 < stepNum)) step.classList.add('completed');
                 if (i + 1 === stepNum) step.classList.add('active');
+                // Mark all visited steps as completed for navigation
+                if (i + 1 <= highestStepReached && i + 1 !== stepNum) step.classList.add('completed');
             });
 
             contents.forEach(content => content.classList.remove('active'));
@@ -619,7 +631,28 @@
                 document.getElementById('telefono').value = bookingState.telefono || '';
                 document.getElementById('email').value = bookingState.email || '';
             }
+
+            // Update summary when going to step 4
+            if (stepNum === 4) {
+                document.getElementById('summaryService').textContent = bookingState.serviceName || '-';
+                document.getElementById('summaryDate').textContent = selectedDate ? formatDateLong(selectedDate) : '-';
+                document.getElementById('summaryTime').textContent = selectedTime || '-';
+                document.getElementById('summaryName').textContent = bookingState.nombre || '-';
+                document.getElementById('summaryPhone').textContent = bookingState.telefono || '-';
+                document.getElementById('summaryPrice').textContent = bookingState.price ? `$${bookingState.price.toLocaleString('es-CL')} CLP` : '-';
+            }
         }
+
+        // Click on step indicators to navigate
+        steps.forEach((step, index) => {
+            step.addEventListener('click', () => {
+                const stepNum = index + 1;
+                // Can only navigate to steps already visited
+                if (stepNum <= highestStepReached) {
+                    goToStep(stepNum);
+                }
+            });
+        });
 
         // Navigation buttons
         document.getElementById('backToStep1').addEventListener('click', () => goToStep(1));

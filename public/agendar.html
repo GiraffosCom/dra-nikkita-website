@@ -242,6 +242,65 @@
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         @media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
 
+        /* Treatments Selection */
+        .treatments-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 900px) { .treatments-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 600px) { .treatments-grid { grid-template-columns: repeat(2, 1fr); } }
+        .treatment-option { cursor: pointer; }
+        .treatment-option input { display: none; }
+        .treatment-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-height: 90px;
+            position: relative;
+        }
+        .treatment-box:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+        .treatment-option input:checked + .treatment-box {
+            border-color: var(--color-gold);
+            background: rgba(201, 169, 98, 0.15);
+        }
+        .treatment-check {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .treatment-option input:checked + .treatment-box .treatment-check { display: flex; }
+        .treatment-name {
+            font-weight: 500;
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+        .treatment-desc {
+            font-size: 0.7rem;
+            color: var(--color-warm-gray);
+        }
+
         /* Summary */
         .summary-card {
             background: rgba(201, 169, 98, 0.1);
@@ -451,8 +510,78 @@
                         <div class="error-msg" id="emailError" style="display: none;"></div>
                     </div>
                     <div class="form-group">
-                        <label>Motivo de la consulta (opcional)</label>
-                        <textarea id="motivo" placeholder="Cuéntanos brevemente qué te gustaría mejorar..."></textarea>
+                        <label>¿Qué tratamiento(s) te interesan? * <span style="font-size: 0.8rem; color: var(--color-warm-gray);">(Puedes elegir varios)</span></label>
+                        <div class="treatments-grid" id="treatmentsGrid">
+                            <label class="treatment-option">
+                                <input type="checkbox" name="tratamiento" value="Mini Lifting">
+                                <span class="treatment-box">
+                                    <span class="treatment-check">✓</span>
+                                    <span class="treatment-name">Mini Lifting</span>
+                                    <span class="treatment-desc">Rejuvenecimiento facial</span>
+                                </span>
+                            </label>
+                            <label class="treatment-option">
+                                <input type="checkbox" name="tratamiento" value="Lipo Papada">
+                                <span class="treatment-box">
+                                    <span class="treatment-check">✓</span>
+                                    <span class="treatment-name">Lipo Papada</span>
+                                    <span class="treatment-desc">Reducción de papada</span>
+                                </span>
+                            </label>
+                            <label class="treatment-option">
+                                <input type="checkbox" name="tratamiento" value="Botox">
+                                <span class="treatment-box">
+                                    <span class="treatment-check">✓</span>
+                                    <span class="treatment-name">Botox</span>
+                                    <span class="treatment-desc">Arrugas de expresión</span>
+                                </span>
+                            </label>
+                            <label class="treatment-option">
+                                <input type="checkbox" name="tratamiento" value="Ácido Hialurónico">
+                                <span class="treatment-box">
+                                    <span class="treatment-check">✓</span>
+                                    <span class="treatment-name">Ácido Hialurónico</span>
+                                    <span class="treatment-desc">Volumen y relleno</span>
+                                </span>
+                            </label>
+                            <label class="treatment-option">
+                                <input type="checkbox" name="tratamiento" value="Bioestimuladores">
+                                <span class="treatment-box">
+                                    <span class="treatment-check">✓</span>
+                                    <span class="treatment-name">Bioestimuladores</span>
+                                    <span class="treatment-desc">Estimulación de colágeno</span>
+                                </span>
+                            </label>
+                            <label class="treatment-option">
+                                <input type="checkbox" name="tratamiento" value="Rinomodelación">
+                                <span class="treatment-box">
+                                    <span class="treatment-check">✓</span>
+                                    <span class="treatment-name">Rinomodelación</span>
+                                    <span class="treatment-desc">Perfilado de nariz</span>
+                                </span>
+                            </label>
+                            <label class="treatment-option">
+                                <input type="checkbox" name="tratamiento" value="Skinbooster">
+                                <span class="treatment-box">
+                                    <span class="treatment-check">✓</span>
+                                    <span class="treatment-name">Skinbooster</span>
+                                    <span class="treatment-desc">Hidratación profunda</span>
+                                </span>
+                            </label>
+                            <label class="treatment-option">
+                                <input type="checkbox" name="tratamiento" value="Otro">
+                                <span class="treatment-box">
+                                    <span class="treatment-check">✓</span>
+                                    <span class="treatment-name">Otro</span>
+                                    <span class="treatment-desc">Consultar en evaluación</span>
+                                </span>
+                            </label>
+                        </div>
+                        <div class="error-msg" id="treatmentsError" style="display: none;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Comentarios adicionales (opcional)</label>
+                        <textarea id="motivo" placeholder="¿Algo más que debamos saber?"></textarea>
                     </div>
                 </form>
                 <div class="btn-group">
@@ -490,6 +619,10 @@
                     <div class="summary-item">
                         <span class="summary-label">Teléfono</span>
                         <span class="summary-value" id="summaryPhone">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Tratamiento(s)</span>
+                        <span class="summary-value" id="summaryTreatments">-</span>
                     </div>
                     <div class="summary-item">
                         <span class="summary-label">Total a Pagar</span>
@@ -584,6 +717,7 @@
             duration: 30,
             date: null,
             time: null,
+            tratamientos: [],
             motivo: ''
         };
 
@@ -850,6 +984,9 @@
             document.getElementById('summaryTime').textContent = selectedTime || '-';
             document.getElementById('summaryName').textContent = bookingState.nombre || '-';
             document.getElementById('summaryPhone').textContent = bookingState.telefono || '-';
+            document.getElementById('summaryTreatments').textContent = bookingState.tratamientos.length > 0
+                ? bookingState.tratamientos.join(', ')
+                : '-';
             document.getElementById('summaryPrice').textContent = bookingState.price ? `$${bookingState.price.toLocaleString('es-CL')} CLP` : '-';
         }
 
@@ -895,10 +1032,16 @@
         // ============================================
         // STEP 4: FORM VALIDATION
         // ============================================
+        function getSelectedTreatments() {
+            const checkboxes = document.querySelectorAll('input[name="tratamiento"]:checked');
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+
         function validateStep4() {
             const nombre = document.getElementById('nombre').value.trim();
             const telefono = document.getElementById('telefono').value.trim();
             const email = document.getElementById('email').value.trim();
+            const treatments = getSelectedTreatments();
             let isValid = true;
 
             // Validate name
@@ -932,10 +1075,21 @@
                 emailError.style.display = 'none';
             }
 
+            // Validate treatments
+            const treatmentsError = document.getElementById('treatmentsError');
+            if (treatments.length === 0) {
+                treatmentsError.textContent = 'Selecciona al menos un tratamiento';
+                treatmentsError.style.display = 'block';
+                isValid = false;
+            } else {
+                treatmentsError.style.display = 'none';
+            }
+
             if (isValid) {
                 bookingState.nombre = nombre;
                 bookingState.telefono = formatChileanPhone(telefono);
                 bookingState.email = email;
+                bookingState.tratamientos = treatments;
                 bookingState.motivo = document.getElementById('motivo').value.trim();
             }
 
@@ -946,10 +1100,12 @@
             const nombre = document.getElementById('nombre').value.trim();
             const telefono = document.getElementById('telefono').value.trim();
             const email = document.getElementById('email').value.trim();
+            const treatments = getSelectedTreatments();
 
             const isComplete = nombre.length >= 3 &&
                               validateChileanPhone(telefono) &&
-                              validateEmail(email);
+                              validateEmail(email) &&
+                              treatments.length > 0;
 
             document.getElementById('toStep5').disabled = !isComplete;
         }
@@ -957,6 +1113,11 @@
         // Add listeners for form fields
         ['nombre', 'telefono', 'email'].forEach(id => {
             document.getElementById(id).addEventListener('input', checkStep4Complete);
+        });
+
+        // Add listeners for treatment checkboxes
+        document.querySelectorAll('input[name="tratamiento"]').forEach(cb => {
+            cb.addEventListener('change', checkStep4Complete);
         });
 
         // ============================================
@@ -1099,6 +1260,7 @@
                 servicio: bookingState.evalTypeName,
                 precio: bookingState.price,
                 duracion: bookingState.duration,
+                tratamientos: bookingState.tratamientos,
                 // Profile data
                 interes: bookingState.interes,
                 edad: bookingState.edad,

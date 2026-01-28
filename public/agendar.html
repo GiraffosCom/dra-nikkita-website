@@ -15,6 +15,7 @@
             --color-charcoal: #2A2A2A;
             --color-soft-black: #1A1A1A;
             --color-warm-gray: #8B8680;
+            --color-error: #e74c3c;
             --font-display: 'Cormorant Garamond', serif;
             --font-body: 'Outfit', sans-serif;
         }
@@ -47,7 +48,7 @@
         .steps { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
         .step {
             display: flex; align-items: center; gap: 0.5rem;
-            padding: 0.5rem 0.8rem; border-radius: 20px; font-size: 0.8rem;
+            padding: 0.5rem 0.8rem; border-radius: 20px; font-size: 0.75rem;
             background: rgba(255, 255, 255, 0.05); color: var(--color-warm-gray);
             transition: all 0.3s ease;
             cursor: pointer;
@@ -71,7 +72,7 @@
         .chat-container {
             background: rgba(0, 0, 0, 0.2);
             border-radius: 15px;
-            max-height: 400px;
+            max-height: 450px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -83,9 +84,10 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            min-height: 300px;
         }
         .chat-bubble {
-            max-width: 80%;
+            max-width: 85%;
             padding: 1rem;
             border-radius: 15px;
             animation: fadeIn 0.3s ease;
@@ -100,6 +102,12 @@
             color: var(--color-soft-black);
             align-self: flex-end;
         }
+        .chat-bubble.error {
+            background: rgba(231, 76, 60, 0.2);
+            border: 1px solid rgba(231, 76, 60, 0.5);
+            color: #e74c3c;
+            font-size: 0.85rem;
+        }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -109,9 +117,11 @@
             background: rgba(0, 0, 0, 0.3);
             display: flex;
             gap: 0.5rem;
+            flex-wrap: wrap;
         }
         .chat-input {
             flex: 1;
+            min-width: 200px;
             padding: 0.8rem 1rem;
             border: 1px solid rgba(201, 169, 98, 0.3);
             border-radius: 25px;
@@ -120,6 +130,7 @@
             font-family: var(--font-body);
         }
         .chat-input:focus { outline: none; border-color: var(--color-gold); }
+        .chat-input.error { border-color: var(--color-error); }
         .chat-send {
             padding: 0.8rem 1.5rem;
             background: var(--color-gold);
@@ -131,6 +142,44 @@
             transition: all 0.3s ease;
         }
         .chat-send:hover { background: var(--color-gold-light); }
+
+        /* Evaluation Type Cards */
+        .eval-type-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        @media (max-width: 768px) { .eval-type-grid { grid-template-columns: 1fr; } }
+        .eval-type-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .eval-type-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(201, 169, 98, 0.3);
+            transform: translateY(-5px);
+        }
+        .eval-type-card.selected {
+            border-color: var(--color-gold);
+            background: rgba(201, 169, 98, 0.1);
+        }
+        .eval-type-card .icon {
+            width: 60px; height: 60px;
+            margin: 0 auto 1rem;
+            background: rgba(201, 169, 98, 0.2);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .eval-type-card .icon svg { width: 30px; height: 30px; stroke: var(--color-gold); }
+        .eval-type-card h3 { font-family: var(--font-display); font-size: 1.3rem; margin-bottom: 0.5rem; }
+        .eval-type-card .price { color: var(--color-gold); font-weight: 600; font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .eval-type-card .details { font-size: 0.85rem; color: var(--color-warm-gray); }
 
         /* Calendar Styles */
         .calendar-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
@@ -187,26 +236,11 @@
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
             outline: none; border-color: var(--color-gold); background: rgba(255, 255, 255, 0.08);
         }
+        .form-group input.error { border-color: var(--color-error); }
+        .form-group .error-msg { color: var(--color-error); font-size: 0.8rem; margin-top: 0.3rem; }
         .form-group textarea { min-height: 80px; resize: vertical; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         @media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
-
-        /* Service Selection in Form */
-        .service-select-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 0.5rem; }
-        @media (max-width: 768px) { .service-select-grid { grid-template-columns: 1fr; } }
-        .service-option {
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .service-option:hover { background: rgba(255, 255, 255, 0.05); border-color: rgba(201, 169, 98, 0.3); }
-        .service-option.selected { border-color: var(--color-gold); background: rgba(201, 169, 98, 0.1); }
-        .service-option h4 { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 0.3rem; }
-        .service-option .price { color: var(--color-gold); font-weight: 600; }
-        .service-option .duration { font-size: 0.8rem; color: var(--color-warm-gray); }
 
         /* Summary */
         .summary-card {
@@ -218,7 +252,7 @@
         .summary-item { display: flex; justify-content: space-between; padding: 0.75rem 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
         .summary-item:last-child { border-bottom: none; }
         .summary-label { color: var(--color-warm-gray); }
-        .summary-value { font-weight: 500; }
+        .summary-value { font-weight: 500; text-align: right; max-width: 60%; }
         .price-tag { font-size: 1.5rem; color: var(--color-gold); font-weight: 600; }
 
         /* Buttons */
@@ -275,14 +309,18 @@
                 </div>
                 <div class="step" data-step="2">
                     <span class="step-number">2</span>
-                    <span>Fecha y Hora</span>
+                    <span>Tipo Evaluación</span>
                 </div>
                 <div class="step" data-step="3">
                     <span class="step-number">3</span>
-                    <span>Tus Datos</span>
+                    <span>Fecha y Hora</span>
                 </div>
                 <div class="step" data-step="4">
                     <span class="step-number">4</span>
+                    <span>Tus Datos</span>
+                </div>
+                <div class="step" data-step="5">
+                    <span class="step-number">5</span>
                     <span>Confirmar</span>
                 </div>
             </div>
@@ -299,8 +337,64 @@
                 </div>
             </div>
 
-            <!-- Step 2: Date & Time Selection -->
+            <!-- Step 2: Tipo de Evaluación -->
             <div class="booking-content" id="step2">
+                <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 0.5rem; text-align: center;">
+                    ¿Cómo te gustaría realizar tu evaluación?
+                </h3>
+                <p style="text-align: center; color: var(--color-warm-gray); margin-bottom: 1rem;">
+                    Selecciona la modalidad que mejor se adapte a ti
+                </p>
+                <div class="eval-type-grid">
+                    <div class="eval-type-card" data-type="online" data-price="25000" data-duration="30">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                        </div>
+                        <h3>Evaluación Online</h3>
+                        <div class="price">$25.000 CLP</div>
+                        <div class="details">30 min • Videollamada<br>Desde cualquier lugar</div>
+                    </div>
+                    <div class="eval-type-card" data-type="presencial" data-price="50000" data-duration="45">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                        </div>
+                        <h3>Evaluación Presencial</h3>
+                        <div class="price">$50.000 CLP</div>
+                        <div class="details">45 min • En clínica<br>Evaluación completa</div>
+                    </div>
+                    <div class="eval-type-card" data-type="urgencia" data-price="80000" data-duration="30">
+                        <div class="icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                        </div>
+                        <h3>Evaluación de Urgencia</h3>
+                        <div class="price">$80.000 CLP</div>
+                        <div class="details">30 min • Prioritaria<br>Atención inmediata</div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" id="backToStep1">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+                        Volver
+                    </button>
+                    <button class="btn btn-primary" id="toStep3" disabled>
+                        Continuar
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Date & Time Selection -->
+            <div class="booking-content" id="step3">
                 <div class="calendar-container">
                     <div class="calendar">
                         <div class="calendar-header">
@@ -323,21 +417,21 @@
                     </div>
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-secondary" id="backToStep1">
+                    <button class="btn btn-secondary" id="backToStep2">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
                         Volver
                     </button>
-                    <button class="btn btn-primary" id="toStep3" disabled>
+                    <button class="btn btn-primary" id="toStep4" disabled>
                         Continuar
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
                     </button>
                 </div>
             </div>
 
-            <!-- Step 3: Personal Information + Service Selection -->
-            <div class="booking-content" id="step3">
+            <!-- Step 4: Personal Information -->
+            <div class="booking-content" id="step4">
                 <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">
-                    Confirma tus datos y selecciona el servicio
+                    Confirma tus datos de contacto
                 </h3>
                 <form id="bookingForm">
                     <div class="form-row">
@@ -348,62 +442,37 @@
                         <div class="form-group">
                             <label>Teléfono *</label>
                             <input type="tel" id="telefono" required placeholder="+56 9 1234 5678">
+                            <div class="error-msg" id="telefonoError" style="display: none;"></div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Correo Electrónico *</label>
                         <input type="email" id="email" required placeholder="tu@email.com">
+                        <div class="error-msg" id="emailError" style="display: none;"></div>
                     </div>
-
-                    <div class="form-group">
-                        <label>Selecciona el servicio que deseas *</label>
-                        <div class="service-select-grid" id="serviceGrid">
-                            <div class="service-option" data-service="evaluacion-online" data-price="25000" data-duration="30">
-                                <h4>Evaluación Online</h4>
-                                <span class="price">$25.000 CLP</span>
-                                <span class="duration">• 30 min • Videollamada</span>
-                            </div>
-                            <div class="service-option" data-service="evaluacion-presencial" data-price="50000" data-duration="45">
-                                <h4>Evaluación Presencial</h4>
-                                <span class="price">$50.000 CLP</span>
-                                <span class="duration">• 45 min • En clínica</span>
-                            </div>
-                            <div class="service-option" data-service="seguimiento" data-price="30000" data-duration="20">
-                                <h4>Control / Seguimiento</h4>
-                                <span class="price">$30.000 CLP</span>
-                                <span class="duration">• 20 min</span>
-                            </div>
-                            <div class="service-option" data-service="consulta-urgente" data-price="80000" data-duration="30">
-                                <h4>Consulta Urgente</h4>
-                                <span class="price">$80.000 CLP</span>
-                                <span class="duration">• 30 min • Prioritaria</span>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <label>Motivo de la consulta (opcional)</label>
-                        <textarea id="motivo" placeholder="Cuéntanos brevemente..."></textarea>
+                        <textarea id="motivo" placeholder="Cuéntanos brevemente qué te gustaría mejorar..."></textarea>
                     </div>
                 </form>
                 <div class="btn-group">
-                    <button class="btn btn-secondary" id="backToStep2">
+                    <button class="btn btn-secondary" id="backToStep3">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
                         Volver
                     </button>
-                    <button class="btn btn-primary" id="toStep4" disabled>
+                    <button class="btn btn-primary" id="toStep5" disabled>
                         Revisar y Confirmar
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
                     </button>
                 </div>
             </div>
 
-            <!-- Step 4: Confirmation -->
-            <div class="booking-content" id="step4">
+            <!-- Step 5: Confirmation -->
+            <div class="booking-content" id="step5">
                 <div class="summary-card">
                     <h3>Resumen de tu Cita</h3>
                     <div class="summary-item">
-                        <span class="summary-label">Servicio</span>
+                        <span class="summary-label">Tipo de Evaluación</span>
                         <span class="summary-value" id="summaryService">-</span>
                     </div>
                     <div class="summary-item">
@@ -428,7 +497,7 @@
                     </div>
                 </div>
                 <div class="btn-group">
-                    <button class="btn btn-secondary" id="backToStep3">
+                    <button class="btn btn-secondary" id="backToStep4">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
                         Volver
                     </button>
@@ -462,7 +531,41 @@
     </div>
 
     <script>
-        // Booking State
+        // ============================================
+        // VALIDATION FUNCTIONS
+        // ============================================
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function validateChileanPhone(phone) {
+            // Remove all non-digits
+            const cleaned = phone.replace(/\D/g, '');
+            // Chilean phones: +56 9 XXXX XXXX (11 digits with country code)
+            // or 9 XXXX XXXX (9 digits without country code)
+            // or landlines starting with 2 (Santiago) or other codes
+            if (cleaned.length === 11 && cleaned.startsWith('569')) return true;
+            if (cleaned.length === 9 && cleaned.startsWith('9')) return true;
+            if (cleaned.length === 9 && cleaned.startsWith('2')) return true;
+            if (cleaned.length === 8) return true; // Old format
+            return false;
+        }
+
+        function formatChileanPhone(phone) {
+            const cleaned = phone.replace(/\D/g, '');
+            if (cleaned.length === 9 && cleaned.startsWith('9')) {
+                return `+56 ${cleaned.slice(0,1)} ${cleaned.slice(1,5)} ${cleaned.slice(5)}`;
+            }
+            if (cleaned.length === 11 && cleaned.startsWith('56')) {
+                return `+${cleaned.slice(0,2)} ${cleaned.slice(2,3)} ${cleaned.slice(3,7)} ${cleaned.slice(7)}`;
+            }
+            return phone;
+        }
+
+        // ============================================
+        // BOOKING STATE
+        // ============================================
         const bookingState = {
             // From precalificación
             nombre: '',
@@ -470,9 +573,13 @@
             email: '',
             edad: '',
             interes: '',
+            procedimientoPrevio: '',
+            expectativas: '',
+            disponibilidad: '',
+            comoNosConocio: '',
             // From booking
-            service: null,
-            serviceName: '',
+            evalType: null,
+            evalTypeName: '',
             price: 0,
             duration: 30,
             date: null,
@@ -497,16 +604,92 @@
         const contents = document.querySelectorAll('.booking-content');
 
         // ============================================
-        // STEP 1: PRECALIFICACIÓN (Mini Bot)
+        // STEP 1: PRECALIFICACIÓN (Mini Bot) - 7+ Questions
         // ============================================
         const prequalQuestions = [
-            { id: 'welcome', message: '¡Hola! 👋 Soy el asistente de la Dra. Nikkita. Antes de agendar, necesito hacerte unas preguntas rápidas.', type: 'info', next: 'nombre' },
-            { id: 'nombre', message: '¿Cuál es tu nombre completo?', type: 'input', field: 'nombre', placeholder: 'Escribe tu nombre...' },
-            { id: 'telefono', message: 'Perfecto, {nombre}. ¿Cuál es tu número de teléfono?', type: 'input', field: 'telefono', placeholder: '+56 9 XXXX XXXX' },
-            { id: 'email', message: '¿Y tu correo electrónico?', type: 'input', field: 'email', placeholder: 'tu@email.com' },
-            { id: 'edad', message: '¿Cuál es tu edad?', type: 'input', field: 'edad', placeholder: 'Ej: 35' },
-            { id: 'interes', message: '¿Qué tratamiento te interesa?', type: 'options', field: 'interes', options: ['Mini Lifting', 'Lipo Papada', 'Botox', 'Ácido Hialurónico', 'Bioestimuladores', 'Otro'] },
-            { id: 'ready', message: '¡Excelente! Ya tengo toda la información. 🎉', type: 'final' }
+            {
+                id: 'welcome',
+                message: '¡Hola! 👋 Soy el asistente de la Dra. Nikkita. Para brindarte la mejor atención, necesito conocerte un poco mejor.',
+                type: 'info'
+            },
+            {
+                id: 'nombre',
+                message: '¿Cuál es tu nombre completo?',
+                type: 'input',
+                field: 'nombre',
+                placeholder: 'Escribe tu nombre...',
+                validation: (v) => v.length >= 3 ? null : 'Por favor ingresa tu nombre completo'
+            },
+            {
+                id: 'telefono',
+                message: 'Mucho gusto, {nombre}. ¿Cuál es tu número de teléfono? 📱',
+                type: 'input',
+                field: 'telefono',
+                placeholder: '+56 9 XXXX XXXX',
+                validation: (v) => validateChileanPhone(v) ? null : 'Por favor ingresa un teléfono chileno válido (ej: +56 9 1234 5678)'
+            },
+            {
+                id: 'email',
+                message: '¿Y tu correo electrónico? 📧',
+                type: 'input',
+                field: 'email',
+                placeholder: 'tu@email.com',
+                validation: (v) => validateEmail(v) ? null : 'Por favor ingresa un correo electrónico válido'
+            },
+            {
+                id: 'edad',
+                message: '¿Cuál es tu edad?',
+                type: 'input',
+                field: 'edad',
+                placeholder: 'Ej: 35',
+                validation: (v) => {
+                    const age = parseInt(v);
+                    if (isNaN(age)) return 'Por favor ingresa un número válido';
+                    if (age < 18) return 'Debes ser mayor de 18 años';
+                    if (age > 100) return 'Por favor ingresa una edad válida';
+                    return null;
+                }
+            },
+            {
+                id: 'interes',
+                message: '¿Qué área te gustaría mejorar? ✨',
+                type: 'options',
+                field: 'interes',
+                options: ['Rostro (lifting, papada)', 'Arrugas y líneas', 'Volumen facial', 'Rejuvenecimiento', 'Otro / No estoy segura']
+            },
+            {
+                id: 'procedimientoPrevio',
+                message: '¿Te has realizado algún procedimiento estético anteriormente?',
+                type: 'options',
+                field: 'procedimientoPrevio',
+                options: ['Sí, varios', 'Sí, uno', 'No, es mi primera vez', 'Prefiero no decir']
+            },
+            {
+                id: 'expectativas',
+                message: '¿Cuáles son tus expectativas con este tratamiento?',
+                type: 'options',
+                field: 'expectativas',
+                options: ['Resultados naturales', 'Cambio notable', 'Solo mantenerme', 'Aún no lo tengo claro']
+            },
+            {
+                id: 'disponibilidad',
+                message: '¿Cuándo te gustaría realizarte el procedimiento?',
+                type: 'options',
+                field: 'disponibilidad',
+                options: ['Lo antes posible', 'En 1-2 semanas', 'En 1 mes', 'Solo quiero informarme']
+            },
+            {
+                id: 'comoNosConocio',
+                message: '¿Cómo nos conociste?',
+                type: 'options',
+                field: 'comoNosConocio',
+                options: ['Instagram', 'Facebook', 'Google', 'Recomendación', 'Otro']
+            },
+            {
+                id: 'ready',
+                message: '¡Perfecto, {nombre}! 🎉 Ya tengo toda la información. Ahora seleccionemos el tipo de evaluación ideal para ti.',
+                type: 'final'
+            }
         ];
 
         let currentQuestionIndex = 0;
@@ -523,23 +706,21 @@
             const messagesContainer = document.getElementById('chatMessages');
             const inputArea = document.getElementById('chatInputArea');
 
-            // Add bot message
             setTimeout(() => {
                 let message = question.message;
-                // Replace placeholders
-                message = message.replace('{nombre}', bookingState.nombre || '');
+                message = message.replace(/{nombre}/g, bookingState.nombre || '');
 
                 addBotMessage(message);
 
                 if (question.type === 'info') {
-                    setTimeout(() => showPrequalQuestion(index + 1), 1500);
+                    setTimeout(() => showPrequalQuestion(index + 1), 2000);
                     return;
                 }
 
                 if (question.type === 'final') {
                     inputArea.innerHTML = `
                         <button class="btn btn-primary" style="width: 100%;" onclick="goToStep(2)">
-                            ¿Estás lista para agendar? ¡Sí, continuar! →
+                            ¿Lista para agendar? ¡Sí, continuar! →
                         </button>
                     `;
                     return;
@@ -548,7 +729,9 @@
                 // Render input
                 if (question.type === 'input') {
                     inputArea.innerHTML = `
-                        <input type="text" class="chat-input" id="prequalInput" placeholder="${question.placeholder}"
+                        <input type="${question.field === 'email' ? 'email' : 'text'}"
+                            class="chat-input" id="prequalInput"
+                            placeholder="${question.placeholder}"
                             onkeypress="if(event.key === 'Enter') submitPrequalAnswer()">
                         <button class="chat-send" onclick="submitPrequalAnswer()">Enviar</button>
                     `;
@@ -557,7 +740,7 @@
                     inputArea.innerHTML = `
                         <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; width: 100%;">
                             ${question.options.map(opt => `
-                                <button class="chat-send" style="flex: 1; min-width: 120px;" onclick="selectPrequalOption('${opt}')">${opt}</button>
+                                <button class="chat-send" style="flex: 1; min-width: 140px; font-size: 0.85rem;" onclick="selectPrequalOption('${opt}')">${opt}</button>
                             `).join('')}
                         </div>
                     `;
@@ -583,14 +766,39 @@
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
+        function addErrorMessage(text) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const bubble = document.createElement('div');
+            bubble.className = 'chat-bubble bot error';
+            bubble.textContent = '⚠️ ' + text;
+            messagesContainer.appendChild(bubble);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
         function submitPrequalAnswer() {
             const input = document.getElementById('prequalInput');
             const value = input.value.trim();
             if (!value) return;
 
             const question = prequalQuestions[currentQuestionIndex];
-            bookingState[question.field] = value;
-            addUserMessage(value);
+
+            // Validate if validation function exists
+            if (question.validation) {
+                const error = question.validation(value);
+                if (error) {
+                    input.classList.add('error');
+                    addErrorMessage(error);
+                    return;
+                }
+            }
+
+            input.classList.remove('error');
+
+            // Format phone if it's the phone field
+            const finalValue = question.field === 'telefono' ? formatChileanPhone(value) : value;
+
+            bookingState[question.field] = finalValue;
+            addUserMessage(finalValue);
 
             setTimeout(() => showPrequalQuestion(currentQuestionIndex + 1), 500);
         }
@@ -609,45 +817,46 @@
         let highestStepReached = 1;
 
         function goToStep(stepNum) {
-            // Track highest step reached
             if (stepNum > highestStepReached) {
                 highestStepReached = stepNum;
             }
 
             steps.forEach((step, i) => {
                 step.classList.remove('active', 'completed');
-                if (i + 1 < highestStepReached || (i + 1 < stepNum)) step.classList.add('completed');
-                if (i + 1 === stepNum) step.classList.add('active');
-                // Mark all visited steps as completed for navigation
                 if (i + 1 <= highestStepReached && i + 1 !== stepNum) step.classList.add('completed');
+                if (i + 1 === stepNum) step.classList.add('active');
             });
 
             contents.forEach(content => content.classList.remove('active'));
             document.getElementById(`step${stepNum}`).classList.add('active');
 
-            // Auto-fill data when going to step 3
-            if (stepNum === 3) {
+            // Auto-fill data when going to step 4
+            if (stepNum === 4) {
                 document.getElementById('nombre').value = bookingState.nombre || '';
                 document.getElementById('telefono').value = bookingState.telefono || '';
                 document.getElementById('email').value = bookingState.email || '';
+                checkStep4Complete();
             }
 
-            // Update summary when going to step 4
-            if (stepNum === 4) {
-                document.getElementById('summaryService').textContent = bookingState.serviceName || '-';
-                document.getElementById('summaryDate').textContent = selectedDate ? formatDateLong(selectedDate) : '-';
-                document.getElementById('summaryTime').textContent = selectedTime || '-';
-                document.getElementById('summaryName').textContent = bookingState.nombre || '-';
-                document.getElementById('summaryPhone').textContent = bookingState.telefono || '-';
-                document.getElementById('summaryPrice').textContent = bookingState.price ? `$${bookingState.price.toLocaleString('es-CL')} CLP` : '-';
+            // Update summary when going to step 5
+            if (stepNum === 5) {
+                updateSummary();
             }
+        }
+
+        function updateSummary() {
+            document.getElementById('summaryService').textContent = bookingState.evalTypeName || '-';
+            document.getElementById('summaryDate').textContent = selectedDate ? formatDateLong(selectedDate) : '-';
+            document.getElementById('summaryTime').textContent = selectedTime || '-';
+            document.getElementById('summaryName').textContent = bookingState.nombre || '-';
+            document.getElementById('summaryPhone').textContent = bookingState.telefono || '-';
+            document.getElementById('summaryPrice').textContent = bookingState.price ? `$${bookingState.price.toLocaleString('es-CL')} CLP` : '-';
         }
 
         // Click on step indicators to navigate
         steps.forEach((step, index) => {
             step.addEventListener('click', () => {
                 const stepNum = index + 1;
-                // Can only navigate to steps already visited
                 if (stepNum <= highestStepReached) {
                     goToStep(stepNum);
                 }
@@ -658,69 +867,100 @@
         document.getElementById('backToStep1').addEventListener('click', () => goToStep(1));
         document.getElementById('toStep3').addEventListener('click', () => goToStep(3));
         document.getElementById('backToStep2').addEventListener('click', () => goToStep(2));
-        document.getElementById('toStep4').addEventListener('click', () => {
-            const nombre = document.getElementById('nombre').value;
-            const telefono = document.getElementById('telefono').value;
-            const email = document.getElementById('email').value;
-            const motivo = document.getElementById('motivo').value;
-
-            if (!nombre || !telefono || !email) {
-                alert('Por favor completa todos los campos obligatorios');
-                return;
-            }
-            if (!bookingState.service) {
-                alert('Por favor selecciona un servicio');
-                return;
-            }
-
-            bookingState.nombre = nombre;
-            bookingState.telefono = telefono;
-            bookingState.email = email;
-            bookingState.motivo = motivo;
-
-            // Update summary
-            document.getElementById('summaryService').textContent = bookingState.serviceName;
-            document.getElementById('summaryDate').textContent = formatDateLong(selectedDate);
-            document.getElementById('summaryTime').textContent = selectedTime;
-            document.getElementById('summaryName').textContent = nombre;
-            document.getElementById('summaryPhone').textContent = telefono;
-            document.getElementById('summaryPrice').textContent = `$${bookingState.price.toLocaleString('es-CL')} CLP`;
-
-            goToStep(4);
-        });
+        document.getElementById('toStep4').addEventListener('click', () => goToStep(4));
         document.getElementById('backToStep3').addEventListener('click', () => goToStep(3));
+        document.getElementById('toStep5').addEventListener('click', () => {
+            if (validateStep4()) {
+                goToStep(5);
+            }
+        });
+        document.getElementById('backToStep4').addEventListener('click', () => goToStep(4));
 
         // ============================================
-        // SERVICE SELECTION (Step 3)
+        // STEP 2: EVALUATION TYPE SELECTION
         // ============================================
-        const serviceOptions = document.querySelectorAll('.service-option');
-        serviceOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                serviceOptions.forEach(o => o.classList.remove('selected'));
-                option.classList.add('selected');
-                bookingState.service = option.dataset.service;
-                bookingState.serviceName = option.querySelector('h4').textContent;
-                bookingState.price = parseInt(option.dataset.price);
-                bookingState.duration = parseInt(option.dataset.duration);
-                checkStep3Complete();
+        const evalTypeCards = document.querySelectorAll('.eval-type-card');
+        evalTypeCards.forEach(card => {
+            card.addEventListener('click', () => {
+                evalTypeCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                bookingState.evalType = card.dataset.type;
+                bookingState.evalTypeName = card.querySelector('h3').textContent;
+                bookingState.price = parseInt(card.dataset.price);
+                bookingState.duration = parseInt(card.dataset.duration);
+                document.getElementById('toStep3').disabled = false;
             });
         });
 
-        function checkStep3Complete() {
-            const nombre = document.getElementById('nombre').value;
-            const telefono = document.getElementById('telefono').value;
-            const email = document.getElementById('email').value;
-            const hasService = bookingState.service !== null;
-            document.getElementById('toStep4').disabled = !(nombre && telefono && email && hasService);
+        // ============================================
+        // STEP 4: FORM VALIDATION
+        // ============================================
+        function validateStep4() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+            const email = document.getElementById('email').value.trim();
+            let isValid = true;
+
+            // Validate name
+            if (nombre.length < 3) {
+                isValid = false;
+            }
+
+            // Validate phone
+            const telefonoInput = document.getElementById('telefono');
+            const telefonoError = document.getElementById('telefonoError');
+            if (!validateChileanPhone(telefono)) {
+                telefonoInput.classList.add('error');
+                telefonoError.textContent = 'Ingresa un teléfono chileno válido';
+                telefonoError.style.display = 'block';
+                isValid = false;
+            } else {
+                telefonoInput.classList.remove('error');
+                telefonoError.style.display = 'none';
+            }
+
+            // Validate email
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            if (!validateEmail(email)) {
+                emailInput.classList.add('error');
+                emailError.textContent = 'Ingresa un correo electrónico válido';
+                emailError.style.display = 'block';
+                isValid = false;
+            } else {
+                emailInput.classList.remove('error');
+                emailError.style.display = 'none';
+            }
+
+            if (isValid) {
+                bookingState.nombre = nombre;
+                bookingState.telefono = formatChileanPhone(telefono);
+                bookingState.email = email;
+                bookingState.motivo = document.getElementById('motivo').value.trim();
+            }
+
+            return isValid;
+        }
+
+        function checkStep4Complete() {
+            const nombre = document.getElementById('nombre').value.trim();
+            const telefono = document.getElementById('telefono').value.trim();
+            const email = document.getElementById('email').value.trim();
+
+            const isComplete = nombre.length >= 3 &&
+                              validateChileanPhone(telefono) &&
+                              validateEmail(email);
+
+            document.getElementById('toStep5').disabled = !isComplete;
         }
 
         // Add listeners for form fields
         ['nombre', 'telefono', 'email'].forEach(id => {
-            document.getElementById(id).addEventListener('input', checkStep3Complete);
+            document.getElementById(id).addEventListener('input', checkStep4Complete);
         });
 
         // ============================================
-        // CALENDAR (Step 2)
+        // CALENDAR (Step 3)
         // ============================================
         function renderCalendar() {
             const year = currentDate.getFullYear();
@@ -802,7 +1042,7 @@
                         selectedTime = slot.dataset.time;
                         bookingState.time = selectedTime;
                         renderTimeSlots();
-                        document.getElementById('toStep3').disabled = false;
+                        document.getElementById('toStep4').disabled = false;
                     });
                 });
             } catch (error) {
@@ -819,7 +1059,7 @@
                         selectedTime = slot.dataset.time;
                         bookingState.time = selectedTime;
                         renderTimeSlots();
-                        document.getElementById('toStep3').disabled = false;
+                        document.getElementById('toStep4').disabled = false;
                     });
                 });
             }
@@ -840,13 +1080,13 @@
         });
 
         // ============================================
-        // CONFIRM BOOKING (Step 4)
+        // CONFIRM BOOKING (Step 5)
         // ============================================
         document.getElementById('confirmBooking').addEventListener('click', async () => {
             const loading = document.getElementById('loading');
-            const step4 = document.getElementById('step4');
+            const step5 = document.getElementById('step5');
 
-            step4.style.display = 'none';
+            step5.style.display = 'none';
             loading.classList.add('active');
 
             const appointmentData = {
@@ -856,11 +1096,16 @@
                 motivo: bookingState.motivo,
                 fecha: bookingState.date,
                 hora: bookingState.time,
-                servicio: bookingState.serviceName,
+                servicio: bookingState.evalTypeName,
                 precio: bookingState.price,
                 duracion: bookingState.duration,
+                // Profile data
                 interes: bookingState.interes,
-                edad: bookingState.edad
+                edad: bookingState.edad,
+                procedimientoPrevio: bookingState.procedimientoPrevio,
+                expectativas: bookingState.expectativas,
+                disponibilidad: bookingState.disponibilidad,
+                comoNosConocio: bookingState.comoNosConocio
             };
 
             try {
@@ -901,7 +1146,7 @@
                 }
             } catch (error) {
                 loading.classList.remove('active');
-                step4.style.display = 'block';
+                step5.style.display = 'block';
                 alert('Error: ' + error.message);
             }
         });

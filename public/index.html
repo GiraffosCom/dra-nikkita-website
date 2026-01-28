@@ -2941,126 +2941,20 @@
             questions: [
                 {
                     id: 'bienvenida',
-                    message: '¡Hola! 👋 Soy el asistente virtual de la Dra. Nikkita. Te guiaré en una pre-evaluación para determinar si eres candidata para nuestros tratamientos de armonización facial.',
+                    message: '¡Hola! 👋 Soy el asistente virtual de la Dra. Nikkita. Déjanos tus datos y te contactaremos pronto.',
                     type: 'info',
-                    nextMessage: 'Esta información será revisada por la Dra. Nikkita personalmente. ¡Comencemos!'
-                },
-                {
-                    id: 'edad',
-                    message: '¿Cuál es tu edad?',
-                    type: 'options',
-                    options: ['18-25 años', '26-35 años', '36-45 años', '46-55 años', '56-65 años', 'Mayor de 65'],
-                    field: 'edad'
-                },
-                {
-                    id: 'estatura',
-                    message: '¿Cuál es tu estatura? (en cm, ejemplo: 165)',
-                    type: 'input',
-                    placeholder: 'Ej: 165',
-                    field: 'estatura',
-                    validation: 'number'
-                },
-                {
-                    id: 'peso',
-                    message: '¿Cuál es tu peso actual? (en kg)',
-                    type: 'input',
-                    placeholder: 'Ej: 65',
-                    field: 'peso',
-                    validation: 'number'
-                },
-                {
-                    id: 'razon',
-                    message: '¿Cuál es la razón principal por la que te interesa un tratamiento de armonización facial?',
-                    type: 'textarea',
-                    placeholder: 'Cuéntanos qué te gustaría mejorar o cambiar...',
-                    field: 'razon'
-                },
-                {
-                    id: 'cirugiasPrevias',
-                    message: '¿Te has realizado cirugías o tratamientos estéticos previos en la zona facial?',
-                    type: 'options',
-                    options: ['No, nunca', 'Sí, botox/rellenos', 'Sí, cirugía facial', 'Sí, varios tratamientos'],
-                    field: 'cirugiasPrevias',
-                    followUp: true
-                },
-                {
-                    id: 'cirugiasPreviasDetalle',
-                    message: '¿Podrías contarnos más detalles sobre los tratamientos que te has realizado?',
-                    type: 'textarea',
-                    placeholder: 'Describe los tratamientos previos, cuándo y dónde...',
-                    field: 'cirugiasPreviasDetalle',
-                    conditional: true
-                },
-                {
-                    id: 'condicionesMedicas',
-                    message: '¿Tienes alguna condición médica que debamos conocer? (diabetes, hipertensión, problemas de coagulación, etc.)',
-                    type: 'options',
-                    options: ['No tengo condiciones médicas', 'Sí, tengo condiciones médicas'],
-                    field: 'condicionesMedicas',
-                    followUp: true
-                },
-                {
-                    id: 'condicionesMedicasDetalle',
-                    message: '¿Cuáles condiciones médicas tienes?',
-                    type: 'textarea',
-                    placeholder: 'Describe tus condiciones médicas...',
-                    field: 'condicionesMedicasDetalle',
-                    conditional: true
-                },
-                {
-                    id: 'medicamentos',
-                    message: '¿Tomas algún medicamento de forma regular?',
-                    type: 'options',
-                    options: ['No tomo medicamentos', 'Sí, tomo medicamentos'],
-                    field: 'medicamentos',
-                    followUp: true
-                },
-                {
-                    id: 'medicamentosDetalle',
-                    message: '¿Qué medicamentos tomas?',
-                    type: 'input',
-                    placeholder: 'Lista los medicamentos...',
-                    field: 'medicamentosDetalle',
-                    conditional: true
-                },
-                {
-                    id: 'fumadora',
-                    message: '¿Eres fumadora?',
-                    type: 'options',
-                    options: ['No fumo', 'Fumo ocasionalmente', 'Fumo regularmente'],
-                    field: 'fumadora'
-                },
-                {
-                    id: 'expectativas',
-                    message: '¿Cuáles son tus expectativas con el tratamiento? ¿Qué resultado esperas lograr?',
-                    type: 'textarea',
-                    placeholder: 'Describe cómo te gustaría verte después del tratamiento...',
-                    field: 'expectativas'
-                },
-                {
-                    id: 'disponibilidad',
-                    message: '¿Cuál es tu disponibilidad para realizarte el tratamiento?',
-                    type: 'options',
-                    options: ['Lo antes posible', 'En 1-2 meses', 'En 3-6 meses', 'Solo estoy explorando opciones'],
-                    field: 'disponibilidad'
-                },
-                {
-                    id: 'comoNosConociste',
-                    message: '¿Cómo nos conociste?',
-                    type: 'options',
-                    options: ['Instagram', 'Facebook', 'TikTok', 'Google', 'Recomendación', 'Otro'],
-                    field: 'comoNosConociste'
+                    nextMessage: '¡Comencemos!'
                 },
                 {
                     id: 'nombre',
-                    message: 'Ahora necesitamos tus datos de contacto. ¿Cuál es tu nombre completo?',
+                    message: '¿Cuál es tu nombre completo?',
                     type: 'input',
                     placeholder: 'Tu nombre completo',
                     field: 'nombre'
                 },
                 {
                     id: 'telefono',
-                    message: '¿Cuál es tu número de teléfono? (con código de país)',
+                    message: '¿Cuál es tu número de teléfono?',
                     type: 'input',
                     placeholder: 'Ej: +56 9 1234 5678',
                     field: 'telefono'
@@ -3071,17 +2965,8 @@
                     type: 'input',
                     placeholder: 'tu@email.com',
                     field: 'email',
-                    validation: 'email'
-                },
-                {
-                    id: 'fotos',
-                    message: 'Por último, necesitamos 3 fotos de tu rostro para que la Dra. Nikkita pueda evaluarte correctamente:',
-                    type: 'photos',
-                    photoTypes: [
-                        { id: 'frente', label: 'Foto de Frente' },
-                        { id: 'izquierdo', label: 'Perfil Izquierdo' },
-                        { id: 'derecho', label: 'Perfil Derecho' }
-                    ]
+                    validation: 'email',
+                    sendToCRM: true
                 },
                 {
                     id: 'final',
@@ -3249,12 +3134,18 @@
             submitInput(field) {
                 const input = document.getElementById('chatInput');
                 const value = input.value.trim();
-                
+
                 if (!value) return;
-                
+
                 this.userData[field] = value;
                 this.addUserMessage(value);
-                
+
+                // Check if this question should trigger CRM send
+                const currentQuestion = this.questions[this.currentStep];
+                if (currentQuestion && currentQuestion.sendToCRM) {
+                    this.sendToCRM();
+                }
+
                 // Move to next non-conditional question
                 let nextIndex = this.currentStep + 1;
                 while (this.questions[nextIndex] && this.questions[nextIndex].conditional) {

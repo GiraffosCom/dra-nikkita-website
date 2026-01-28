@@ -40,14 +40,28 @@
             margin: 0 auto 2rem;
             animation: pulse 2s ease-in-out infinite;
         }
+        .icon.loading {
+            background: linear-gradient(135deg, var(--color-gold), #b8963a);
+        }
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         .icon svg {
             width: 50px;
             height: 50px;
             color: white;
+        }
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
         h1 {
             font-family: var(--font-display);
@@ -72,6 +86,22 @@
             margin: 2rem 0;
             border: 1px solid rgba(201, 169, 98, 0.2);
         }
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        .detail-label {
+            color: rgba(248, 245, 240, 0.6);
+        }
+        .detail-value {
+            color: var(--color-gold);
+            font-weight: 500;
+        }
         .btn {
             display: inline-block;
             padding: 1rem 2rem;
@@ -87,28 +117,123 @@
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(201, 169, 98, 0.3);
         }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"/>
-            </svg>
-        </div>
-        <h1>¡Pago <span>Exitoso</span>!</h1>
-        <p>Tu cita ha sido confirmada y pagada correctamente.</p>
-
-        <div class="card">
-            <p>Te enviaremos un <span class="highlight">correo de confirmación</span> con los detalles de tu cita.</p>
-            <p style="margin-top: 1rem;">También recibirás un <span class="highlight">recordatorio por WhatsApp</span> 24 horas antes.</p>
+        <!-- Loading State -->
+        <div id="loadingState">
+            <div class="icon loading">
+                <div class="spinner"></div>
+            </div>
+            <h1>Verificando <span>Pago</span>...</h1>
+            <p>Por favor espera mientras confirmamos tu pago.</p>
         </div>
 
-        <p style="font-size: 0.9rem; opacity: 0.7;">
-            Si tienes alguna pregunta, contáctanos por WhatsApp.
-        </p>
+        <!-- Success State -->
+        <div id="successState" class="hidden">
+            <div class="icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <h1>¡Pago <span>Exitoso</span>!</h1>
+            <p>Tu cita ha sido confirmada y pagada correctamente.</p>
 
-        <a href="/" class="btn">Volver al Inicio</a>
+            <div class="card">
+                <div class="detail-item">
+                    <span class="detail-label">Paciente</span>
+                    <span class="detail-value" id="detailNombre">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Servicio</span>
+                    <span class="detail-value" id="detailServicio">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Fecha</span>
+                    <span class="detail-value" id="detailFecha">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Hora</span>
+                    <span class="detail-value" id="detailHora">-</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Monto pagado</span>
+                    <span class="detail-value" id="detailMonto">-</span>
+                </div>
+            </div>
+
+            <p>Te enviaremos un <span class="highlight">recordatorio por WhatsApp</span> 24 horas antes.</p>
+
+            <a href="/" class="btn">Volver al Inicio</a>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="hidden">
+            <div class="icon" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="8" x2="12" y2="12"/>
+                    <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+            </div>
+            <h1>Error al <span style="color: #e74c3c;">Verificar</span></h1>
+            <p id="errorMessage">Hubo un problema al verificar tu pago.</p>
+            <a href="/agendar.html" class="btn">Intentar Nuevamente</a>
+        </div>
     </div>
+
+    <script>
+        async function verifyPayment() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const paymentId = urlParams.get('payment_id');
+            const status = urlParams.get('status');
+            const externalRef = urlParams.get('external_reference');
+
+            if (!paymentId) {
+                showError('No se encontró información del pago');
+                return;
+            }
+
+            try {
+                const response = await fetch(`/api/verify-payment?payment_id=${paymentId}&status=${status}&external_reference=${externalRef}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    showSuccess(data);
+                } else {
+                    showError(data.message || 'No se pudo verificar el pago');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showError('Error de conexión. Por favor contacta a soporte.');
+            }
+        }
+
+        function showSuccess(data) {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('successState').classList.remove('hidden');
+
+            if (data.appointment) {
+                document.getElementById('detailNombre').textContent = data.appointment.nombre || '-';
+                document.getElementById('detailServicio').textContent = data.appointment.servicio || '-';
+                document.getElementById('detailFecha').textContent = data.appointment.fecha || '-';
+                document.getElementById('detailHora').textContent = data.appointment.hora || '-';
+            }
+            if (data.amount) {
+                document.getElementById('detailMonto').textContent = `$${data.amount.toLocaleString('es-CL')} CLP`;
+            }
+        }
+
+        function showError(message) {
+            document.getElementById('loadingState').classList.add('hidden');
+            document.getElementById('errorState').classList.remove('hidden');
+            document.getElementById('errorMessage').textContent = message;
+        }
+
+        // Run on page load
+        verifyPayment();
+    </script>
 </body>
 </html>

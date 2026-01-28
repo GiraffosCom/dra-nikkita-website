@@ -67,7 +67,8 @@ export default async function handler(req, res) {
             last_name: leadData.personal?.nombre?.split(' ').slice(1).join(' ') || '',
             email: leadData.personal?.email || '',
             mobile_no: leadData.personal?.telefono || '',
-            status: 'New'
+            status: 'New',
+            notes: notesContent
         };
 
         console.log('Sending to Frappe:', JSON.stringify(frappeLeadData));
@@ -94,6 +95,29 @@ export default async function handler(req, res) {
         }
 
         const leadId = result.data?.name;
+
+        // Add notes as a Comment (backup method if notes field doesn't exist)
+        if (leadId) {
+            try {
+                await fetch(`${CRM_URL}/api/resource/Comment`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `token ${API_KEY}:${API_SECRET}`,
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        comment_type: 'Comment',
+                        reference_doctype: 'CRM Lead',
+                        reference_name: leadId,
+                        content: notesContent.replace(/\n/g, '<br>')
+                    })
+                });
+                console.log('Comment added to lead');
+            } catch (commentError) {
+                console.error('Error adding comment:', commentError);
+            }
+        }
 
         // Upload photos if present
         if (leadData.fotos && leadId) {

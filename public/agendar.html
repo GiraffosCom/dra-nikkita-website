@@ -840,11 +840,21 @@
                 type: 'input',
                 field: 'telefono',
                 placeholder: '+56 9 XXXX XXXX',
-                validation: (v) => validateChileanPhone(v) ? null : 'Por favor ingresa un teléfono chileno válido (ej: +56 9 1234 5678)'
+                validation: (v) => validateChileanPhone(v) ? null : 'Por favor ingresa un teléfono chileno válido (ej: +56 9 1234 5678)',
+                afterSubmit: 'sendWhatsAppCode'
+            },
+            {
+                id: 'verificacion',
+                message: '📲 Te enviamos un código de 6 dígitos por WhatsApp. Por favor ingrésalo para verificar tu número:',
+                type: 'input',
+                field: 'codigoVerificacion',
+                placeholder: '123456',
+                validation: (v) => /^\d{6}$/.test(v) ? null : 'El código debe tener 6 dígitos',
+                afterSubmit: 'verifyWhatsAppCode'
             },
             {
                 id: 'email',
-                message: 'Perfecto. ¿Cuál es tu correo electrónico? 📧',
+                message: '✅ ¡Número verificado! Ahora, ¿cuál es tu correo electrónico? 📧',
                 type: 'input',
                 field: 'email',
                 placeholder: 'tu@email.com',

@@ -3131,25 +3131,42 @@
                     
                     this.addBotMessage(question.message);
                     this.renderInput(question);
+                    // Scroll after input is rendered
+                    setTimeout(() => this.scrollToBottom(), 150);
                 }, 300);
             },
             
+            scrollToBottom() {
+                const messagesContainer = document.getElementById('chatMessages');
+                const inputArea = document.getElementById('chatInputArea');
+
+                // Scroll the messages container
+                setTimeout(() => {
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+                    // Also scroll the input area into view
+                    if (inputArea) {
+                        inputArea.scrollIntoView({ behavior: 'smooth', block: 'end' });
+                    }
+                }, 100);
+            },
+
             addBotMessage(text) {
                 const messagesContainer = document.getElementById('chatMessages');
                 const bubble = document.createElement('div');
                 bubble.className = 'chat-bubble bot';
                 bubble.textContent = text;
                 messagesContainer.appendChild(bubble);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                this.scrollToBottom();
             },
-            
+
             addUserMessage(text) {
                 const messagesContainer = document.getElementById('chatMessages');
                 const bubble = document.createElement('div');
                 bubble.className = 'chat-bubble user';
                 bubble.textContent = text;
                 messagesContainer.appendChild(bubble);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                this.scrollToBottom();
             },
             
             renderInput(question) {

@@ -3392,14 +3392,25 @@
                 };
                 
                 console.log('Lead Data for CRM:', leadData);
-                
-                // TODO: Replace with actual API call to your CRM
-                // fetch('YOUR_CRM_ENDPOINT', {
-                //     method: 'POST',
-                //     headers: { 'Content-Type': 'application/json' },
-                //     body: JSON.stringify(leadData)
-                // });
-                
+
+                // Send to Frappe CRM via serverless function
+                fetch('/api/crm-lead', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(leadData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('Lead created in CRM:', data.lead_id);
+                    } else {
+                        console.error('CRM Error:', data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error sending to CRM:', error);
+                });
+
                 // Also send to WhatsApp as backup
                 const whatsappMessage = `🆕 NUEVO LEAD PRE-EVALUACIÓN
 

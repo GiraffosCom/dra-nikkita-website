@@ -905,44 +905,84 @@
             });
         }
 
-        function selectDate(date) {
+        async function selectDate(date) {
             selectedDate = date;
             bookingState.date = date.toISOString().split('T')[0];
             renderCalendar();
-            renderTimeSlots();
+            await renderTimeSlots();
         }
 
-        function renderTimeSlots() {
+        async function renderTimeSlots() {
+            const timeSlotsContainer = document.getElementById('timeSlots');
+
             if (!selectedDate) {
-                document.getElementById('timeSlots').innerHTML = '<div class="no-slots">Selecciona una fecha para ver horarios disponibles</div>';
+                timeSlotsContainer.innerHTML = '<div class="no-slots">Selecciona una fecha para ver horarios disponibles</div>';
                 return;
             }
 
-            // Simulate some busy slots randomly
-            const busySlots = availableSlots.filter(() => Math.random() > 0.7);
+            // Show loading
+            timeSlotsContainer.innerHTML = '<div class="no-slots">Cargando horarios...</div>';
 
-            let html = '';
-            availableSlots.forEach(slot => {
-                const isBusy = busySlots.includes(slot);
-                const isSelected = selectedTime === slot;
-                let classes = 'time-slot';
-                if (isBusy) classes += ' disabled';
-                if (isSelected) classes += ' selected';
+            try {
+                // Fetch availability from Frappe
+                const dateStr = selectedDate.toISOString().split('T')[0];
+                const response = await fetch(`/api/availability?date=${dateStr}`);
+                const data = await response.json();
 
-                html += `<div class="${classes}" data-time="${slot}">${slot}</div>`;
-            });
+                if (!data.success) {
+                    throw new Error(data.error || 'Error al cargar horarios');
+                }
 
-            document.getElementById('timeSlots').innerHTML = html;
+                const slots = data.slots || [];
 
-            // Add click handlers
-            document.querySelectorAll('.time-slot:not(.disabled)').forEach(slot => {
-                slot.addEventListener('click', () => {
-                    selectedTime = slot.dataset.time;
-                    bookingState.time = selectedTime;
-                    renderTimeSlots();
-                    document.getElementById('toStep3').disabled = false;
+                if (slots.length === 0) {
+                    timeSlotsContainer.innerHTML = '<div class="no-slots">No hay horarios disponibles para esta fecha</div>';
+                    return;
+                }
+
+                let html = '';
+                slots.forEach(slot => {
+                    const isSelected = selectedTime === slot.time;
+                    let classes = 'time-slot';
+                    if (!slot.available) classes += ' disabled';
+                    if (isSelected) classes += ' selected';
+
+                    html += `<div class="${classes}" data-time="${slot.time}">${slot.time}</div>`;
                 });
-            });
+
+                timeSlotsContainer.innerHTML = html;
+
+                // Add click handlers
+                document.querySelectorAll('.time-slot:not(.disabled)').forEach(slot => {
+                    slot.addEventListener('click', () => {
+                        selectedTime = slot.dataset.time;
+                        bookingState.time = selectedTime;
+                        renderTimeSlots();
+                        document.getElementById('toStep3').disabled = false;
+                    });
+                });
+
+            } catch (error) {
+                console.error('Error fetching availability:', error);
+                // Fallback to default slots if API fails
+                let html = '';
+                availableSlots.forEach(slot => {
+                    const isSelected = selectedTime === slot;
+                    let classes = 'time-slot';
+                    if (isSelected) classes += ' selected';
+                    html += `<div class="${classes}" data-time="${slot}">${slot}</div>`;
+                });
+                timeSlotsContainer.innerHTML = html;
+
+                document.querySelectorAll('.time-slot').forEach(slot => {
+                    slot.addEventListener('click', () => {
+                        selectedTime = slot.dataset.time;
+                        bookingState.time = selectedTime;
+                        renderTimeSlots();
+                        document.getElementById('toStep3').disabled = false;
+                    });
+                });
+            }
         }
 
         function formatDateLong(date) {

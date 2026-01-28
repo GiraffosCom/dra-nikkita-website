@@ -7,6 +7,9 @@
     "build": "echo 'Static site - no build needed'",
     "start": "npx serve public"
   },
+  "dependencies": {
+    "form-data": "^4.0.0"
+  },
   "keywords": [
     "dra-nikkita",
     "clinica-estetica",

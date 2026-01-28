@@ -93,11 +93,59 @@ export default async function handler(req, res) {
             });
         }
 
+        const leadId = result.data?.name;
+
+        // Upload photos if present
+        if (leadData.fotos && leadId) {
+            const photoNames = ['frente', 'izquierdo', 'derecho'];
+
+            for (const photoName of photoNames) {
+                const photo = leadData.fotos[photoName];
+                if (photo && photo.data) {
+                    try {
+                        // Extract base64 data (remove data:image/xxx;base64, prefix)
+                        const base64Data = photo.data.split(',')[1];
+                        const buffer = Buffer.from(base64Data, 'base64');
+
+                        // Determine file extension from data URL
+                        const mimeMatch = photo.data.match(/data:image\/(\w+);/);
+                        const extension = mimeMatch ? mimeMatch[1] : 'jpg';
+                        const fileName = `${leadId}_${photoName}.${extension}`;
+
+                        // Create form data for file upload
+                        const FormData = (await import('form-data')).default;
+                        const formData = new FormData();
+                        formData.append('file', buffer, {
+                            filename: fileName,
+                            contentType: `image/${extension}`
+                        });
+                        formData.append('is_private', '0');
+                        formData.append('doctype', 'CRM Lead');
+                        formData.append('docname', leadId);
+
+                        // Upload file to Frappe
+                        await fetch(`${CRM_URL}/api/method/upload_file`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `token ${API_KEY}:${API_SECRET}`,
+                                ...formData.getHeaders()
+                            },
+                            body: formData
+                        });
+
+                        console.log(`Uploaded photo: ${fileName}`);
+                    } catch (photoError) {
+                        console.error(`Error uploading photo ${photoName}:`, photoError);
+                    }
+                }
+            }
+        }
+
         // Success
         return res.status(200).json({
             success: true,
             message: 'Lead created successfully',
-            lead_id: result.data?.name
+            lead_id: leadId
         });
 
     } catch (error) {

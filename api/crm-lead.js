@@ -68,8 +68,7 @@ export default async function handler(req, res) {
             last_name: leadData.personal?.nombre?.split(' ').slice(1).join(' ') || '',
             email: leadData.personal?.email || '',
             mobile_no: leadData.personal?.telefono || '',
-            source: 'Website',
-            notes: notesContent
+            lead_owner: 'Administrator'
         };
 
         // Send to Frappe CRM

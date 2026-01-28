@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Cita | Dra Nikkita</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-cream: #F8F5F0;
+            --color-gold: #C9A962;
+            --color-gold-light: #E8D5A3;
+            --color-charcoal: #2A2A2A;
+            --color-soft-black: #1A1A1A;
+            --color-warm-gray: #8B8680;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--color-soft-black) 0%, #2d2d2d 100%);
+            color: var(--color-cream);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 0.5rem;
+        }
+
+        .header h1 span {
+            color: var(--color-gold);
+        }
+
+        .header p {
+            color: var(--color-warm-gray);
+            font-size: 1rem;
+        }
+
+        .booking-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-warm-gray);
+            transition: all 0.3s ease;
+        }
+
+        .step.active {
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+        }
+
+        .step.completed {
+            background: rgba(201, 169, 98, 0.3);
+            color: var(--color-gold);
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .step.active .step-number {
+            background: var(--color-soft-black);
+            color: var(--color-gold);
+        }
+
+        .booking-content {
+            display: none;
+        }
+
+        .booking-content.active {
+            display: block;
+        }
+
+        /* Calendar Styles */
+        .calendar-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .calendar-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .calendar {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .calendar-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 400;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .calendar-nav button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--color-cream);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .calendar-nav button:hover {
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+        }
+
+        .calendar-weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .calendar-weekdays span {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--color-warm-gray);
+            padding: 0.5rem;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .calendar-day:hover:not(.disabled):not(.empty) {
+            background: rgba(201, 169, 98, 0.3);
+        }
+
+        .calendar-day.selected {
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+            font-weight: 600;
+        }
+
+        .calendar-day.disabled {
+            color: rgba(255, 255, 255, 0.2);
+            cursor: not-allowed;
+        }
+
+        .calendar-day.empty {
+            background: transparent;
+            cursor: default;
+        }
+
+        .calendar-day.today {
+            border: 1px solid var(--color-gold);
+        }
+
+        /* Time Slots */
+        .time-slots {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            padding: 1.5rem;
+        }
+
+        .time-slots h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .time-slots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .time-slot {
+            padding: 0.75rem;
+            text-align: center;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .time-slot:hover:not(.disabled) {
+            background: rgba(201, 169, 98, 0.3);
+        }
+
+        .time-slot.selected {
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+            font-weight: 600;
+        }
+
+        .time-slot.disabled {
+            color: rgba(255, 255, 255, 0.2);
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        .no-slots {
+            text-align: center;
+            color: var(--color-warm-gray);
+            padding: 2rem;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--color-gold);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--color-cream);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--color-gold);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Summary */
+        .summary-card {
+            background: rgba(201, 169, 98, 0.1);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(201, 169, 98, 0.3);
+        }
+
+        .summary-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--color-gold);
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: var(--color-warm-gray);
+        }
+
+        .summary-value {
+            font-weight: 500;
+        }
+
+        .price-tag {
+            font-size: 1.5rem;
+            color: var(--color-gold);
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-gold-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary:disabled {
+            background: rgba(201, 169, 98, 0.3);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--color-cream);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        /* Success Screen */
+        .success-screen {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--color-gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .success-icon svg {
+            width: 40px;
+            height: 40px;
+            color: var(--color-soft-black);
+        }
+
+        .success-screen h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .success-screen p {
+            color: var(--color-warm-gray);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Service Selection */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(201, 169, 98, 0.3);
+        }
+
+        .service-card.selected {
+            border-color: var(--color-gold);
+            background: rgba(201, 169, 98, 0.1);
+        }
+
+        .service-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-card p {
+            font-size: 0.85rem;
+            color: var(--color-warm-gray);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-price {
+            color: var(--color-gold);
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .service-duration {
+            font-size: 0.8rem;
+            color: var(--color-warm-gray);
+        }
+
+        /* Loading */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(201, 169, 98, 0.3);
+            border-top-color: var(--color-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Dra <span>Nikkita</span></h1>
+            <p>Agenda tu cita de evaluación</p>
+        </div>
+
+        <div class="booking-card">
+            <div class="steps">
+                <div class="step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span>Servicio</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span>Fecha y Hora</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span>Tus Datos</span>
+                </div>
+                <div class="step" data-step="4">
+                    <span class="step-number">4</span>
+                    <span>Confirmar</span>
+                </div>
+            </div>
+
+            <!-- Step 1: Service Selection -->
+            <div class="booking-content active" id="step1">
+                <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">
+                    Selecciona el tipo de consulta
+                </h3>
+                <div class="services-grid">
+                    <div class="service-card" data-service="evaluacion" data-price="0" data-duration="30">
+                        <h4>Evaluación Inicial</h4>
+                        <p>Primera consulta para evaluar tu caso y determinar el mejor tratamiento</p>
+                        <span class="service-price">Gratis</span>
+                        <span class="service-duration">• 30 min</span>
+                    </div>
+                    <div class="service-card" data-service="consulta" data-price="50000" data-duration="45">
+                        <h4>Consulta Personalizada</h4>
+                        <p>Consulta detallada con plan de tratamiento personalizado</p>
+                        <span class="service-price">$50.000 CLP</span>
+                        <span class="service-duration">• 45 min</span>
+                    </div>
+                    <div class="service-card" data-service="seguimiento" data-price="30000" data-duration="20">
+                        <h4>Seguimiento</h4>
+                        <p>Control post-procedimiento o seguimiento de tratamiento</p>
+                        <span class="service-price">$30.000 CLP</span>
+                        <span class="service-duration">• 20 min</span>
+                    </div>
+                    <div class="service-card" data-service="urgente" data-price="80000" data-duration="30">
+                        <h4>Consulta Urgente</h4>
+                        <p>Atención prioritaria para casos que requieren evaluación inmediata</p>
+                        <span class="service-price">$80.000 CLP</span>
+                        <span class="service-duration">• 30 min</span>
+                    </div>
+                </div>
+                <div class="btn-group" style="justify-content: flex-end;">
+                    <button class="btn btn-primary" id="toStep2" disabled>
+                        Continuar
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Date & Time Selection -->
+            <div class="booking-content" id="step2">
+                <div class="calendar-container">
+                    <div class="calendar">
+                        <div class="calendar-header">
+                            <h3 id="currentMonth">Enero 2026</h3>
+                            <div class="calendar-nav">
+                                <button id="prevMonth">‹</button>
+                                <button id="nextMonth">›</button>
+                            </div>
+                        </div>
+                        <div class="calendar-weekdays">
+                            <span>Dom</span>
+                            <span>Lun</span>
+                            <span>Mar</span>
+                            <span>Mié</span>
+                            <span>Jue</span>
+                            <span>Vie</span>
+                            <span>Sáb</span>
+                        </div>
+                        <div class="calendar-days" id="calendarDays"></div>
+                    </div>
+                    <div class="time-slots">
+                        <h3>Horarios Disponibles</h3>
+                        <div class="time-slots-grid" id="timeSlots">
+                            <div class="no-slots">Selecciona una fecha para ver horarios disponibles</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" id="backToStep1">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                        Volver
+                    </button>
+                    <button class="btn btn-primary" id="toStep3" disabled>
+                        Continuar
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Personal Information -->
+            <div class="booking-content" id="step3">
+                <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center;">
+                    Completa tus datos
+                </h3>
+                <form id="bookingForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Nombre Completo *</label>
+                            <input type="text" id="nombre" required placeholder="Ej: María González">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono *</label>
+                            <input type="tel" id="telefono" required placeholder="Ej: +56 9 1234 5678">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electrónico *</label>
+                        <input type="email" id="email" required placeholder="Ej: maria@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Motivo de la consulta</label>
+                        <textarea id="motivo" placeholder="Cuéntanos brevemente el motivo de tu consulta..."></textarea>
+                    </div>
+                </form>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" id="backToStep2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                        Volver
+                    </button>
+                    <button class="btn btn-primary" id="toStep4">
+                        Revisar y Confirmar
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Confirmation -->
+            <div class="booking-content" id="step4">
+                <div class="summary-card">
+                    <h3>Resumen de tu Cita</h3>
+                    <div class="summary-item">
+                        <span class="summary-label">Servicio</span>
+                        <span class="summary-value" id="summaryService">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Fecha</span>
+                        <span class="summary-value" id="summaryDate">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Hora</span>
+                        <span class="summary-value" id="summaryTime">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Nombre</span>
+                        <span class="summary-value" id="summaryName">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Teléfono</span>
+                        <span class="summary-value" id="summaryPhone">-</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Total a Pagar</span>
+                        <span class="summary-value price-tag" id="summaryPrice">-</span>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-secondary" id="backToStep3">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                        Volver
+                    </button>
+                    <button class="btn btn-primary" id="confirmBooking">
+                        <span id="confirmBtnText">Confirmar Cita</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Loading -->
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Procesando tu reserva...</p>
+            </div>
+
+            <!-- Success -->
+            <div class="booking-content" id="stepSuccess">
+                <div class="success-screen">
+                    <div class="success-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                    </div>
+                    <h2>¡Cita Agendada!</h2>
+                    <p>Tu cita ha sido confirmada exitosamente.</p>
+                    <p id="confirmationDetails"></p>
+                    <p style="margin-top: 1rem; color: var(--color-gold);">
+                        Te enviaremos un recordatorio por WhatsApp y correo electrónico.
+                    </p>
+                    <a href="/" class="btn btn-primary" style="margin-top: 2rem; text-decoration: none;">
+                        Volver al Inicio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Booking State
+        const bookingState = {
+            service: null,
+            serviceName: '',
+            price: 0,
+            duration: 30,
+            date: null,
+            time: null,
+            nombre: '',
+            telefono: '',
+            email: '',
+            motivo: ''
+        };
+
+        // Calendar State
+        let currentDate = new Date();
+        let selectedDate = null;
+        let selectedTime = null;
+
+        // Available time slots (can be fetched from server)
+        const availableSlots = [
+            '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+            '12:00', '14:00', '14:30', '15:00', '15:30', '16:00',
+            '16:30', '17:00', '17:30', '18:00'
+        ];
+
+        // DOM Elements
+        const steps = document.querySelectorAll('.step');
+        const contents = document.querySelectorAll('.booking-content');
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        // Service Selection
+        serviceCards.forEach(card => {
+            card.addEventListener('click', () => {
+                serviceCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                bookingState.service = card.dataset.service;
+                bookingState.serviceName = card.querySelector('h4').textContent;
+                bookingState.price = parseInt(card.dataset.price);
+                bookingState.duration = parseInt(card.dataset.duration);
+                document.getElementById('toStep2').disabled = false;
+            });
+        });
+
+        // Step Navigation
+        function goToStep(stepNum) {
+            steps.forEach((step, i) => {
+                step.classList.remove('active', 'completed');
+                if (i + 1 < stepNum) step.classList.add('completed');
+                if (i + 1 === stepNum) step.classList.add('active');
+            });
+
+            contents.forEach(content => content.classList.remove('active'));
+            document.getElementById(`step${stepNum}`).classList.add('active');
+        }
+
+        document.getElementById('toStep2').addEventListener('click', () => goToStep(2));
+        document.getElementById('backToStep1').addEventListener('click', () => goToStep(1));
+        document.getElementById('toStep3').addEventListener('click', () => goToStep(3));
+        document.getElementById('backToStep2').addEventListener('click', () => goToStep(2));
+        document.getElementById('toStep4').addEventListener('click', () => {
+            // Validate form
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const email = document.getElementById('email').value;
+            const motivo = document.getElementById('motivo').value;
+
+            if (!nombre || !telefono || !email) {
+                alert('Por favor completa todos los campos obligatorios');
+                return;
+            }
+
+            bookingState.nombre = nombre;
+            bookingState.telefono = telefono;
+            bookingState.email = email;
+            bookingState.motivo = motivo;
+
+            // Update summary
+            document.getElementById('summaryService').textContent = bookingState.serviceName;
+            document.getElementById('summaryDate').textContent = formatDateLong(selectedDate);
+            document.getElementById('summaryTime').textContent = selectedTime;
+            document.getElementById('summaryName').textContent = nombre;
+            document.getElementById('summaryPhone').textContent = telefono;
+            document.getElementById('summaryPrice').textContent = bookingState.price === 0 ? 'Gratis' : `$${bookingState.price.toLocaleString('es-CL')} CLP`;
+
+            // Update button text based on price
+            document.getElementById('confirmBtnText').textContent = bookingState.price === 0 ? 'Confirmar Cita' : 'Pagar y Confirmar';
+
+            goToStep(4);
+        });
+        document.getElementById('backToStep3').addEventListener('click', () => goToStep(3));
+
+        // Calendar Functions
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+
+            const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+
+            let html = '';
+
+            // Empty cells for days before first day of month
+            for (let i = 0; i < firstDay; i++) {
+                html += '<div class="calendar-day empty"></div>';
+            }
+
+            // Days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const date = new Date(year, month, day);
+                const isPast = date < today;
+                const isWeekend = date.getDay() === 0; // Sunday
+                const isToday = date.toDateString() === today.toDateString();
+                const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+
+                let classes = 'calendar-day';
+                if (isPast || isWeekend) classes += ' disabled';
+                if (isToday) classes += ' today';
+                if (isSelected) classes += ' selected';
+
+                html += `<div class="${classes}" data-date="${date.toISOString()}">${day}</div>`;
+            }
+
+            document.getElementById('calendarDays').innerHTML = html;
+
+            // Add click handlers
+            document.querySelectorAll('.calendar-day:not(.disabled):not(.empty)').forEach(day => {
+                day.addEventListener('click', () => selectDate(new Date(day.dataset.date)));
+            });
+        }
+
+        function selectDate(date) {
+            selectedDate = date;
+            bookingState.date = date.toISOString().split('T')[0];
+            renderCalendar();
+            renderTimeSlots();
+        }
+
+        function renderTimeSlots() {
+            if (!selectedDate) {
+                document.getElementById('timeSlots').innerHTML = '<div class="no-slots">Selecciona una fecha para ver horarios disponibles</div>';
+                return;
+            }
+
+            // Simulate some busy slots randomly
+            const busySlots = availableSlots.filter(() => Math.random() > 0.7);
+
+            let html = '';
+            availableSlots.forEach(slot => {
+                const isBusy = busySlots.includes(slot);
+                const isSelected = selectedTime === slot;
+                let classes = 'time-slot';
+                if (isBusy) classes += ' disabled';
+                if (isSelected) classes += ' selected';
+
+                html += `<div class="${classes}" data-time="${slot}">${slot}</div>`;
+            });
+
+            document.getElementById('timeSlots').innerHTML = html;
+
+            // Add click handlers
+            document.querySelectorAll('.time-slot:not(.disabled)').forEach(slot => {
+                slot.addEventListener('click', () => {
+                    selectedTime = slot.dataset.time;
+                    bookingState.time = selectedTime;
+                    renderTimeSlots();
+                    document.getElementById('toStep3').disabled = false;
+                });
+            });
+        }
+
+        function formatDateLong(date) {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            return date.toLocaleDateString('es-CL', options);
+        }
+
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        });
+
+        // Confirm Booking
+        document.getElementById('confirmBooking').addEventListener('click', async () => {
+            const loading = document.getElementById('loading');
+            const step4 = document.getElementById('step4');
+
+            step4.style.display = 'none';
+            loading.classList.add('active');
+
+            try {
+                const response = await fetch('/api/appointment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        nombre: bookingState.nombre,
+                        telefono: bookingState.telefono,
+                        email: bookingState.email,
+                        motivo: bookingState.motivo,
+                        fecha: bookingState.date,
+                        hora: bookingState.time,
+                        servicio: bookingState.serviceName,
+                        precio: bookingState.price,
+                        duracion: bookingState.duration
+                    })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    loading.classList.remove('active');
+                    document.getElementById('confirmationDetails').textContent =
+                        `${formatDateLong(selectedDate)} a las ${selectedTime}`;
+
+                    // Show success
+                    contents.forEach(c => c.classList.remove('active'));
+                    document.getElementById('stepSuccess').classList.add('active');
+
+                    // Update steps
+                    steps.forEach(step => step.classList.add('completed'));
+                } else {
+                    throw new Error(result.error || 'Error al agendar la cita');
+                }
+            } catch (error) {
+                loading.classList.remove('active');
+                step4.style.display = 'block';
+                alert('Error: ' + error.message);
+            }
+        });
+
+        // Initialize
+        renderCalendar();
+    </script>
+</body>
+</html>

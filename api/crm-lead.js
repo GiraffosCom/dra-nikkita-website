@@ -30,7 +30,38 @@ export default async function handler(req, res) {
             return res.status(500).json({ error: 'Server configuration error' });
         }
 
-        // Prepare lead data for Frappe CRM
+        // Build detailed notes with all medical and interest information
+        const notesContent = `
+📋 INFORMACIÓN DEL LEAD - PRE-EVALUACIÓN
+
+👤 DATOS PERSONALES
+- Nombre: ${leadData.personal?.nombre || 'No especificado'}
+- Teléfono: ${leadData.personal?.telefono || 'No especificado'}
+- Email: ${leadData.personal?.email || 'No especificado'}
+
+📊 DATOS MÉDICOS
+- Edad: ${leadData.medical?.edad || 'No especificado'}
+- Estatura: ${leadData.medical?.estatura || 'No especificado'} cm
+- Peso: ${leadData.medical?.peso || 'No especificado'} kg
+- Cirugías previas: ${leadData.medical?.cirugiasPrevias || 'No especificado'}
+  ${leadData.medical?.cirugiasPreviasDetalle ? `  Detalle: ${leadData.medical.cirugiasPreviasDetalle}` : ''}
+- Condiciones médicas: ${leadData.medical?.condicionesMedicas || 'No especificado'}
+  ${leadData.medical?.condicionesMedicasDetalle ? `  Detalle: ${leadData.medical.condicionesMedicasDetalle}` : ''}
+- Medicamentos: ${leadData.medical?.medicamentos || 'No especificado'}
+  ${leadData.medical?.medicamentosDetalle ? `  Detalle: ${leadData.medical.medicamentosDetalle}` : ''}
+- Fumadora: ${leadData.medical?.fumadora || 'No especificado'}
+
+💭 INTERÉS Y EXPECTATIVAS
+- Razón de consulta: ${leadData.interest?.razon || 'No especificado'}
+- Expectativas: ${leadData.interest?.expectativas || 'No especificado'}
+- Disponibilidad: ${leadData.interest?.disponibilidad || 'No especificado'}
+- Cómo nos conoció: ${leadData.interest?.comoNosConociste || 'No especificado'}
+
+📅 Fecha de registro: ${new Date().toLocaleString('es-CL')}
+🌐 Fuente: Chatbot Web
+        `.trim();
+
+        // Prepare lead data for Frappe CRM using standard fields
         const frappeLeadData = {
             doctype: 'CRM Lead',
             first_name: leadData.personal?.nombre?.split(' ')[0] || '',
@@ -38,21 +69,7 @@ export default async function handler(req, res) {
             email: leadData.personal?.email || '',
             mobile_no: leadData.personal?.telefono || '',
             source: 'Website',
-            // Custom fields - adjust based on your Frappe CRM setup
-            custom_edad: leadData.medical?.edad || '',
-            custom_estatura: leadData.medical?.estatura || '',
-            custom_peso: leadData.medical?.peso || '',
-            custom_cirugias_previas: leadData.medical?.cirugiasPrevias || '',
-            custom_cirugias_previas_detalle: leadData.medical?.cirugiasPreviasDetalle || '',
-            custom_condiciones_medicas: leadData.medical?.condicionesMedicas || '',
-            custom_condiciones_medicas_detalle: leadData.medical?.condicionesMedicasDetalle || '',
-            custom_medicamentos: leadData.medical?.medicamentos || '',
-            custom_medicamentos_detalle: leadData.medical?.medicamentosDetalle || '',
-            custom_fumadora: leadData.medical?.fumadora || '',
-            custom_razon_consulta: leadData.interest?.razon || '',
-            custom_expectativas: leadData.interest?.expectativas || '',
-            custom_disponibilidad: leadData.interest?.disponibilidad || '',
-            custom_como_nos_conocio: leadData.interest?.comoNosConociste || ''
+            notes: notesContent
         };
 
         // Send to Frappe CRM

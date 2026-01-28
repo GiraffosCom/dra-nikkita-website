@@ -1008,21 +1008,45 @@
             step4.style.display = 'none';
             loading.classList.add('active');
 
+            const appointmentData = {
+                nombre: bookingState.nombre,
+                telefono: bookingState.telefono,
+                email: bookingState.email,
+                motivo: bookingState.motivo,
+                fecha: bookingState.date,
+                hora: bookingState.time,
+                servicio: bookingState.serviceName,
+                precio: bookingState.price,
+                duracion: bookingState.duration
+            };
+
             try {
+                // If price > 0, redirect to MercadoPago
+                if (bookingState.price > 0) {
+                    const paymentResponse = await fetch('/api/payment', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(appointmentData)
+                    });
+
+                    const paymentResult = await paymentResponse.json();
+
+                    if (paymentResult.success && paymentResult.payment_url) {
+                        // Redirect to MercadoPago checkout
+                        window.location.href = paymentResult.payment_url;
+                        return;
+                    } else if (paymentResult.free) {
+                        // Free appointment, continue to create event
+                    } else {
+                        throw new Error(paymentResult.error || 'Error al crear el pago');
+                    }
+                }
+
+                // For free appointments, create event directly
                 const response = await fetch('/api/appointment', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        nombre: bookingState.nombre,
-                        telefono: bookingState.telefono,
-                        email: bookingState.email,
-                        motivo: bookingState.motivo,
-                        fecha: bookingState.date,
-                        hora: bookingState.time,
-                        servicio: bookingState.serviceName,
-                        precio: bookingState.price,
-                        duracion: bookingState.duration
-                    })
+                    body: JSON.stringify(appointmentData)
                 });
 
                 const result = await response.json();

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Exitoso | Dra Nikkita</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-cream: #F8F5F0;
+            --color-gold: #C9A962;
+            --color-charcoal: #2A2A2A;
+            --color-soft-black: #1A1A1A;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--color-soft-black) 0%, #2d2d2d 100%);
+            color: var(--color-cream);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .container {
+            text-align: center;
+            max-width: 500px;
+        }
+        .icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .icon svg {
+            width: 50px;
+            height: 50px;
+            color: white;
+        }
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        h1 span { color: var(--color-gold); }
+        p {
+            color: rgba(248, 245, 240, 0.8);
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        .highlight {
+            color: var(--color-gold);
+            font-weight: 500;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(201, 169, 98, 0.2);
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 169, 98, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="20 6 9 17 4 12"/>
+            </svg>
+        </div>
+        <h1>¡Pago <span>Exitoso</span>!</h1>
+        <p>Tu cita ha sido confirmada y pagada correctamente.</p>
+
+        <div class="card">
+            <p>Te enviaremos un <span class="highlight">correo de confirmación</span> con los detalles de tu cita.</p>
+            <p style="margin-top: 1rem;">También recibirás un <span class="highlight">recordatorio por WhatsApp</span> 24 horas antes.</p>
+        </div>
+
+        <p style="font-size: 0.9rem; opacity: 0.7;">
+            Si tienes alguna pregunta, contáctanos por WhatsApp.
+        </p>
+
+        <a href="/" class="btn">Volver al Inicio</a>
+    </div>
+</body>
+</html>

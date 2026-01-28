@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago No Completado | Dra Nikkita</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-cream: #F8F5F0;
+            --color-gold: #C9A962;
+            --color-charcoal: #2A2A2A;
+            --color-soft-black: #1A1A1A;
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'Outfit', sans-serif;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: var(--font-body);
+            background: linear-gradient(135deg, var(--color-soft-black) 0%, #2d2d2d 100%);
+            color: var(--color-cream);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .container {
+            text-align: center;
+            max-width: 500px;
+        }
+        .icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+        .icon svg {
+            width: 50px;
+            height: 50px;
+            color: white;
+        }
+        h1 {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+        h1 span { color: #e74c3c; }
+        p {
+            color: rgba(248, 245, 240, 0.8);
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(231, 76, 60, 0.3);
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--color-cream);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </div>
+        <h1>Pago <span>No Completado</span></h1>
+        <p>Hubo un problema al procesar tu pago.</p>
+
+        <div class="card">
+            <p>No te preocupes, no se realizó ningún cargo a tu tarjeta.</p>
+            <p style="margin-top: 1rem;">Puedes intentar nuevamente o usar otro método de pago.</p>
+        </div>
+
+        <a href="/agendar.html" class="btn">Intentar Nuevamente</a>
+        <a href="/" class="btn btn-secondary">Volver al Inicio</a>
+    </div>
+</body>
+</html>

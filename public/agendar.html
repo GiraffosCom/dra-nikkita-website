@@ -697,6 +697,83 @@
         }
 
         // ============================================
+        // WHATSAPP VERIFICATION
+        // ============================================
+        let isPhoneVerified = false;
+        let verificationAttempts = 0;
+
+        async function sendWhatsAppCode() {
+            const phone = bookingState.telefono;
+            const nombre = bookingState.nombre;
+
+            addBotMessage('📤 Enviando código de verificación por WhatsApp...');
+
+            try {
+                const response = await fetch(`/api/whatsapp-verify?action=send-code`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone, nombre })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    return true; // Continue to verification question
+                } else {
+                    addErrorMessage(data.error || 'Error al enviar el código. Intenta nuevamente.');
+                    return false; // Stay on current question
+                }
+            } catch (error) {
+                console.error('Error sending WhatsApp code:', error);
+                // If WhatsApp service is not available, skip verification
+                addBotMessage('⚠️ El servicio de verificación no está disponible. Continuaremos sin verificación por ahora.');
+                isPhoneVerified = true; // Skip verification
+                return 'skip'; // Skip to next question after verification
+            }
+        }
+
+        async function verifyWhatsAppCode() {
+            const phone = bookingState.telefono;
+            const code = bookingState.codigoVerificacion;
+
+            try {
+                const response = await fetch(`/api/whatsapp-verify?action=verify-code`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone, code })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    isPhoneVerified = true;
+                    bookingState.telefonoVerificado = true;
+                    return true; // Continue to next question
+                } else {
+                    verificationAttempts++;
+                    if (verificationAttempts >= 3) {
+                        addErrorMessage('Demasiados intentos fallidos. Por favor solicita un nuevo código.');
+                        // Go back to phone question
+                        return 'retry';
+                    }
+                    addErrorMessage(data.error || 'Código incorrecto. Intenta nuevamente.');
+                    return false; // Stay on current question
+                }
+            } catch (error) {
+                console.error('Error verifying code:', error);
+                addBotMessage('⚠️ Error de conexión. Continuaremos sin verificación.');
+                isPhoneVerified = true;
+                return true;
+            }
+        }
+
+        async function resendWhatsAppCode() {
+            addUserMessage('Reenviar código');
+            verificationAttempts = 0;
+            await sendWhatsAppCode();
+        }
+
+        // ============================================
         // BOOKING STATE
         // ============================================
         const bookingState = {
@@ -710,6 +787,9 @@
             expectativas: '',
             disponibilidad: '',
             comoNosConocio: '',
+            // Verification
+            telefonoVerificado: false,
+            codigoVerificacion: '',
             // From booking
             evalType: null,
             evalTypeName: '',
@@ -760,11 +840,21 @@
                 type: 'input',
                 field: 'telefono',
                 placeholder: '+56 9 XXXX XXXX',
-                validation: (v) => validateChileanPhone(v) ? null : 'Por favor ingresa un teléfono chileno válido (ej: +56 9 1234 5678)'
+                validation: (v) => validateChileanPhone(v) ? null : 'Por favor ingresa un teléfono chileno válido (ej: +56 9 1234 5678)',
+                afterSubmit: 'sendWhatsAppCode'
+            },
+            {
+                id: 'verificacion',
+                message: '📲 Te hemos enviado un código de 6 dígitos por WhatsApp. Por favor ingrésalo aquí:',
+                type: 'input',
+                field: 'codigoVerificacion',
+                placeholder: 'Ej: 123456',
+                validation: (v) => /^\d{6}$/.test(v) ? null : 'El código debe ser de 6 dígitos',
+                afterSubmit: 'verifyWhatsAppCode'
             },
             {
                 id: 'email',
-                message: '¿Y tu correo electrónico? 📧',
+                message: '✅ ¡Número verificado! Ahora, ¿cuál es tu correo electrónico? 📧',
                 type: 'input',
                 field: 'email',
                 placeholder: 'tu@email.com',
@@ -862,12 +952,16 @@
 
                 // Render input
                 if (question.type === 'input') {
+                    // Check if this is verification question - add resend button
+                    const isVerification = question.id === 'verificacion';
                     inputArea.innerHTML = `
                         <input type="${question.field === 'email' ? 'email' : 'text'}"
                             class="chat-input" id="prequalInput"
                             placeholder="${question.placeholder}"
+                            ${isVerification ? 'inputmode="numeric" pattern="[0-9]*"' : ''}
                             onkeypress="if(event.key === 'Enter') submitPrequalAnswer()">
                         <button class="chat-send" onclick="submitPrequalAnswer()">Enviar</button>
+                        ${isVerification ? '<button class="chat-send" style="background: rgba(255,255,255,0.1); margin-top: 0.5rem; width: 100%;" onclick="resendWhatsAppCode()">📲 Reenviar código</button>' : ''}
                     `;
                     document.getElementById('prequalInput').focus();
                 } else if (question.type === 'options') {
@@ -909,7 +1003,7 @@
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
-        function submitPrequalAnswer() {
+        async function submitPrequalAnswer() {
             const input = document.getElementById('prequalInput');
             const value = input.value.trim();
             if (!value) return;
@@ -933,6 +1027,39 @@
 
             bookingState[question.field] = finalValue;
             addUserMessage(finalValue);
+
+            // Handle special afterSubmit actions
+            if (question.afterSubmit) {
+                // Disable input while processing
+                input.disabled = true;
+                const sendBtn = document.querySelector('.chat-send');
+                if (sendBtn) sendBtn.disabled = true;
+
+                let result;
+                if (question.afterSubmit === 'sendWhatsAppCode') {
+                    result = await sendWhatsAppCode();
+                } else if (question.afterSubmit === 'verifyWhatsAppCode') {
+                    result = await verifyWhatsAppCode();
+                }
+
+                if (result === false) {
+                    // Stay on current question, re-enable input
+                    input.disabled = false;
+                    input.value = '';
+                    input.focus();
+                    if (sendBtn) sendBtn.disabled = false;
+                    return;
+                } else if (result === 'skip') {
+                    // Skip verification question, go to email
+                    setTimeout(() => showPrequalQuestion(currentQuestionIndex + 2), 500);
+                    return;
+                } else if (result === 'retry') {
+                    // Go back to phone question
+                    verificationAttempts = 0;
+                    setTimeout(() => showPrequalQuestion(currentQuestionIndex - 1), 500);
+                    return;
+                }
+            }
 
             setTimeout(() => showPrequalQuestion(currentQuestionIndex + 1), 500);
         }

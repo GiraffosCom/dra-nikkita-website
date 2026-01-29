@@ -200,6 +200,40 @@
             animation: fadeInUp 0.8s var(--transition-smooth) 0.6s forwards;
         }
 
+        .hero-subtitle strong {
+            color: var(--color-gold);
+            font-weight: 500;
+        }
+
+        .hero-problems {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s var(--transition-smooth) 0.5s forwards;
+        }
+
+        .problem-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .problem-number {
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            color: var(--color-gold);
+            font-weight: 500;
+        }
+
+        .problem-text {
+            font-size: 1rem;
+            color: var(--color-charcoal);
+        }
+
         .hero-buttons {
             display: flex;
             gap: 1.5rem;
@@ -467,6 +501,86 @@
             margin: 0;
         }
 
+        .dra-intro {
+            font-size: 1.2rem !important;
+            color: var(--color-cream) !important;
+        }
+
+        .dra-intro strong {
+            color: var(--color-gold);
+        }
+
+        .value-content strong {
+            color: var(--color-gold);
+        }
+
+        .value-content em {
+            color: var(--color-gold);
+            font-style: italic;
+        }
+
+        .value-fundamentals {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(201, 169, 98, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(201, 169, 98, 0.2);
+        }
+
+        .fundamental-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+        }
+
+        .fundamental-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(201, 169, 98, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .fundamental-icon svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--color-gold);
+        }
+
+        .fundamental-text {
+            position: relative;
+        }
+
+        .fundamental-number {
+            position: absolute;
+            top: -5px;
+            left: -15px;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--color-gold);
+            opacity: 0.3;
+            font-weight: 300;
+        }
+
+        .fundamental-text h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+            color: var(--color-cream);
+        }
+
+        .fundamental-text p {
+            font-size: 0.85rem;
+            color: rgba(248, 245, 240, 0.7);
+            margin: 0;
+        }
+
         /* Services Section */
         .services-section {
             padding: 10rem 6rem;
@@ -662,6 +776,156 @@
         .service-btn:hover {
             background: var(--color-gold);
             color: var(--color-soft-black);
+        }
+
+        /* Problems Grid - Treatments by Problem */
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .problem-category {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+        }
+
+        .problem-category.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .problem-header {
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, var(--color-soft-black) 0%, #2a2a2a 100%);
+            color: var(--color-cream);
+        }
+
+        .problem-tag {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--color-gold);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .problem-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+
+        .problem-header p {
+            font-size: 0.85rem;
+            color: rgba(248, 245, 240, 0.7);
+            margin: 0;
+        }
+
+        .problem-solutions {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .solution-card {
+            padding: 1.2rem;
+            background: var(--color-cream);
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .solution-card:hover {
+            border-color: var(--color-gold);
+            transform: translateX(5px);
+        }
+
+        .solution-card.featured {
+            border-left: 3px solid var(--color-gold);
+            background: rgba(201, 169, 98, 0.05);
+        }
+
+        .solution-card.highlight {
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid var(--color-gold);
+            background: linear-gradient(135deg, rgba(201, 169, 98, 0.1) 0%, rgba(201, 169, 98, 0.05) 100%);
+        }
+
+        .highlight-badge {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: var(--color-gold);
+            color: var(--color-soft-black);
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+        }
+
+        .solution-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--color-charcoal);
+        }
+
+        .solution-card p {
+            font-size: 0.85rem;
+            color: var(--color-warm-gray);
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .solution-price {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-gold);
+            margin-bottom: 0.8rem;
+        }
+
+        .solution-btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: transparent;
+            border: 1px solid var(--color-charcoal);
+            color: var(--color-charcoal);
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s var(--transition-smooth);
+        }
+
+        .solution-btn:hover {
+            background: var(--color-charcoal);
+            color: var(--color-cream);
+        }
+
+        .solution-btn.primary {
+            background: var(--color-gold);
+            border-color: var(--color-gold);
+            color: var(--color-soft-black);
+            padding: 1rem 2rem;
+            font-size: 0.85rem;
+        }
+
+        .solution-btn.primary:hover {
+            background: var(--color-charcoal);
+            border-color: var(--color-charcoal);
+            color: var(--color-cream);
+        }
+
+        @media (max-width: 768px) {
+            .problems-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* Professional Services */
@@ -2057,27 +2321,45 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <span class="hero-badge">Clínica e Instituto</span>
+            <span class="hero-badge">Si ya pasaste los 30...</span>
             <h1 class="hero-title">
-                Armonización Facial<br>
-                <em>10 años más joven</em>
+                Te aseguro que tienes<br>
+                <em>uno de estos problemas</em>
             </h1>
+            <div class="hero-problems">
+                <div class="problem-item">
+                    <span class="problem-number">01</span>
+                    <span class="problem-text">Piel apagada y sin luminosidad</span>
+                </div>
+                <div class="problem-item">
+                    <span class="problem-number">02</span>
+                    <span class="problem-text">Arrugas y líneas de expresión</span>
+                </div>
+                <div class="problem-item">
+                    <span class="problem-number">03</span>
+                    <span class="problem-text">Flacidez facial y pérdida de firmeza</span>
+                </div>
+                <div class="problem-item">
+                    <span class="problem-number">04</span>
+                    <span class="problem-text">Grasa acumulada en papada</span>
+                </div>
+            </div>
             <p class="hero-subtitle">
-                Tratamientos estéticos de armonización facial con resultados naturales y duraderos. Tecnología avanzada y expertise médico de clase mundial.
+                La buena noticia es que todos tienen solución. Te puedo dejar <strong>10 años más joven</strong> con tratamientos personalizados y resultados naturales.
             </p>
             <div class="hero-buttons">
                 <a href="/agendar.html" class="btn-primary">
-                    Agenda tu Evaluación
+                    Quiero mi Transformación
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                 </a>
-                <a href="#servicios" class="btn-secondary">Ver Tratamientos</a>
+                <a href="#tratamientos" class="btn-secondary">Ver Soluciones</a>
             </div>
             <div class="hero-stats">
                 <div class="stat">
                     <div class="stat-number">+2,500</div>
-                    <div class="stat-label">Pacientes Satisfechos</div>
+                    <div class="stat-label">Pacientes Transformadas</div>
                 </div>
                 <div class="stat">
                     <div class="stat-number">15+</div>
@@ -2085,7 +2367,7 @@
                 </div>
                 <div class="stat">
                     <div class="stat-number">98%</div>
-                    <div class="stat-label">Tasa de Satisfacción</div>
+                    <div class="stat-label">Satisfacción</div>
                 </div>
             </div>
         </div>
@@ -2095,7 +2377,7 @@
         </div>
     </section>
 
-    <!-- Value Proposition -->
+    <!-- Value Proposition - Dra Nicole -->
     <section class="value-section">
         <div class="value-grid">
             <div class="value-header">
@@ -2106,36 +2388,57 @@
                 </h2>
             </div>
             <div class="value-content">
-                <p>
-                    En Dra Nikkita nos especializamos en tratamientos de armonización facial que devuelven la juventud y confianza a nuestros pacientes. Cada procedimiento es personalizado, utilizando las técnicas más avanzadas y productos de la más alta calidad.
+                <p class="dra-intro">
+                    Soy la <strong>Dra. Nicole Morales</strong>, especialista en tratamientos de medicina estética facial, docente y con entrenamiento a nivel internacional.
                 </p>
                 <p>
-                    Nuestro compromiso es que cada paciente se sienta seguro, confiado y admirado por su entorno. Porque verse bien es sentirse bien.
+                    Sé lo importante que es tu cuerpo y lo difícil que puede ser elegir quién estará a cargo de tu transformación. Por eso, antes de confiar en alguien, debes asegurarte de <strong>3 cosas fundamentales</strong>:
                 </p>
-                <div class="value-features">
-                    <div class="feature-item">
-                        <div class="feature-icon">
+                <div class="value-fundamentals">
+                    <div class="fundamental-item">
+                        <div class="fundamental-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                        </div>
+                        <div class="fundamental-text">
+                            <span class="fundamental-number">1</span>
+                            <h4>Clínica Autorizada</h4>
+                            <p>Instalaciones certificadas con todos los permisos sanitarios</p>
+                        </div>
+                    </div>
+                    <div class="fundamental-item">
+                        <div class="fundamental-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                             </svg>
                         </div>
-                        <div class="feature-text">
-                            <h4>Seguridad Certificada</h4>
-                            <p>Protocolos médicos estrictos</p>
+                        <div class="fundamental-text">
+                            <span class="fundamental-number">2</span>
+                            <h4>Productos Certificados</h4>
+                            <p>Solo utilizamos insumos de la más alta calidad y procedencia verificada</p>
                         </div>
                     </div>
-                    <div class="feature-item">
-                        <div class="feature-icon">
+                    <div class="fundamental-item">
+                        <div class="fundamental-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M12 6v6l4 2"/>
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
                             </svg>
                         </div>
-                        <div class="feature-text">
-                            <h4>Resultados Inmediatos</h4>
-                            <p>Cambios visibles desde el día 1</p>
+                        <div class="fundamental-text">
+                            <span class="fundamental-number">3</span>
+                            <h4>Doctora Especialista</h4>
+                            <p>Formación especializada y experiencia comprobada</p>
                         </div>
                     </div>
+                </div>
+                <p style="margin-top: 2rem;">
+                    También soy <strong>mujer y mamá</strong>, por eso entiendo perfectamente los cambios físicos y emocionales que van sucediendo a través de los años. Mi misión es entregar, a través de mis tratamientos, <em>impactos profundos en la vida de mis pacientes</em>.
+                </p>
+                <div class="value-features" style="margin-top: 2.5rem;">
+                    <h4 style="grid-column: 1/-1; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-gold); margin-bottom: 1rem;">Lo que me caracteriza:</h4>
                     <div class="feature-item">
                         <div class="feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2143,7 +2446,21 @@
                             </svg>
                         </div>
                         <div class="feature-text">
-                            <h4>Aspecto Natural</h4>
+                            <h4>Atención Personalizada</h4>
+                            <p>Cada paciente es única</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+                                <line x1="9" y1="9" x2="9.01" y2="9"/>
+                                <line x1="15" y1="9" x2="15.01" y2="9"/>
+                            </svg>
+                        </div>
+                        <div class="feature-text">
+                            <h4>Resultados Naturales</h4>
                             <p>Sin rastros de intervención</p>
                         </div>
                     </div>
@@ -2157,8 +2474,8 @@
                             </svg>
                         </div>
                         <div class="feature-text">
-                            <h4>Atención Personalizada</h4>
-                            <p>Cada caso es único</p>
+                            <h4>Cercanía y Confianza</h4>
+                            <p>Te acompaño en todo el proceso</p>
                         </div>
                     </div>
                 </div>
@@ -2166,11 +2483,11 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services-section" id="servicios">
+    <!-- Treatments Section - By Problem -->
+    <section class="services-section" id="tratamientos">
         <div class="section-header">
             <span class="section-label">Tratamientos</span>
-            <h2 class="section-title">Nuestros <em>Servicios</em></h2>
+            <h2 class="section-title">Soluciones según <em>tu problema</em></h2>
         </div>
 
         <div class="services-tabs">
@@ -2178,129 +2495,124 @@
             <button class="tab-btn" onclick="showServices('medicos')">Para Médicos</button>
         </div>
 
-        <!-- Patient Services -->
-        <div class="services-grid patient-services active" id="pacientes-grid">
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2a10 10 0 0 1 10 10c0 5.52-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2z"/>
-                        <path d="M12 8v4l2 2"/>
-                    </svg>
+        <!-- Patient Services - Organized by Problem -->
+        <div class="problems-grid patient-services active" id="pacientes-grid">
+            <!-- Piel Apagada -->
+            <div class="problem-category">
+                <div class="problem-header">
+                    <span class="problem-tag">Problema 01</span>
+                    <h3>Piel Apagada</h3>
+                    <p>Devuelve la luminosidad y vitalidad a tu rostro</p>
                 </div>
-                <h3>Mini Lifting</h3>
-                <p>Cirugía para devolver la piel caída a su lugar inicial, eliminando flacidez, grasa localizada y mejorando el contorno facial.</p>
-                <div class="service-price">
-                    <span class="price-amount">$1.600.000</span>
-                    <span class="price-currency">CLP</span>
+                <div class="problem-solutions">
+                    <div class="solution-card">
+                        <h4>Pink Glow</h4>
+                        <p>Tratamiento de luminosidad con efecto inmediato de piel de porcelana</p>
+                        <a href="/agendar.html" class="solution-btn">Consultar</a>
+                    </div>
+                    <div class="solution-card">
+                        <h4>Skinbooster</h4>
+                        <p>Hidratación profunda que restaura la luminosidad natural</p>
+                        <a href="/agendar.html" class="solution-btn">Consultar</a>
+                    </div>
                 </div>
-                <ul class="service-features">
-                    <li>Incluye Lipo + Transferencia</li>
-                    <li>6 masajes postoperatorios</li>
-                    <li>Seguimiento personalizado</li>
-                </ul>
-                <a href="/agendar.html" class="service-btn" style="text-decoration: none; display: inline-block; text-align: center;">Agendar Evaluación</a>
             </div>
 
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/>
-                        <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
-                    </svg>
+            <!-- Arrugas -->
+            <div class="problem-category">
+                <div class="problem-header">
+                    <span class="problem-tag">Problema 02</span>
+                    <h3>Arrugas</h3>
+                    <p>Elimina las líneas de expresión y rejuvenece tu mirada</p>
                 </div>
-                <h3>Lipo Papada</h3>
-                <p>Cirugía de liposucción de la grasa de papada y cuello para un perfil más definido y juvenil.</p>
-                <div class="service-price">
-                    <span class="price-amount">$700.000</span>
-                    <span class="price-currency">CLP</span>
+                <div class="problem-solutions">
+                    <div class="solution-card featured">
+                        <h4>Botox</h4>
+                        <p>Tratamiento para suavizar líneas de expresión con resultados naturales</p>
+                        <div class="solution-price">Desde $70.000 por zona</div>
+                        <a href="/agendar.html" class="solution-btn">Agendar</a>
+                    </div>
                 </div>
-                <ul class="service-features">
-                    <li>6 masajes postoperatorios</li>
-                    <li>Recuperación rápida</li>
-                    <li>Resultados permanentes</li>
-                </ul>
-                <a href="/agendar.html" class="service-btn" style="text-decoration: none; display: inline-block; text-align: center;">Agendar Evaluación</a>
             </div>
 
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 16v-4"/>
-                        <path d="M12 8h.01"/>
-                    </svg>
+            <!-- Flacidez -->
+            <div class="problem-category">
+                <div class="problem-header">
+                    <span class="problem-tag">Problema 03</span>
+                    <h3>Flacidez</h3>
+                    <p>Recupera la firmeza y tensión de tu piel</p>
                 </div>
-                <h3>Lipo Transferencia</h3>
-                <p>Rellenos con grasa propia para armonización facial natural y duradera.</p>
-                <div class="service-price">
-                    <span class="price-amount">Consultar</span>
+                <div class="problem-solutions">
+                    <div class="solution-card">
+                        <h4>Bioestimuladores</h4>
+                        <p>Estimulación natural del colágeno para firmeza progresiva</p>
+                        <div class="solution-price">Desde $500.000</div>
+                        <a href="/agendar.html" class="solution-btn">Agendar</a>
+                    </div>
+                    <div class="solution-card featured">
+                        <h4>Mini Lifting</h4>
+                        <p>Cirugía para devolver la piel caída a su lugar, eliminando flacidez</p>
+                        <div class="solution-price">$1.600.000</div>
+                        <a href="/agendar.html" class="solution-btn">Agendar</a>
+                    </div>
                 </div>
-                <ul class="service-features">
-                    <li>100% tu propia grasa</li>
-                    <li>Resultados naturales</li>
-                    <li>Mayor duración</li>
-                </ul>
-                <a href="/agendar.html" class="service-btn" style="text-decoration: none; display: inline-block; text-align: center;">Agendar Evaluación</a>
             </div>
 
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/>
-                    </svg>
+            <!-- Grasa Localizada -->
+            <div class="problem-category">
+                <div class="problem-header">
+                    <span class="problem-tag">Problema 04</span>
+                    <h3>Grasa Localizada</h3>
+                    <p>Elimina la papada y define tu perfil</p>
                 </div>
-                <h3>Botox</h3>
-                <p>Tratamiento para suavizar líneas de expresión y arrugas, con resultados naturales.</p>
-                <div class="service-price">
-                    <span class="price-amount">$70.000</span>
-                    <span class="price-currency">CLP por zona</span>
+                <div class="problem-solutions">
+                    <div class="solution-card featured">
+                        <h4>Lipo Papada</h4>
+                        <p>Liposucción de papada y cuello para un perfil más definido y juvenil</p>
+                        <div class="solution-price">$700.000</div>
+                        <a href="/agendar.html" class="solution-btn">Agendar</a>
+                    </div>
                 </div>
-                <ul class="service-features">
-                    <li>3 zonas por $210.000</li>
-                    <li>Sin tiempo de recuperación</li>
-                    <li>Duración 4-6 meses</li>
-                </ul>
-                <a href="/agendar.html" class="service-btn" style="text-decoration: none; display: inline-block; text-align: center;">Agendar Evaluación</a>
             </div>
 
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                    </svg>
+            <!-- Falta Definición -->
+            <div class="problem-category">
+                <div class="problem-header">
+                    <span class="problem-tag">Problema 05</span>
+                    <h3>Falta Definición Facial</h3>
+                    <p>Armoniza y define los rasgos de tu rostro</p>
                 </div>
-                <h3>Ácido Hialurónico</h3>
-                <p>Rellenos de labios y facial para volumen y definición natural.</p>
-                <div class="service-price">
-                    <span class="price-amount">$250.000</span>
-                    <span class="price-currency">CLP</span>
+                <div class="problem-solutions">
+                    <div class="solution-card">
+                        <h4>Rinomodelación</h4>
+                        <p>Perfilado de nariz sin cirugía con ácido hialurónico</p>
+                        <a href="/agendar.html" class="solution-btn">Consultar</a>
+                    </div>
+                    <div class="solution-card">
+                        <h4>Labios by Nikkita</h4>
+                        <p>Definición y volumen natural para labios perfectos</p>
+                        <div class="solution-price">Desde $250.000</div>
+                        <a href="/agendar.html" class="solution-btn">Agendar</a>
+                    </div>
                 </div>
-                <ul class="service-features">
-                    <li>Labios y contorno</li>
-                    <li>Efecto inmediato</li>
-                    <li>Duración 8-12 meses</li>
-                </ul>
-                <a href="/agendar.html" class="service-btn" style="text-decoration: none; display: inline-block; text-align: center;">Agendar Evaluación</a>
             </div>
 
-            <div class="service-card">
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-                    </svg>
+            <!-- Full Face -->
+            <div class="problem-category full-width">
+                <div class="problem-header">
+                    <span class="problem-tag">Solución Integral</span>
+                    <h3>Cara con Aspecto Derretido</h3>
+                    <p>Transformación completa para rejuvenecer todo tu rostro</p>
                 </div>
-                <h3>Bioestimuladores</h3>
-                <p>Sculptra y otros bioestimuladores para regeneración natural del colágeno.</p>
-                <div class="service-price">
-                    <span class="price-amount">$500.000</span>
-                    <span class="price-currency">CLP</span>
+                <div class="problem-solutions">
+                    <div class="solution-card featured highlight">
+                        <div class="highlight-badge">⭐ Tratamiento Estrella</div>
+                        <h4>Full Face by Nikkita</h4>
+                        <p>Protocolo exclusivo de armonización facial completa que combina múltiples técnicas para un rejuvenecimiento integral. Resultados que te dejan 10 años más joven.</p>
+                        <div class="solution-price">Consultar en evaluación</div>
+                        <a href="/agendar.html" class="solution-btn primary">Quiero mi Full Face</a>
+                    </div>
                 </div>
-                <ul class="service-features">
-                    <li>Estimula colágeno propio</li>
-                    <li>Resultados progresivos</li>
-                    <li>Efecto hasta 2 años</li>
-                </ul>
-                <a href="/agendar.html" class="service-btn" style="text-decoration: none; display: inline-block; text-align: center;">Agendar Evaluación</a>
             </div>
         </div>
 
@@ -2368,52 +2680,52 @@
         </div>
     </section>
 
-    <!-- Process Section -->
+    <!-- Process Section - Ruta de Transformación -->
     <section class="process-section" id="proceso">
         <div class="section-header">
-            <span class="section-label">Tu Camino</span>
-            <h2 class="section-title">Proceso de <em>Transformación</em></h2>
+            <span class="section-label">¡Yo estoy lista!</span>
+            <h2 class="section-title">Te entrego la ruta para tu <em>Transformación</em></h2>
         </div>
 
         <div class="process-timeline">
             <div class="process-step">
                 <div class="step-number">1</div>
                 <h4 class="step-title">Precalificación</h4>
-                <p class="step-desc">Evaluación inicial para determinar si eres candidata</p>
+                <p class="step-desc">Completa el formulario para conocer tu caso</p>
             </div>
             <div class="process-step">
                 <div class="step-number">2</div>
                 <h4 class="step-title">Evaluación</h4>
-                <p class="step-desc">Consulta online o presencial con la Dra. Nikkita</p>
+                <p class="step-desc">Consulta personalizada conmigo (online o presencial)</p>
             </div>
             <div class="process-step">
                 <div class="step-number">3</div>
-                <h4 class="step-title">Plan Tratamiento</h4>
-                <p class="step-desc">Diseño personalizado según tus objetivos</p>
+                <h4 class="step-title">Plan Personalizado</h4>
+                <p class="step-desc">Diseño tu tratamiento ideal según tus objetivos</p>
             </div>
             <div class="process-step">
                 <div class="step-number">4</div>
-                <h4 class="step-title">Procedimiento</h4>
-                <p class="step-desc">Tratamiento con los más altos estándares</p>
+                <h4 class="step-title">Tu Procedimiento</h4>
+                <p class="step-desc">Realizamos el tratamiento con los más altos estándares</p>
             </div>
             <div class="process-step">
                 <div class="step-number">5</div>
-                <h4 class="step-title">Control</h4>
-                <p class="step-desc">Seguimiento y control post-tratamiento</p>
+                <h4 class="step-title">Seguimiento</h4>
+                <p class="step-desc">Te acompaño en tu recuperación hasta ver tu transformación</p>
             </div>
         </div>
     </section>
 
-    <!-- Evaluation Section -->
+    <!-- Evaluation Section - Agendamiento -->
     <section class="bot-section" id="evaluacion">
         <div class="evaluation-container">
             <div class="section-header" style="text-align: center; margin-bottom: 3rem;">
-                <span class="value-label">Primer Paso</span>
+                <span class="value-label">El siguiente paso</span>
                 <h2 style="font-family: var(--font-display); font-size: clamp(2rem, 3vw, 2.8rem); font-weight: 300;">
-                    Agenda tu <em style="color: var(--color-gold); font-style: italic;">Evaluación</em>
+                    Cuéntame, ¿cuándo <em style="color: var(--color-gold); font-style: italic;">conversamos tu caso</em>?
                 </h2>
                 <p style="color: rgba(248, 245, 240, 0.7); margin-top: 1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
-                    El primer paso para tu transformación es una evaluación personalizada con la Dra. Nikkita
+                    Agenda tu evaluación y comencemos juntas tu proceso de transformación
                 </p>
             </div>
 
@@ -2493,19 +2805,6 @@
                 </div>
             </div>
 
-            <!-- Pre-evaluation Chat Section -->
-            <div class="chat-section">
-                <div class="chat-header-info">
-                    <h3>¿No estás segura si calificas?</h3>
-                    <p>Completa nuestra pre-evaluación gratuita y descubre si eres candidata para nuestros tratamientos</p>
-                </div>
-                <button class="btn-chat-open" onclick="openChatBot()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                    Iniciar Pre-Evaluación Gratuita
-                </button>
-            </div>
         </div>
     </section>
 

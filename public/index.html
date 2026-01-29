@@ -150,7 +150,7 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 10rem 5rem 4rem 5rem;
+            padding: 8rem 6rem;
             position: relative;
             z-index: 2;
         }
@@ -354,11 +354,11 @@
         }
 
         .hero-stats {
+            position: absolute;
+            bottom: 4rem;
+            left: 6rem;
             display: flex;
-            gap: 3rem;
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(201, 169, 98, 0.2);
+            gap: 4rem;
             opacity: 0;
             animation: fadeInUp 0.8s var(--transition-smooth) 1s forwards;
         }
@@ -369,18 +369,16 @@
 
         .stat-number {
             font-family: var(--font-display);
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 400;
             color: var(--color-gold);
-            line-height: 1;
         }
 
         .stat-label {
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--color-warm-gray);
-            margin-top: 0.3rem;
         }
 
         /* Floating Elements */
@@ -2186,25 +2184,12 @@
             .hero {
                 grid-template-columns: 1fr;
             }
-            .hero-content {
-                padding: 8rem 4rem 3rem 4rem;
-            }
             .hero-image {
                 display: block;
                 min-height: 400px;
-                order: -1;
-            }
-            .hero-stats {
-                justify-content: flex-start;
             }
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 1024px) {
-            .hero-buttons {
-                flex-wrap: wrap;
             }
         }
 
@@ -2219,14 +2204,8 @@
                 padding: 6rem 2rem;
             }
             .hero-stats {
-                gap: 1.5rem;
-                flex-wrap: wrap;
-            }
-            .stat-number {
-                font-size: 1.5rem;
-            }
-            .hero-problems {
-                margin-bottom: 1.5rem;
+                left: 2rem;
+                gap: 2rem;
             }
             .services-section,
             .value-section,
